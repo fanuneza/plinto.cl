@@ -5,39 +5,60 @@ import ServiceList from "../components/ServiceList.astro";
 
 const items = [
   {
+    icon: "house",
     title: "ARQUITECTOS",
-    body: "Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra. Creamos una narrativa coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales.",
-    points: ["Posicionamiento de Marca (Branding)", "Registros fotográficos y videos (Storytelling)", "Kits de difusión: posts, newsletters, entrevistas y micro-documentales"],
+    body: "Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra. Creamos una narrativa coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales para posicionar tu estudio y tus proyectos.",
+    points: [
+      "Posicionamiento de Marca (Branding)",
+      "Registros Fotográficos y Videos (Storytelling)",
+      "Kits de difusión (Content Marketing: Visual, Posts, Newsletters, Entrevistas, Micro-documentales)",
+    ],
   },
   {
+    icon: "building",
     title: "INMOBILIARIAS & CORREDORAS",
-    body: "Promovemos los proyectos desde una mirada arquitectónica y estratégica. Creamos contenido profesional y coherente que comunica el valor del diseño.",
-    points: ["Identidad de Marca (Branding)", "Narrativas de Proyectos (Storytelling)", "Kits de difusión visual, posts y newsletters"],
+    body: "Promovemos los proyectos desde una mirada arquitectónica y estratégica. Creamos contenido atractivo, profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto.",
+    points: [
+      "Identidad de Marca (Branding)",
+      "Narrativas de Proyectos (Storytelling)",
+      "Kits de difusión (Content Marketing: Visual, Posts, Newsletters)",
+    ],
   },
   {
-    title: "MARCAS & MATERIALES DE CONSTRUCCION",
+    icon: "tree",
+    title: "MARCAS & MATERIALES DE CONSTRUCCIÓN",
     body: "Desarrollo de una identidad de marca fuerte con un lenguaje visual cohesivo que resuene con su público, logrando mayor engagement y conversión.",
-    points: ["Estrategia de comunicación visual (Storytelling)"],
+    points: [
+      "Identidad de Marca (Branding)",
+      "Estrategia de comunicación visual (Storytelling)",
+      "Kits de difusión (Content Marketing: Visual, Posts, Newsletters)",
+    ],
   },
   {
-    title: "ASESORIAS EN PROYECTOS & CONCURSOS",
-    body: "Creamos material gráfico y editorial para lanzamientos de productos, proyectos, postulaciones y concursos.",
-    points: ["Lanzamientos y campañas especiales", "Estrategias comunicacionales para concursos", "Contenido gráfico y editorial para difusión de obras"],
+    icon: "lightbulb",
+    title: "ASESORÍAS EN PROYECTOS & CONCURSOS",
+    body: "Te ayudamos con la creación de material gráfico y editorial para distintas instancias (especiales y puntuales) como lanzamientos de productos, proyectos y postulaciones.",
+    points: [
+      "Lanzamientos y Campañas Especiales",
+      "Estrategias comunicacionales para concursos",
+      "Contenido gráfico y editorial para difusión de obras municipales, culturales, gubernamentales, etc",
+    ],
   },
-];
+  {
+    icon: "asterisk",
+    title: "Nota al pie",
+    body: "Plinto se dedica principalmente a la creación de estrategia e identidad de marca/proyectos/productos.\n\nNo somos una agencia de mantención de redes sociales, sin embargo, estamos abiertos a conversar y definir el plan de acción específico para tu caso.\n\nSi tienes dudas, escríbenos!",
+  },
+] as const;
 ---
 
-<BaseLayout title="Servicios y Clientes" description="Áreas, clientes y servicios de Plinto para arquitectura, inmobiliarias, marcas y concursos.">
+<BaseLayout
+  title="Servicios y Clientes"
+  description="Áreas, clientes y servicios de Plinto para arquitectura, inmobiliarias, marcas y concursos."
+  bodyClass="service-page"
+>
   <SectionTitle title="SERVICIOS & CLIENTES" />
   <section class="page-section">
     <ServiceList items={items} />
-  </section>
-  <section class="page-section split">
-    <h2 class="large-heading">Nota al pie</h2>
-    <div class="copy-stack">
-      <p>Plinto se dedica principalmente a la creación de estrategia e identidad de marca, proyectos y productos.</p>
-      <p>No somos una agencia de mantención de redes sociales, sin embargo, estamos abiertos a conversar y definir un plan de acción específico para tu caso.</p>
-      <p>Si tienes dudas, escríbenos.</p>
-    </div>
   </section>
 </BaseLayout>

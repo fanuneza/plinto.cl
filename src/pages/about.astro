@@ -6,60 +6,79 @@ const people = [
   {
     name: "Fernanda Castro",
     role: "Directora Ejecutiva",
+    image: "/assets/framer/PpRxv4KxPjWnvzdjqm3IJgHeQ.jpg",
     bio: [
-      "Arquitecta de la Pontificia Universidad Católica de Chile, Fernanda cuenta con más de una década de experiencia liderando equipos editoriales en el ámbito digital, dirigiendo la estrategia de contenidos en ArchDaily.",
+      "Arquitecta de la Pontificia Universidad Católica de Chile, Fernanda cuenta con más de una década de experiencia liderando equipos editoriales en el ámbito digital, dirigiendo la estrategia de contenidos en ArchDaily, el sitio de arquitectura más visitado del mundo. Su trayectoria combina una mirada curatorial profunda con una comprensión estratégica del marketing de contenidos y la comunicación digital.",
       "Cofundadora de Casa Gris, espacio colaborativo y de exposición para artistas vinculados a la arquitectura, ha estado a cargo de su gestión, programación y curatoría desde 2015.",
-      "Su trabajo fotográfico ha sido publicado en medios digitales e impresos, consolidando una visión estética que hoy impulsa desde Plinto.",
+      "Su trabajo fotográfico ha sido publicado en medios digitales e impresos, consolidando una visión estética que hoy impulsa desde Plinto, donde lidera proyectos que conectan identidad, narrativa visual y estrategia de marca para el sector arquitectura y construcción.",
     ],
   },
   {
     name: "Diego Hernández",
     role: "Director Creativo",
+    image: "/assets/framer/47f03Rj91gTy0T5UtRq6lOxHmBE.png",
     bio: [
-      "Con más de una década de experiencia en medios, estrategia creativa y posicionamiento de marcas globales, Diego ha liderado proyectos de alto impacto entre arquitectura, comunicación y cultura urbana.",
-      "Como Director de los Building of the Year Awards, coordinó producción, expansión internacional y relaciones con medios y arquitectos a nivel global.",
+      "Con más de una década de experiencia en medios, estrategia creativa y posicionamiento de marcas globales, Diego Hernández ha liderado proyectos de alto impacto en la intersección entre arquitectura, comunicación y cultura urbana.",
+      "Como Director de los Building of the Year Award, ha coordinado la producción, expansión internacional y relaciones con medios y arquitectos a nivel global. Además, desde su rol como Director Creativo en ArchDaily, ha desarrollado campañas para marcas como MINI, VELUX, Epic Games y Chaos Group, generando engagement internacional y visibilidad estratégica.",
     ],
   },
   {
     name: "Cristian Pino Anguita",
     role: "Director Audiovisual",
+    image: "/assets/framer/uPGgGVbRg6ezsLLOEmxXJPcp9Q.png",
     bio: [
-      "Guionista, director y montajista chileno con carrera entre cine y digital. Actualmente director audiovisual en UCHTV.",
-      "Ha dirigido proyectos documentales y piezas vinculadas a arquitectura, arte, Bienal de Arquitectura de Chile, ArchDaily y Fundación Techo.",
+      "Guionista, director y montajista chileno con vasta carrera entre el 2010 y 2023 generando contenido tanto en cine y digital. Actualmente director audiovisual en UCHTV.",
+      "Ha desarrollado experiencia e interés en plataformas digitales que lo han llevado a dirigir proyectos documentales para el Museo Nacional de Historia Natural en Chile, series documentales para Diaz, Andrés Vio y Gabriel Holzapfel.",
+      "Ha incursionado en proyectos de arquitectura visual para la Architecture Review. También ha sido parte de equipos creativos estables en la Bienal de Arquitectura de Chile, ArchDaily y Fundación Techo.",
     ],
   },
-  {
-    name: "Soon",
-    role: "Socios Colaboradores",
-    bio: ["Social Media Expert", "Editor de contenidos"],
-  },
+];
+
+const collaborators = [
+  { role: "Social Media Expert", name: "Soon" },
+  { role: "Editor de contenidos", name: "Soon", note: "..." },
 ];
 ---
 
 <BaseLayout title="About" description="Equipo y mirada editorial de Plinto.">
   <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
-  <section class="page-section split">
-    <p class="intro-copy">No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</p>
-    <div class="copy-stack">
+  <section class="about-context page-section">
+    <img class="about-logo" src="/assets/framer/6ldb2N6oAFWaC0nTNBKPoPT2yVc.png" alt="Logo de Plinto" width="350" height="350" />
+    <div class="about-context-copy">
+      <p class="about-eyebrow">contexto</p>
+      <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</h2>
       <p>Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la arquitectura y la construcción a través de una narrativa coherente y distintiva.</p>
       <p>Contamos con más de 10 años de experiencia en creación de contenido y marcas de arquitectura. Trabajamos con una mirada editorial aplicada a un objetivo comercial.</p>
+      <p>Especialistas en convertir conocimiento técnico en comunicación clara combinando la creatividad con estructura: estética con sentido.</p>
     </div>
   </section>
-  <section class="page-section">
-    <p class="kicker">Socios Colaboradores</p>
+  <section class="team-section page-section">
     <div class="people-grid">
       {
         people.map((person) => (
           <article class="person">
-            <div>
+            <img src={person.image} alt={`Retrato de ${person.name}`} width="350" height="350" />
+            <div class="person-copy">
+              <p class="about-eyebrow">{person.role}</p>
               <h2>{person.name}</h2>
-              <p>{person.role}</p>
-            </div>
-            <div>
               {person.bio.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
             </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <section class="collaborators-section page-section">
+    <h2>Socios Colaboradores</h2>
+    <div class="collaborators-grid">
+      {
+        collaborators.map((person) => (
+          <article>
+            <p>{person.role}</p>
+            <h3>{person.name}</h3>
+            {person.note && <span>{person.note}</span>}
           </article>
         ))
       }

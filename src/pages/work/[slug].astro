@@ -27,7 +27,7 @@ const related = (await getCollection("work"))
   <article class="work-detail">
     <div class="work-hero">
       <h1>{work.data.title}</h1>
-      <img src={work.data.coverImage} alt="" data-parallax data-parallax-speed="0.035" />
+      <img src={work.data.coverImage} alt={`Imagen principal de ${work.data.title}`} data-parallax data-parallax-speed="0.035" />
     </div>
     <div class="meta-grid">
       <p><span>CLIENT</span>{work.data.client}</p>
@@ -50,16 +50,16 @@ const related = (await getCollection("work"))
         </ul>
       </section>
     </div>
-    <section class="copy-stack">
-      <h2>SUMMARY</h2>
-      <p>{work.data.summary}</p>
-      <Content />
-    </section>
     <section>
       <p class="kicker">IMAGE GALLERY</p>
       <div class="gallery">
-        {work.data.gallery.map((image) => <img src={image} alt="" loading="lazy" />)}
+        {work.data.gallery.map((image, index) => <img src={image} alt={`Galería de ${work.data.title}, imagen ${index + 1}`} loading="lazy" />)}
       </div>
+    </section>
+    <section class="copy-stack detail-summary">
+      <h2>SUMMARY</h2>
+      <p>{work.data.summary}</p>
+      <Content />
     </section>
     <section>
       <p class="kicker">READ MORE</p>

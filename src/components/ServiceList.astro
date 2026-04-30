@@ -1,25 +1,29 @@
 ---
+import ServiceIcon from "./ServiceIcon.astro";
+
 interface Item {
   number?: string;
   title: string;
+  icon?: "house" | "building" | "tree" | "lightbulb" | "asterisk" | "dna" | "phone" | "image" | "network";
   body?: string;
-  points?: string[];
+  points?: readonly string[];
 }
 
 interface Props {
-  items: Item[];
+  items: readonly Item[];
 }
 
 const { items } = Astro.props;
+const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as const;
 ---
 
 <div class="service-list">
   {
     items.map((item, index) => (
       <article class="service-item">
-        <span class={`service-icon service-icon-${index + 1}`} aria-hidden="true"></span>
+        <ServiceIcon name={item.icon ?? fallbackIcons[index % fallbackIcons.length]} />
         {item.number && <p class="service-number">{item.number}</p>}
-        <h2>{item.title}</h2>
+        <h3>{item.title}</h3>
         {item.body && <p>{item.body}</p>}
         {item.points && (
           <ul>

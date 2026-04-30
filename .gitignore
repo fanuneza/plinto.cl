@@ -149,3 +149,10 @@ vite.config.ts.timestamp-*
 *.md
 docs/
 !README.md
+
+# Playwright
+PLAYWRIGHT_VISUAL_CAPTURE.md
+playwright.config.ts
+tests/visual/
+test-results/
+playwright-report/

@@ -6,12 +6,12 @@ import { site } from "../data/site";
 
 <BaseLayout title="Contacto" description="Contacta a Plinto en Santiago, Chile.">
   <SectionTitle title="CONTACTO" />
-  <section class="page-section">
+  <section class="page-section contact-section">
     <div class="contact-links">
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <a href={`mailto:${site.secondaryEmail}`}>{site.secondaryEmail}</a>
-      <a href={site.instagram} rel="noopener">Instagram</a>
-      <a href={site.linkedin} rel="noopener">LinkedIn</a>
+      <p><span>Email</span><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><span>Email</span><a href={`mailto:${site.secondaryEmail}`}>{site.secondaryEmail}</a></p>
+      <p><span>Instagram</span><a href={site.instagram} rel="noopener">Instagram</a></p>
+      <p><span>LinkedIn</span><a href={site.linkedin} rel="noopener">LinkedIn</a></p>
     </div>
   </section>
 </BaseLayout>

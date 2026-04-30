@@ -13,8 +13,8 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
     <div class="portfolio-head" data-reveal>
       <span></span>
       <div class="view-toggles" aria-label="Cambiar vista">
-        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla"><span class="grid-icon" aria-hidden="true"></span></button>
-        <button type="button" data-view-button="list" aria-label="Vista lista"><span class="list-icon" aria-hidden="true"></span></button>
+        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"><span class="grid-icon" aria-hidden="true"></span></button>
+        <button type="button" data-view-button="list" aria-label="Vista lista" aria-pressed="false"><span class="list-icon" aria-hidden="true"></span></button>
       </div>
     </div>
     <WorkGrid items={works} />

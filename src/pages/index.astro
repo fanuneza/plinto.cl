@@ -7,26 +7,30 @@ import ServiceList from "../components/ServiceList.astro";
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
 const services = [
   {
+    icon: "dna",
     title: "IDENTIDAD DE MARCA",
     body: "Desarrollo de identidad de marca con un lenguaje visual cohesivo que resuene con su público objetivo.",
     points: ["Narrativa", "Estrategia de Marca", "Identidad Visual"],
   },
   {
+    icon: "phone",
     title: "ESTRATEGIAS EN REDES",
     body: "Creación de estrategia y material para difusión de proyectos y productos en RRSS, newsletters y web.",
     points: ["Estrategia por usuario y canales", "Creación de Contenido Orgánico", "Creación de Contenido Pagado"],
   },
   {
+    icon: "image",
     title: "CREACIÓN DE CONTENIDO",
     body: "Creación de packs de contenido audiovisual y editorial para distintos medios y difusión según objetivos del cliente.",
     points: ["Producción Audiovisual: Fotografía, Video, Visualización 3D, Ilustraciones", "Artículos y Posts - SEO", "Newsletters"],
   },
   {
+    icon: "network",
     title: "CONSULTORÍAS",
     body: "Apoyamos el crecimiento de tu marca o proyecto desde el ángulo que necesites.",
     points: ["Campañas de difusión y awareness", "Visión y misión de empresa", "Captación de nuevos clientes"],
   },
-];
+] as const;
 ---
 
 <BaseLayout title="Estrategia, contenido y comunicación para arquitectura">
@@ -47,7 +51,7 @@ const services = [
     <img class="intro-stone intro-stone-left" src="/assets/framer/t2OjgKbmaeCadvRYemAk9b9nQ.png" alt="" data-parallax data-parallax-speed="-0.06" />
     <img class="intro-stone intro-stone-right" src="/assets/framer/7DD3rsLrVwKdIOgIT2qwjqlpg.png" alt="" data-parallax data-parallax-speed="0.05" />
     <div class="brand-intro-inner" data-reveal>
-      <h2>Elevamos la identidad de tu marca desde la narrativa,<br />la estética visual y el contenido creativo</h2>
+      <h2>Elevamos la identidad de tu marca desde la narrativa, la estética visual y el contenido creativo</h2>
       <p class="asterisk">*</p>
       <div class="intro-services">
         <p><strong>Branding.</strong><br />Construimos identidad de marca y rescatamos el valor intrínseco</p>
@@ -89,7 +93,7 @@ const services = [
 
   <section class="services-section page-section">
     <div class="center-head" data-reveal>
-      <h2>QUE CREAMOS</h2>
+      <h2>QUÉ CREAMOS</h2>
       <p>Especialistas en traducir el conocimiento técnico en una comunicación clara y asequible que combina la creatividad y la estética con un sentido mayor y coherente. Trabajamos con una mirada editorial aplicada a un objetivo comercial.</p>
     </div>
     <ServiceList items={services} />
@@ -97,7 +101,7 @@ const services = [
 
   <section class="audience-section page-section">
     <div class="center-head" data-reveal>
-      <h2>AREAS Y CLIENTES</h2>
+      <h2>ÁREAS Y CLIENTES</h2>
       <p>Cómo ayudamos a distintos agentes del rubro.</p>
     </div>
     <div class="audience-grid" data-reveal>
