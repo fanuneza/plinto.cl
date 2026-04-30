@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import WorkGrid from "../../components/WorkGrid.astro";
+
+const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Work" description="Portafolio de proyectos, campanas y registros desarrollados por Plinto.">
+  <SectionTitle title="WORK" />
+  <section class="page-section work-page" data-work-view>
+    <div class="portfolio-head" data-reveal>
+      <span></span>
+      <div class="view-toggles" aria-label="Cambiar vista">
+        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla"><span class="grid-icon" aria-hidden="true"></span></button>
+        <button type="button" data-view-button="list" aria-label="Vista lista"><span class="list-icon" aria-hidden="true"></span></button>
+      </div>
+    </div>
+    <WorkGrid items={works} />
+  </section>
+</BaseLayout>

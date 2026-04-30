@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Contacto" description="Contacta a Plinto en Santiago, Chile.">
+  <SectionTitle title="CONTACTO" />
+  <section class="page-section">
+    <div class="contact-links">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <a href={`mailto:${site.secondaryEmail}`}>{site.secondaryEmail}</a>
+      <a href={site.instagram} rel="noopener">Instagram</a>
+      <a href={site.linkedin} rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+</BaseLayout>

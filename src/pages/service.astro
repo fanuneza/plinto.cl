@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ServiceList from "../components/ServiceList.astro";
+
+const items = [
+  {
+    title: "ARQUITECTOS",
+    body: "Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra. Creamos una narrativa coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales.",
+    points: ["Posicionamiento de Marca (Branding)", "Registros fotográficos y videos (Storytelling)", "Kits de difusión: posts, newsletters, entrevistas y micro-documentales"],
+  },
+  {
+    title: "INMOBILIARIAS & CORREDORAS",
+    body: "Promovemos los proyectos desde una mirada arquitectónica y estratégica. Creamos contenido profesional y coherente que comunica el valor del diseño.",
+    points: ["Identidad de Marca (Branding)", "Narrativas de Proyectos (Storytelling)", "Kits de difusión visual, posts y newsletters"],
+  },
+  {
+    title: "MARCAS & MATERIALES DE CONSTRUCCION",
+    body: "Desarrollo de una identidad de marca fuerte con un lenguaje visual cohesivo que resuene con su público, logrando mayor engagement y conversión.",
+    points: ["Estrategia de comunicación visual (Storytelling)"],
+  },
+  {
+    title: "ASESORIAS EN PROYECTOS & CONCURSOS",
+    body: "Creamos material gráfico y editorial para lanzamientos de productos, proyectos, postulaciones y concursos.",
+    points: ["Lanzamientos y campañas especiales", "Estrategias comunicacionales para concursos", "Contenido gráfico y editorial para difusión de obras"],
+  },
+];
+---
+
+<BaseLayout title="Servicios y Clientes" description="Áreas, clientes y servicios de Plinto para arquitectura, inmobiliarias, marcas y concursos.">
+  <SectionTitle title="SERVICIOS & CLIENTES" />
+  <section class="page-section">
+    <ServiceList items={items} />
+  </section>
+  <section class="page-section split">
+    <h2 class="large-heading">Nota al pie</h2>
+    <div class="copy-stack">
+      <p>Plinto se dedica principalmente a la creación de estrategia e identidad de marca, proyectos y productos.</p>
+      <p>No somos una agencia de mantención de redes sociales, sin embargo, estamos abiertos a conversar y definir un plan de acción específico para tu caso.</p>
+      <p>Si tienes dudas, escríbenos.</p>
+    </div>
+  </section>
+</BaseLayout>

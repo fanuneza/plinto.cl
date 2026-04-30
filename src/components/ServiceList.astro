@@ -1,0 +1,34 @@
+---
+interface Item {
+  number?: string;
+  title: string;
+  body?: string;
+  points?: string[];
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="service-list">
+  {
+    items.map((item, index) => (
+      <article class="service-item">
+        <span class={`service-icon service-icon-${index + 1}`} aria-hidden="true"></span>
+        {item.number && <p class="service-number">{item.number}</p>}
+        <h2>{item.title}</h2>
+        {item.body && <p>{item.body}</p>}
+        {item.points && (
+          <ul>
+            {item.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))
+  }
+</div>

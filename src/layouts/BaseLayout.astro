@@ -1,0 +1,144 @@
+---
+import { site, navItems, asset } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalPath?: string;
+  bodyClass?: string;
+}
+
+const {
+  title = "Plinto.cl",
+  description = site.description,
+  image = asset("MZK5p6L2KJBsJm76mSUw29Nz0vM.png"),
+  canonicalPath = Astro.url.pathname,
+  bodyClass = "",
+} = Astro.props;
+const canonical = new URL(canonicalPath, site.url).toString();
+const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={asset("5JFrnuH626kL8p163hhDeqy8Kc.svg")} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, site.url).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site.url).toString()} />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#content">Saltar al contenido</a>
+    <header class="site-header" data-reveal>
+      <a class="brand" href="/" aria-label="Plinto home">plinto</a>
+      <nav aria-label="Principal">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <h2>CONTACTO</h2>
+      <div class="footer-column footer-identity">
+        <a class="footer-brand" href="/">Plinto.cl</a>
+        <p>Santiago, Chile<br />2025</p>
+      </div>
+      <div class="footer-column">
+        <p>Páginas</p>
+        <a href="/">HOME</a>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+      <div class="footer-column">
+        <p>Utility Pages</p>
+        <a href="/404">404 PAGE</a>
+      </div>
+      <div class="footer-column">
+        <p>Socials</p>
+        <a href={site.instagram} rel="noopener">INSTAGRAM</a>
+        <a href={site.linkedin} rel="noopener">LinkedIn</a>
+      </div>
+    </footer>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        const targets = document.querySelectorAll("[data-reveal], .work-card, .service-item, .person, .gallery img");
+        targets.forEach((target, index) => {
+          target.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 100}ms`);
+        });
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+        );
+        targets.forEach((target) => observer.observe(target));
+
+        const parallaxTargets = Array.from(document.querySelectorAll("[data-parallax]"));
+        let ticking = false;
+
+        const setParallax = () => {
+          const viewportCenter = window.innerHeight / 2;
+          parallaxTargets.forEach((target) => {
+            const rect = target.getBoundingClientRect();
+            const speed = Number.parseFloat(target.getAttribute("data-parallax-speed") || "0");
+            const axis = target.getAttribute("data-parallax-axis") || "y";
+            const distance = (rect.top + rect.height / 2 - viewportCenter) * speed;
+
+            if (axis === "x") {
+              target.style.setProperty("--parallax-x", `${distance.toFixed(2)}px`);
+            } else {
+              target.style.setProperty("--parallax-y", `${distance.toFixed(2)}px`);
+            }
+          });
+          ticking = false;
+        };
+
+        const requestParallax = () => {
+          if (!ticking) {
+            window.requestAnimationFrame(setParallax);
+            ticking = true;
+          }
+        };
+
+        if (parallaxTargets.length) {
+          setParallax();
+          window.addEventListener("scroll", requestParallax, { passive: true });
+          window.addEventListener("resize", requestParallax);
+        }
+      }
+
+      document.querySelectorAll("[data-work-view]").forEach((view) => {
+        const buttons = view.querySelectorAll("[data-view-button]");
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const mode = button.getAttribute("data-view-button");
+            view.classList.toggle("is-list", mode === "list");
+            buttons.forEach((item) => item.classList.toggle("is-active", item === button));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

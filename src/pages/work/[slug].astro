@@ -1,0 +1,69 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WorkGrid from "../../components/WorkGrid.astro";
+
+export async function getStaticPaths() {
+  const works = await getCollection("work");
+  return works.flatMap((work) => {
+    const slug = work.id.replace(/\.mdx$/, "");
+    const slugs = [slug, ...work.data.legacySlugs];
+    return slugs.map((pathSlug) => ({
+      params: { slug: pathSlug },
+      props: { work, canonicalSlug: slug },
+    }));
+  });
+}
+
+const { work, canonicalSlug } = Astro.props;
+const { Content } = await render(work);
+const related = (await getCollection("work"))
+  .filter((item) => item.id !== work.id)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 2);
+---
+
+<BaseLayout title={work.data.seoTitle} description={work.data.seoDescription} image={work.data.coverImage} canonicalPath={`/work/${canonicalSlug}`}>
+  <article class="work-detail">
+    <div class="work-hero">
+      <h1>{work.data.title}</h1>
+      <img src={work.data.coverImage} alt="" data-parallax data-parallax-speed="0.035" />
+    </div>
+    <div class="meta-grid">
+      <p><span>CLIENT</span>{work.data.client}</p>
+      <p><span>SERVICE</span>{work.data.service}</p>
+      <p><span>YEAR</span>{work.data.year}</p>
+    </div>
+    <div class="detail-sections">
+      <section>
+        <h2>01 - BRIEF</h2>
+        <p>{work.data.brief ?? work.data.summary}</p>
+      </section>
+      <section>
+        <h2>02 - SOLUTION</h2>
+        <p>{work.data.solution ?? work.data.summary}</p>
+      </section>
+      <section>
+        <h2>03 - DELIVERABLES</h2>
+        <ul>
+          {work.data.deliverables.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+    </div>
+    <section class="copy-stack">
+      <h2>SUMMARY</h2>
+      <p>{work.data.summary}</p>
+      <Content />
+    </section>
+    <section>
+      <p class="kicker">IMAGE GALLERY</p>
+      <div class="gallery">
+        {work.data.gallery.map((image) => <img src={image} alt="" loading="lazy" />)}
+      </div>
+    </section>
+    <section>
+      <p class="kicker">READ MORE</p>
+      <WorkGrid items={related} />
+    </section>
+  </article>
+</BaseLayout>
