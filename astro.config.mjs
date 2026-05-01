@@ -10,9 +10,6 @@ const legacyWorkPaths = new Set([
 export default defineConfig({
   site: "https://plinto.cl",
   output: "static",
-  build: {
-    inlineStylesheets: "always",
-  },
   integrations: [
     mdx(),
     sitemap({
