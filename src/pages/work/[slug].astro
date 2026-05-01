@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import WorkGrid from "../../components/WorkGrid.astro";
 
@@ -16,24 +16,82 @@ export async function getStaticPaths() {
 }
 
 const { work, canonicalSlug } = Astro.props;
-const { Content } = await render(work);
+const currentSlug = Astro.params.slug;
+const isLegacySlug = currentSlug !== canonicalSlug;
+const hasFeaturedGalleryTile = canonicalSlug !== "casa-kddk";
+const canonicalPath = `/work/${canonicalSlug}/`;
 const related = (await getCollection("work"))
   .filter((item) => item.id !== work.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 2);
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: work.data.title,
+    description: work.data.seoDescription,
+    image: new URL(work.data.coverImage, Astro.site).toString(),
+    creator: {
+      "@type": "Organization",
+      name: "Plinto",
+    },
+    datePublished: String(work.data.year),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: new URL("/", Astro.site).toString(),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Work",
+        item: new URL("/work", Astro.site).toString(),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: work.data.title,
+        item: new URL(canonicalPath, Astro.site).toString(),
+      },
+    ],
+  },
+];
 ---
 
-<BaseLayout title={work.data.seoTitle} description={work.data.seoDescription} image={work.data.coverImage} canonicalPath={`/work/${canonicalSlug}`}>
+<BaseLayout
+  title={work.data.seoTitle}
+  description={work.data.seoDescription}
+  image={work.data.coverImage}
+  imageAlt={work.data.coverAlt}
+  canonicalPath={canonicalPath}
+  robots={isLegacySlug ? "noindex,follow,max-image-preview:large" : "index,follow,max-image-preview:large"}
+  ogType="article"
+  structuredData={structuredData}
+>
   <article class="work-detail">
     <div class="work-hero">
       <h1>{work.data.title}</h1>
-      <img src={work.data.coverImage} alt={`Imagen principal de ${work.data.title}`} data-parallax data-parallax-speed="0.035" />
+      <img
+        src={work.data.coverImage}
+        alt={work.data.coverAlt}
+        width={work.data.coverWidth}
+        height={work.data.coverHeight}
+        decoding="async"
+        data-parallax
+        data-parallax-speed="0.035"
+      />
     </div>
-    <div class="meta-grid">
-      <p><span>CLIENT</span>{work.data.client}</p>
-      <p><span>SERVICE</span>{work.data.service}</p>
-      <p><span>YEAR</span>{work.data.year}</p>
-    </div>
+    <dl class="meta-grid">
+      <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
+      <div><dt>SERVICE</dt><dd>{work.data.service}</dd></div>
+      <div><dt>YEAR</dt><dd>{work.data.year}</dd></div>
+    </dl>
     <div class="detail-sections">
       <section>
         <h2>01 - BRIEF</h2>
@@ -51,19 +109,56 @@ const related = (await getCollection("work"))
       </section>
     </div>
     <section>
-      <p class="kicker">IMAGE GALLERY</p>
-      <div class="gallery">
-        {work.data.gallery.map((image, index) => <img src={image} alt={`Galería de ${work.data.title}, imagen ${index + 1}`} loading="lazy" />)}
-      </div>
+      <h2 class="kicker">IMAGE GALLERY</h2>
+      <ul class="gallery" data-lightbox-gallery>
+        {
+          work.data.gallery.map((image, index) => (
+            <li
+              class:list={[
+                "gallery-item",
+                { "gallery-item--featured": hasFeaturedGalleryTile && (index + 1) % 3 === 0 },
+              ]}
+            >
+              <button
+                class="gallery-button"
+                type="button"
+                data-lightbox-trigger
+                data-src={image.src}
+                data-alt={image.alt}
+                data-caption={image.caption ?? image.alt}
+                aria-label={`Abrir imagen: ${image.caption ?? image.alt}`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            </li>
+          ))
+        }
+      </ul>
     </section>
     <section class="copy-stack detail-summary">
       <h2>SUMMARY</h2>
       <p>{work.data.summary}</p>
-      <Content />
     </section>
     <section>
-      <p class="kicker">READ MORE</p>
+      <h2 class="kicker">READ MORE</h2>
       <WorkGrid items={related} />
     </section>
   </article>
+  <dialog class="lightbox" data-lightbox-dialog aria-label="Vista ampliada de imagen">
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Cerrar vista ampliada">
+      ×
+    </button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__image" data-lightbox-image alt="" />
+      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+    </figure>
+  </dialog>
+  <script is:inline src="/scripts/lightbox.js" defer></script>
 </BaseLayout>

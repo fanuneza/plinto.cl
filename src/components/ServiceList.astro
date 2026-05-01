@@ -17,10 +17,10 @@ const { items } = Astro.props;
 const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as const;
 ---
 
-<div class="service-list">
+<ul class="service-list">
   {
     items.map((item, index) => (
-      <article class="service-item">
+      <li class="service-item">
         <ServiceIcon name={item.icon ?? fallbackIcons[index % fallbackIcons.length]} />
         {item.number && <p class="service-number">{item.number}</p>}
         <h3>{item.title}</h3>
@@ -32,7 +32,7 @@ const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as 
             ))}
           </ul>
         )}
-      </article>
+      </li>
     ))
   }
-</div>
+</ul>

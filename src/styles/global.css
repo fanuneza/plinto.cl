@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Satoshi";
-  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2") format("woff2");
+  src: url("/assets/fonts/satoshi/Satoshi-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Satoshi";
-  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2") format("woff2");
+  src: url("/assets/fonts/satoshi/Satoshi-Medium.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 500;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: "Satoshi";
-  src: url("https://framerusercontent.com/third-party-assets/fontshare/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2") format("woff2");
+  src: url("/assets/fonts/satoshi/Satoshi-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("https://framerusercontent.com/assets/vQyevYAyHtARFwPqUzQGpnDs.woff2") format("woff2");
+  src: url("/assets/fonts/inter/Inter-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("https://framerusercontent.com/assets/d3tHnaQIAeqiE5hGcRw4mmgWYU.woff2") format("woff2");
+  src: url("/assets/fonts/inter/Inter-Medium.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 500;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("https://app.framerstatic.com/Inter-SemiBold.latin-RDYY2AG2.woff2") format("woff2");
+  src: url("/assets/fonts/inter/Inter-SemiBold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 600;
@@ -48,7 +48,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("https://framerusercontent.com/assets/DXD0Q7LSl7HEvDzucnyLnGBHM.woff2") format("woff2");
+  src: url("/assets/fonts/inter/Inter-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -81,7 +81,16 @@ body {
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
-  font-family: Satoshi, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    Satoshi,
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   font-size: 16px;
   line-height: 1.4;
   text-rendering: optimizeLegibility;
@@ -95,7 +104,6 @@ h4,
 h5,
 h6,
 .brand,
-.footer-brand,
 .site-header nav,
 .kicker,
 .work-title {
@@ -114,6 +122,10 @@ a {
 
 a:hover {
   color: var(--muted);
+}
+
+address {
+  font-style: normal;
 }
 
 .skip-link {
@@ -144,8 +156,7 @@ a:hover {
   backdrop-filter: blur(12px);
 }
 
-.brand,
-.footer-brand {
+.brand {
   font-size: 24px;
   line-height: 1;
   font-weight: 500;
@@ -169,8 +180,8 @@ a:hover {
 
 .site-footer {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(42px, 109.12px, 128px);
   margin: 0 clamp(20px, 2.9vw, 80px) 38px;
   padding: 52px 40px 60px;
   background: var(--text);
@@ -193,22 +204,59 @@ a:hover {
   gap: 12px;
 }
 
+.site-footer .footer-column h3 {
+  margin: 0 0 20px;
+  color: var(--white);
+  font-family: Inter, Satoshi, ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
 .site-footer p {
   margin: 0;
   color: rgba(255, 255, 255, 0.58);
 }
 
-.footer-identity p {
+.footer-identity address {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-identity address p {
   color: var(--white);
+  font-size: 26px;
+  line-height: 1.22;
+  font-weight: 400;
+}
+
+.footer-credit {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: center;
+}
+
+.footer-credit span,
+.footer-credit a {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.footer-credit a {
+  font-weight: 700;
 }
 
 .site-footer a {
   font-size: 14px;
-  font-weight: 700;
-}
-
-.footer-identity {
-  font-size: 28px;
   font-weight: 700;
 }
 
@@ -286,7 +334,8 @@ a:hover {
   --parallax-x: 0px;
   --parallax-y: 0px;
   --stone-rotate: 0deg;
-  transform: translate3d(var(--parallax-x), var(--parallax-y), 0) rotate(var(--stone-rotate));
+  transform: translate3d(var(--parallax-x), var(--parallax-y), 0)
+    rotate(var(--stone-rotate));
   will-change: transform;
 }
 
@@ -302,33 +351,6 @@ a:hover {
   top: 150px;
   width: clamp(218px, 23vw, 310px);
   --stone-rotate: 22deg;
-}
-
-.stone-left {
-  left: -96px;
-  top: 168px;
-  --stone-rotate: -12deg;
-}
-
-.stone-right {
-  right: -74px;
-  top: 150px;
-  width: clamp(178px, 21vw, 304px);
-  --stone-rotate: 18deg;
-}
-
-.stone-bottom-left {
-  left: 18px;
-  bottom: -92px;
-  width: clamp(190px, 22vw, 300px);
-  --stone-rotate: 2deg;
-}
-
-.stone-bottom-right {
-  right: -66px;
-  bottom: -48px;
-  width: clamp(178px, 21vw, 304px);
-  --stone-rotate: 16deg;
 }
 
 .page-section,
@@ -355,15 +377,6 @@ a:hover {
   font-weight: 500;
 }
 
-.large-heading {
-  max-width: 1180px;
-  margin: 0;
-  font-size: clamp(56px, 11vw, 154px);
-  line-height: 0.92;
-  letter-spacing: 0;
-  font-weight: 500;
-}
-
 .section-title + .page-section {
   padding-top: 0;
 }
@@ -385,13 +398,6 @@ a:hover {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
-}
-
-.split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(36px, 6vw, 96px);
-  align-items: start;
 }
 
 .copy-stack {
@@ -480,13 +486,18 @@ a:hover {
   top: 6px;
   height: 2px;
   background: currentColor;
-  box-shadow: 0 7px 0 currentColor, 0 14px 0 currentColor;
+  box-shadow:
+    0 7px 0 currentColor,
+    0 14px 0 currentColor;
 }
 
 .work-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 56px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .work-card {
@@ -853,7 +864,10 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+  margin: 0;
+  padding: 0;
   border-top: 0;
+  list-style: none;
 }
 
 .service-item {
@@ -920,21 +934,10 @@ a:hover {
   top: 0.72em;
   width: 15px;
   height: 15px;
-  border: 1.4px solid currentColor;
-  border-radius: 999px;
+  background-color: currentColor;
+  -webkit-mask: url("/assets/icons/check.svg") no-repeat center / contain;
+  mask: url("/assets/icons/check.svg") no-repeat center / contain;
   transform: translateY(-50%);
-}
-
-.service-item li::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: calc(0.72em - 1px);
-  width: 6px;
-  height: 3px;
-  border-left: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-50%) rotate(-45deg);
 }
 
 .service-icon {
@@ -979,11 +982,11 @@ a:hover {
 .services-section .service-item > p:not(.service-number),
 .services-section .service-item li,
 .services-section .service-icon {
-  color: var(--soft);
+  color: var(--text);
 }
 
 .services-section .service-icon {
-  filter: invert(66%);
+  filter: none;
 }
 
 .services-section .service-item li {
@@ -1011,7 +1014,13 @@ a:hover {
   height: 24px;
   margin-bottom: 28px;
   border-radius: 2px;
-  background: var(--panel);
+  background: var(--muted);
+  opacity: 0.2;
+  transition: opacity 180ms ease;
+}
+
+.audience-grid article:hover span {
+  opacity: 0.5;
 }
 
 .audience-grid h3 {
@@ -1057,6 +1066,9 @@ a:hover {
   display: grid;
   gap: 18px;
   max-width: 1120px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .contact-links a {
@@ -1076,12 +1088,14 @@ a:hover {
   border: 0;
 }
 
-.meta-grid p,
+.meta-grid div,
+.meta-grid dt,
+.meta-grid dd,
 .work-detail p {
   margin: 0;
 }
 
-.meta-grid span {
+.meta-grid dt {
   display: block;
   margin-bottom: 8px;
   color: #1f3545;
@@ -1165,17 +1179,86 @@ a:hover {
   gap: 18px;
   max-width: 1000px;
   margin: 0 auto;
+  margin-block: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.gallery-item--featured {
+  grid-column: 1 / -1;
+  aspect-ratio: 2.05;
+}
+
+.gallery-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.gallery-button:focus-visible,
+.lightbox__close:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
 }
 
 .gallery img {
+  display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
 }
 
-.gallery img:nth-child(3n) {
-  grid-column: 1 / -1;
-  aspect-ratio: 2.05;
+.lightbox {
+  width: min(96vw, 1200px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.lightbox::backdrop {
+  background: rgb(0 0 0 / 0.82);
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lightbox__figure {
+  margin: 0;
+}
+
+.lightbox__image {
+  display: block;
+  width: 100%;
+  max-height: 86vh;
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  padding-block: 0.75rem;
+  color: white;
+  text-align: center;
 }
 
 .work-detail > section > .kicker {
@@ -1215,27 +1298,6 @@ a:hover {
 
 .work-detail > section:last-child > .kicker {
   text-align: left;
-}
-
-.js [data-reveal],
-.js .work-card,
-.js .service-item,
-.js .person,
-.js .gallery img {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.js [data-reveal].is-visible,
-.js .work-card.is-visible,
-.js .service-item.is-visible,
-.js .person.is-visible,
-.js .gallery img.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
 }
 
 @media (max-width: 1199px) {
@@ -1372,8 +1434,8 @@ a:hover {
     gap: 14px;
   }
 
-  .gallery img,
-  .gallery img:nth-child(3n) {
+  .gallery-item,
+  .gallery-item--featured {
     grid-column: auto;
     aspect-ratio: 1.1;
   }
@@ -1394,6 +1456,11 @@ a:hover {
     gap: 34px;
   }
 
+  .footer-credit {
+    gap: 10px;
+    margin-top: 0;
+  }
+
   .site-footer h2 {
     display: none;
   }
@@ -1412,10 +1479,6 @@ a:hover {
 
   .section-title h1 {
     font-size: clamp(38px, 13vw, 52px);
-  }
-
-  .large-heading {
-    font-size: clamp(48px, 17vw, 82px);
   }
 
   .portfolio-head {
@@ -1600,8 +1663,7 @@ a:hover {
 }
 
 /* Brand parity overrides */
-.brand,
-.footer-brand {
+.brand {
   font-size: 26px;
   font-weight: 500;
 }
@@ -1623,12 +1685,8 @@ a:hover {
   font-weight: 700;
 }
 
-.footer-identity,
-.footer-identity p {
+.footer-identity {
   color: var(--white);
-  font-size: 26px;
-  line-height: 1.22;
-  font-weight: 700;
 }
 
 .site-footer .footer-column > p {
@@ -1638,15 +1696,40 @@ a:hover {
   font-weight: 700;
 }
 
+.site-footer .footer-identity address > p {
+  color: var(--white);
+  font-family: Satoshi, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 26px;
+  line-height: 1.22;
+  font-weight: 400;
+}
+
 .site-footer a {
+  position: relative;
   color: var(--white);
   font-size: 16px;
   line-height: 1.35;
   font-weight: 700;
 }
 
+.site-footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 180ms ease;
+}
+
+.site-footer a:hover::after {
+  transform: scaleX(1);
+}
+
 .section-title h1,
-.large-heading,
 .source-head .kicker,
 .center-head h2,
 .somos-inner h2 {
@@ -1695,8 +1778,7 @@ a:hover {
   font-weight: 400;
 }
 
-.work-title,
-.work-card h5 {
+.work-title {
   color: var(--text);
 }
 
@@ -1914,7 +1996,7 @@ a:hover {
   gap: 26px;
 }
 
-.contact-links p {
+.contact-links li {
   display: grid;
   gap: 8px;
   margin: 0;
@@ -1996,13 +2078,11 @@ a:hover {
     display: flex;
   }
 
-  .brand,
-  .footer-brand {
+  .brand {
     font-size: 26px;
   }
 
   .section-title h1,
-  .large-heading,
   .source-head .kicker,
   .center-head h2,
   .somos-inner h2,

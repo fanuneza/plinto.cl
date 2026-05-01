@@ -149,6 +149,7 @@ vite.config.ts.timestamp-*
 *.md
 docs/
 !README.md
+!THIRD_PARTY_NOTICES.md
 
 # Playwright
 PLAYWRIGHT_VISUAL_CAPTURE.md

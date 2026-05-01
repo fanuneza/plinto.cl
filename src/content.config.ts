@@ -10,7 +10,18 @@ const work = defineCollection({
     service: z.string(),
     year: z.number(),
     coverImage: z.string(),
-    gallery: z.array(z.string()),
+    coverAlt: z.string(),
+    coverWidth: z.number(),
+    coverHeight: z.number(),
+    gallery: z.array(
+      z.object({
+        src: z.string(),
+        alt: z.string(),
+        width: z.number(),
+        height: z.number(),
+        caption: z.string().optional(),
+      })
+    ),
     summary: z.string(),
     seoTitle: z.string(),
     seoDescription: z.string(),

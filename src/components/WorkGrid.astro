@@ -10,26 +10,31 @@ const { items, limit } = Astro.props;
 const visible = limit ? items.slice(0, limit) : items;
 ---
 
-<div class="work-grid">
+<ul class="work-grid">
   {
     visible.map((item) => (
-      <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}`}>
-        <span class="work-media">
-          <img
-            src={item.data.coverImage}
-            alt={`Imagen principal de ${item.data.title}`}
-            loading="lazy"
-            data-parallax
-            data-parallax-speed="0.045"
-          />
-        </span>
-        <span class="work-meta">
-          <span class="work-title">{item.data.title}</span>
-          <span class="work-service">{item.data.service}</span>
-          <span class="work-year">{item.data.year}</span>
-          <span class="work-arrow" aria-hidden="true"></span>
-        </span>
-      </a>
+      <li>
+        <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}`}>
+          <span class="work-media">
+            <img
+              src={item.data.coverImage}
+              alt={item.data.coverAlt}
+              width={item.data.coverWidth}
+              height={item.data.coverHeight}
+              loading="lazy"
+              decoding="async"
+              data-parallax
+              data-parallax-speed="0.045"
+            />
+          </span>
+          <span class="work-meta">
+            <span class="work-title">{item.data.title}</span>
+            <span class="work-service">{item.data.service}</span>
+            <span class="work-year">{item.data.year}</span>
+            <span class="work-arrow" aria-hidden="true"></span>
+          </span>
+        </a>
+      </li>
     ))
   }
-</div>
+</ul>

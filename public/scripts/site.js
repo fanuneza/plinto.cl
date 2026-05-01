@@ -24,26 +24,6 @@ window.addEventListener("keydown", (event) => {
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion) {
-  const targets = document.querySelectorAll("[data-reveal], .work-card, .service-item, .person, .gallery img");
-
-  targets.forEach((target, index) => {
-    target.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 100}ms`);
-  });
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-  );
-
-  targets.forEach((target) => observer.observe(target));
-
   const parallaxTargets = Array.from(document.querySelectorAll("[data-parallax]"));
   let ticking = false;
 

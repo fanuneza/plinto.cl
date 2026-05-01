@@ -6,19 +6,48 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   canonicalPath?: string;
+  robots?: string;
+  ogType?: "website" | "article";
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
 }
 
 const {
   title = "Plinto.cl",
   description = site.description,
-  image = asset("brand/plinto-logo-stacked.png"),
+  image = asset("brand/plinto-og-image.webp"),
+  imageAlt = "Plinto",
   canonicalPath = Astro.url.pathname,
+  robots = "index,follow,max-image-preview:large",
+  ogType = "website",
+  structuredData = [],
   bodyClass = "",
 } = Astro.props;
 const canonical = new URL(canonicalPath, site.url).toString();
 const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
+const currentYear = new Date().getFullYear();
+const imageUrl = new URL(image, site.url).toString();
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const structuredDataItems = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Plinto",
+    url: site.url,
+    email: site.email,
+    sameAs: [site.instagram, site.linkedin],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Plinto",
+    url: site.url,
+    inLanguage: "es-CL",
+  },
+  ...(Array.isArray(structuredData) ? structuredData : [structuredData]),
+];
 ---
 
 <!doctype html>
@@ -31,23 +60,33 @@ const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta property="og:type" content="website" />
+    <meta name="robots" content={robots} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Plinto" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, site.url).toString()} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, site.url).toString()} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {structuredDataItems.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#content">Saltar al contenido</a>
     <header class="site-header" data-reveal>
       <a class="brand" href="/" aria-label="Plinto home">plinto</a>
       <nav id="site-nav" aria-label="Principal">
-        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        {
+          navItems.map((item) => {
+            const href = item.href.replace(/\/$/, "") || "/";
+            const isCurrent = pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+            return <a href={item.href} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
+          })
+        }
       </nav>
       <button class="mobile-menu-mark" type="button" aria-label="Abrir menu" aria-controls="site-nav" aria-expanded="false">
         <span aria-hidden="true"></span>
@@ -59,24 +98,28 @@ const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
     <footer class="site-footer">
       <h2>CONTACTO</h2>
       <div class="footer-column footer-identity">
-        <a class="footer-brand" href="/">Plinto.cl</a>
-        <p>Santiago, Chile<br />2025</p>
+        <address>
+          <p>Plinto.cl</p>
+          <p>Santiago, Chile</p>
+          <p>{currentYear}</p>
+        </address>
       </div>
       <div class="footer-column">
-        <p>Páginas</p>
+        <h3>Páginas</h3>
         <a href="/">HOME</a>
         {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
       </div>
       <div class="footer-column">
-        <p>Utility Pages</p>
-        <a href="/404">404 PAGE</a>
+        <h3>Socials</h3>
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-      <div class="footer-column">
-        <p>Socials</p>
-        <a href={site.instagram} rel="noopener">INSTAGRAM</a>
-        <a href={site.linkedin} rel="noopener">LinkedIn</a>
-      </div>
+      <p class="footer-credit">
+        <span>Design: Plinto.cl</span>
+        <span class="footer-credit__separator" aria-hidden="true">·</span>
+        <span>Dev: <a href="https://agenciachucao.cl/?utm_source=plinto.cl&utm_medium=referral&utm_campaign=credit_footer" target="_blank" rel="noopener noreferrer">agencia chucao</a></span>
+      </p>
     </footer>
-    <script is:inline src="/scripts/site.js"></script>
+    <script is:inline src="/scripts/site.js" defer></script>
   </body>
 </html>

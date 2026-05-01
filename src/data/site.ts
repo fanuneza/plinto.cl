@@ -5,7 +5,7 @@ export const site = {
     "Estudio de estrategia, contenido y comunicación para marcas del mundo de la arquitectura y la construcción.",
   email: "fernanda@plinto.cl",
   secondaryEmail: "diego@plinto.cl",
-  instagram: "https://instagram.com/plinto-cl.com",
+  instagram: "https://instagram.com/plinto.cl",
   linkedin: "https://www.linkedin.com/company/plinto-cl/",
 };
 
