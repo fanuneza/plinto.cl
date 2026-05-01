@@ -147,6 +147,7 @@ vite.config.ts.timestamp-*
 
 # Docs
 *.md
+*.md.bak
 docs/
 !README.md
 !THIRD_PARTY_NOTICES.md
@@ -157,3 +158,6 @@ playwright.config.ts
 tests/visual/
 test-results/
 playwright-report/
+
+# Claude
+.claude/
