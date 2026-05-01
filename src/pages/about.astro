@@ -43,7 +43,7 @@ const collaborators = [
 <BaseLayout title="About" description="Equipo y mirada editorial de Plinto.">
   <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
   <section class="about-context page-section">
-    <img class="about-logo" src="/assets/images/brand/plinto-logo-stacked.png" alt="Logo de Plinto" width="350" height="350" />
+    <img class="about-logo" src="/assets/images/brand/plinto-logo-stacked.png" alt="Logo de Plinto" width="350" height="350" loading="lazy" decoding="async" />
     <div class="about-context-copy">
       <p class="about-eyebrow">contexto</p>
       <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</h2>
@@ -57,7 +57,7 @@ const collaborators = [
       {
         people.map((person) => (
           <article class="person">
-            <img src={person.image} alt={`Retrato de ${person.name}`} width="350" height="350" />
+            <img src={person.image} alt={`Retrato de ${person.name}`} width="350" height="350" loading="lazy" decoding="async" />
             <div class="person-copy">
               <p class="about-eyebrow">{person.role}</p>
               <h2>{person.name}</h2>

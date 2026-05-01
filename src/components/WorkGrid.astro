@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getResponsiveImageSources } from "../utils/responsive-images";
+import { getRasterImageSrcSet, getResponsiveImageSources } from "../utils/responsive-images";
 
 interface Props {
   items: CollectionEntry<"work">[];
@@ -16,6 +16,7 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
   {
     visible.map((item) => {
       const responsiveSources = getResponsiveImageSources(item.data.coverImage, item.data.coverWidth);
+      const rasterSrcSet = getRasterImageSrcSet(item.data.coverImage, item.data.coverWidth);
 
       return (
         <li>
@@ -31,6 +32,8 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
                   height={item.data.coverHeight}
                   loading="lazy"
                   decoding="async"
+                  fetchpriority="low"
+                  srcset={rasterSrcSet}
                   sizes={cardSizes}
                   data-parallax
                   data-parallax-speed="0.045"

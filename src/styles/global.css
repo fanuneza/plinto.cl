@@ -359,6 +359,13 @@ address {
   padding: clamp(64px, 7.4vw, 112px) clamp(20px, 7vw, 100px);
 }
 
+.page-section,
+.site-footer,
+.work-detail > section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
 .section-title {
   display: grid;
   justify-items: center;
@@ -1380,8 +1387,8 @@ address {
   }
 
   .hero {
-    min-height: 540px;
-    padding: 66px 20px 74px;
+    min-height: 500px;
+    padding: 58px 20px 68px;
   }
 
   .hero-content {
@@ -1401,25 +1408,7 @@ address {
   }
 
   .stone {
-    display: block;
-    width: auto;
-    opacity: 0.34;
-    will-change: auto;
-  }
-
-  .stone-hero-left {
-    top: 72px;
-    left: -54px;
-    width: clamp(112px, 34vw, 148px);
-    --stone-rotate: -14deg;
-  }
-
-  .stone-hero-right {
-    top: auto;
-    right: -36px;
-    bottom: 82px;
-    width: clamp(94px, 28vw, 128px);
-    --stone-rotate: 18deg;
+    display: none;
   }
 
   .site-footer,
@@ -1687,18 +1676,6 @@ address {
 
   .service-page .service-item li {
     padding-left: 28px;
-  }
-}
-
-@media (max-width: 380px) {
-  .stone-hero-left {
-    left: -62px;
-    width: 118px;
-    opacity: 0.28;
-  }
-
-  .stone-hero-right {
-    display: none;
   }
 }
 
