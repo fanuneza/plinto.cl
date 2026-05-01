@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getResponsiveImageSources } from "../utils/responsive-images";
 
 interface Props {
   items: CollectionEntry<"work">[];
@@ -8,33 +9,44 @@ interface Props {
 
 const { items, limit } = Astro.props;
 const visible = limit ? items.slice(0, limit) : items;
+const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) calc(50vw - 32px), 520px";
 ---
 
 <ul class="work-grid">
   {
-    visible.map((item) => (
-      <li>
-        <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}`}>
-          <span class="work-media">
-            <img
-              src={item.data.coverImage}
-              alt={item.data.coverAlt}
-              width={item.data.coverWidth}
-              height={item.data.coverHeight}
-              loading="lazy"
-              decoding="async"
-              data-parallax
-              data-parallax-speed="0.045"
-            />
-          </span>
-          <span class="work-meta">
-            <span class="work-title">{item.data.title}</span>
-            <span class="work-service">{item.data.service}</span>
-            <span class="work-year">{item.data.year}</span>
-            <span class="work-arrow" aria-hidden="true"></span>
-          </span>
-        </a>
-      </li>
-    ))
+    visible.map((item) => {
+      const responsiveSources = getResponsiveImageSources(item.data.coverImage, item.data.coverWidth);
+
+      return (
+        <li>
+          <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}`}>
+            <span class="work-media">
+              <picture>
+                <source srcset={responsiveSources.avif} sizes={cardSizes} type="image/avif" />
+                <source srcset={responsiveSources.webp} sizes={cardSizes} type="image/webp" />
+                <img
+                  src={item.data.coverImage}
+                  alt={item.data.coverAlt}
+                  width={item.data.coverWidth}
+                  height={item.data.coverHeight}
+                  loading="lazy"
+                  decoding="async"
+                  sizes={cardSizes}
+                  data-parallax
+                  data-parallax-speed="0.045"
+                  data-parallax-min-width="810"
+                />
+              </picture>
+            </span>
+            <span class="work-meta">
+              <span class="work-title">{item.data.title}</span>
+              <span class="work-service">{item.data.service}</span>
+              <span class="work-year">{item.data.year}</span>
+              <span class="work-arrow" aria-hidden="true"></span>
+            </span>
+          </a>
+        </li>
+      );
+    })
   }
 </ul>

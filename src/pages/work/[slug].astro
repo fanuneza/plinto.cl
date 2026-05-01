@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import WorkGrid from "../../components/WorkGrid.astro";
+import { getResponsiveImageSources } from "../../utils/responsive-images";
 
 export async function getStaticPaths() {
   const works = await getCollection("work");
@@ -24,6 +25,8 @@ const related = (await getCollection("work"))
   .filter((item) => item.id !== work.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 2);
+const heroImageSources = getResponsiveImageSources(work.data.coverImage, work.data.coverWidth);
+const heroSizes = "(max-width: 809px) calc(100vw - 40px), 1000px";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -77,15 +80,23 @@ const structuredData = [
   <article class="work-detail">
     <div class="work-hero">
       <h1>{work.data.title}</h1>
-      <img
-        src={work.data.coverImage}
-        alt={work.data.coverAlt}
-        width={work.data.coverWidth}
-        height={work.data.coverHeight}
-        decoding="async"
-        data-parallax
-        data-parallax-speed="0.035"
-      />
+      <picture>
+        <source srcset={heroImageSources.avif} sizes={heroSizes} type="image/avif" />
+        <source srcset={heroImageSources.webp} sizes={heroSizes} type="image/webp" />
+        <img
+          src={work.data.coverImage}
+          alt={work.data.coverAlt}
+          width={work.data.coverWidth}
+          height={work.data.coverHeight}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          sizes={heroSizes}
+          data-parallax
+          data-parallax-speed="0.035"
+          data-parallax-min-width="810"
+        />
+      </picture>
     </div>
     <dl class="meta-grid">
       <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>

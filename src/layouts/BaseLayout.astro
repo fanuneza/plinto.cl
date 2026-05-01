@@ -30,6 +30,7 @@ const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
 const currentYear = new Date().getFullYear();
 const imageUrl = new URL(image, site.url).toString();
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const themeColor = "#fffbf7";
 const structuredDataItems = [
   {
     "@context": "https://schema.org",
@@ -56,11 +57,14 @@ const structuredDataItems = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={themeColor} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <meta name="robots" content={robots} />
+    <link rel="preload" href="/assets/fonts/inter/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/satoshi/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Plinto" />
     <meta property="og:title" content={pageTitle} />

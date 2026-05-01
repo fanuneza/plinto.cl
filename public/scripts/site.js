@@ -1,5 +1,13 @@
 document.documentElement.classList.add("js");
 
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+const rootStyles = getComputedStyle(document.documentElement);
+const backgroundThemeColor = rootStyles.getPropertyValue("--bg").trim();
+
+if (themeColorMeta && backgroundThemeColor) {
+  themeColorMeta.setAttribute("content", backgroundThemeColor);
+}
+
 const menuButton = document.querySelector(".mobile-menu-mark");
 const siteNav = document.querySelector("#site-nav");
 
@@ -24,7 +32,10 @@ window.addEventListener("keydown", (event) => {
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion) {
-  const parallaxTargets = Array.from(document.querySelectorAll("[data-parallax]"));
+  const parallaxTargets = Array.from(document.querySelectorAll("[data-parallax]")).filter((target) => {
+    const minWidth = Number.parseInt(target.getAttribute("data-parallax-min-width") || "0", 10);
+    return window.innerWidth >= minWidth;
+  });
   let ticking = false;
 
   const setParallax = () => {
@@ -54,9 +65,17 @@ if (!reduceMotion) {
   };
 
   if (parallaxTargets.length) {
-    setParallax();
-    window.addEventListener("scroll", requestParallax, { passive: true });
-    window.addEventListener("resize", requestParallax);
+    const startParallax = () => {
+      setParallax();
+      window.addEventListener("scroll", requestParallax, { passive: true });
+      window.addEventListener("resize", requestParallax);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(startParallax, { timeout: 400 });
+    } else {
+      window.setTimeout(startParallax, 120);
+    }
   }
 }
 
