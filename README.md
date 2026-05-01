@@ -1,37 +1,45 @@
 # Plinto.cl
 
-Static Astro site for Plinto, a strategy, content, and communication studio focused on architecture and construction brands.
+Sitio estatico desarrollado con Astro para Plinto, estudio enfocado en estrategia, contenidos y comunicacion para marcas de arquitectura y construccion.
 
 ## Stack
 
 - `Astro 6`
 - `TypeScript`
-- `@astrojs/mdx` for work entries
-- `@astrojs/sitemap` for sitemap generation
+- `@astrojs/mdx` para fichas de proyectos
+- `@astrojs/sitemap` para generacion de sitemap
+- `Playwright` disponible para capturas visuales locales
 
-## Commands
+## Requisitos
 
-- `npm install`: install dependencies from `package-lock.json`.
-- `npm run dev`: start the local Astro development server.
-- `npm run build`: run `astro check` and build the static site into `dist/`.
-- `npm run preview`: preview the production build locally.
+- `Node.js` compatible con las dependencias definidas en `package-lock.json`
+- `npm`
 
-## Project Structure
+## Comandos
 
-- `src/pages/`: route entrypoints for home, about, service, contact, 404, and work pages.
-- `src/pages/work/[slug].astro`: generated work detail pages, including legacy slug support from content frontmatter.
-- `src/layouts/`: shared page layout.
-- `src/components/`: reusable UI such as the work grid, section title, and service list/icon components.
-- `src/content/work/*.mdx`: portfolio entries and frontmatter-driven metadata.
-- `src/content.config.ts`: content collection schema for work entries.
-- `src/data/site.ts`: global site metadata, navigation, and asset helper.
-- `src/styles/global.css`: global styles, design tokens, and page-level rules.
-- `public/assets/icons/`: static SVG icons used across the site.
-- `public/assets/images/`: site image library organized by `brand/`, `decorative/`, `people/`, and `projects/`.
+- `npm install`: instala las dependencias del proyecto.
+- `npm run dev`: levanta el entorno local de desarrollo.
+- `npm run build`: ejecuta `astro check` y genera la version de produccion en `dist/`.
+- `npm run preview`: sirve localmente la compilacion de produccion.
 
-## Content Model
+## Estructura del proyecto
 
-Each work entry in `src/content/work/` is an MDX file with frontmatter used to generate list and detail pages. Current fields include:
+- `src/pages/`: rutas del sitio.
+- `src/pages/work/[slug].astro`: pagina dinamica de detalle para proyectos.
+- `src/layouts/`: layouts compartidos.
+- `src/components/`: componentes reutilizables de interfaz.
+- `src/content/work/*.mdx`: entradas del portafolio.
+- `src/content.config.ts`: esquema de la coleccion de contenido.
+- `src/data/`: datos compartidos del sitio.
+- `src/styles/global.css`: tokens, estilos globales y reglas base.
+- `public/`: archivos estaticos publicados sin procesamiento.
+- `docs/site-capture/`: material historico de referencia del sitio anterior.
+
+## Modelo de contenido
+
+Cada proyecto en `src/content/work/` se define como un archivo MDX con frontmatter. Desde ahi se generan los listados, las paginas de detalle y parte del contenido SEO.
+
+Campos usados actualmente:
 
 - `title`
 - `client`
@@ -50,15 +58,21 @@ Each work entry in `src/content/work/` is an MDX file with frontmatter used to g
 - `solution`
 - `deliverables`
 
-## Asset Conventions
+## Convenciones de assets
 
-- Project images live under `public/assets/images/projects/`.
-- Team portraits live under `public/assets/images/people/`.
-- Brand assets such as the Plinto logo live under `public/assets/images/brand/`.
-- Decorative stones and similar non-content images live under `public/assets/images/decorative/`.
-- New assets should use descriptive, SEO-friendly filenames instead of hashed imports.
+- Prefiere nuevas rutas bajo `public/assets/`.
+- Usa nombres descriptivos para imagenes y otros archivos estaticos.
+- Agrega texto alternativo significativo cuando el recurso aporte contenido.
 
-## Notes
+## Flujo de trabajo recomendado
 
-- `docs/site-capture/` contains historical reference material from the previous site and should be treated as reference-only.
-- `dist/`, local logs, caches, and other generated artifacts are not part of the committed source of truth.
+1. Instala dependencias con `npm install`.
+2. Trabaja localmente con `npm run dev`.
+3. Si cambias rutas, contenido o estilos, valida el resultado en navegador.
+4. Antes de cerrar tu cambio, ejecuta `npm run build`.
+
+## Notas
+
+- `dist/`, caches, logs, resultados de pruebas y otros archivos generados no forman parte de la fuente de verdad del proyecto.
+- `docs/site-capture/` debe tratarse solo como referencia historica, no como documentacion vigente de implementacion.
+- No subas secretos ni archivos `.env` reales al repositorio.
