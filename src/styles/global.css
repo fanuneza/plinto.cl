@@ -917,23 +917,24 @@ a:hover {
   content: "";
   position: absolute;
   left: 0;
-  top: 2px;
+  top: 0.72em;
   width: 15px;
   height: 15px;
   border: 1.4px solid currentColor;
   border-radius: 999px;
+  transform: translateY(-50%);
 }
 
 .service-item li::after {
   content: "";
   position: absolute;
   left: 4px;
-  top: 6px;
+  top: calc(0.72em - 1px);
   width: 6px;
   height: 3px;
   border-left: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(-45deg);
+  transform: translateY(-50%) rotate(-45deg);
 }
 
 .service-icon {
@@ -979,6 +980,10 @@ a:hover {
 .services-section .service-item li,
 .services-section .service-icon {
   color: var(--soft);
+}
+
+.services-section .service-icon {
+  filter: invert(66%);
 }
 
 .services-section .service-item li {
