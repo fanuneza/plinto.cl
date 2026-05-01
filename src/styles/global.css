@@ -517,9 +517,10 @@ address {
 
 .asterisk {
   margin: 58px 0 68px;
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 700;
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .intro-services {
