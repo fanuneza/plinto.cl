@@ -16,4 +16,4 @@ export const navItems = [
   { href: "/contact", label: "CONTACT" },
 ];
 
-export const asset = (name: string) => `/assets/framer/${name}`;
+export const asset = (name: string) => `/assets/images/${name}`;
