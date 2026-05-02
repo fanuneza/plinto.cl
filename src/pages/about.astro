@@ -5,6 +5,7 @@ import SectionTitle from "../components/SectionTitle.astro";
 import fernandaImg from "../assets/images/people/fernanda-castro-portrait.jpg";
 import diegoImg from "../assets/images/people/diego-hernandez-portrait.png";
 import cristianImg from "../assets/images/people/cristian-pino-anguita-portrait-bw.png";
+import logoStacked from "../assets/images/brand/plinto-logo-stacked.png";
 
 const people = [
   {
@@ -47,12 +48,12 @@ const collaborators = [
 <BaseLayout title="About" description="Equipo y mirada editorial de Plinto.">
   <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
   <section class="about-context page-section">
-    <img
+    <Image
       class="about-logo"
-      src="/assets/images/brand/plinto-logo-stacked.png"
+      src={logoStacked}
       alt="Logo de Plinto"
-      width="350"
-      height="350"
+      width={350}
+      height={350}
       loading="eager"
       decoding="async"
       fetchpriority="high"

@@ -1,8 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import ServiceList from "../components/ServiceList.astro";
+import stoneHeroLeft from "../assets/images/decorative/stone-hero-left.png";
+import stoneHeroRight from "../assets/images/decorative/stone-hero-right.png";
+import stoneStack from "../assets/images/decorative/stone-stack.png";
 
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
 const services = [
@@ -39,20 +43,20 @@ const services = [
 
 <BaseLayout title="Estrategia, contenido y comunicación para arquitectura">
   <section class="hero">
-    <img
+    <Image
       class="stone stone-hero-left"
-      src="/assets/images/decorative/stone-hero-left.png"
+      src={stoneHeroLeft}
       alt=""
-      width="678"
-      height="629"
+      width={678}
+      height={629}
       decoding="async"
     />
-    <img
+    <Image
       class="stone stone-hero-right"
-      src="/assets/images/decorative/stone-hero-right.png"
+      src={stoneHeroRight}
       alt=""
-      width="402"
-      height="390"
+      width={402}
+      height={390}
       decoding="async"
     />
     <div class="hero-content">
@@ -89,12 +93,12 @@ const services = [
           <li>estructura fundamental sobre la que se desarrolla y sostiene una identidad clara y coherente</li>
         </ol>
       </div>
-      <img
+      <Image
         class="stacked-stone"
-        src="/assets/images/decorative/stone-stack.png"
+        src={stoneStack}
         alt=""
-        width="1920"
-        height="1920"
+        width={1920}
+        height={1920}
         loading="lazy"
         decoding="async"
       />
