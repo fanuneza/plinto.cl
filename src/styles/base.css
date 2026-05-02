@@ -66,7 +66,8 @@
   --line: #e5e2de;
   --panel: #f7f3ef;
   --label: #1f3545;
-  --font-body: Satoshi, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    Satoshi, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-ui: Inter, Satoshi, ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -120,4 +121,3 @@ a:hover {
 address {
   font-style: normal;
 }
-

@@ -24,18 +24,18 @@ Sitio estatico desarrollado con Astro para Plinto, estudio enfocado en estrategi
 
 ## Comandos
 
-| Comando | Descripcion |
-|---------|-------------|
-| `npm install` | Instala las dependencias del proyecto. |
-| `npm run dev` | Levanta el entorno local de desarrollo. |
-| `npm run build` | Ejecuta `astro check` y genera la version de produccion en `dist/`. |
-| `npm run preview` | Sirve localmente la compilacion de produccion. |
-| `npm run lint` | Ejecuta ESLint y Stylelint. |
-| `npm run format` | Formatea el codigo con Prettier. |
-| `npm run format:check` | Verifica el formateo sin modificar archivos. |
-| `npm run test:lighthouse` | Ejecuta Lighthouse CI sobre `dist/`. |
-| `npm run test:a11y` | Ejecuta tests de accesibilidad con Playwright + axe-core. |
-| `npm run test:visual` | Ejecuta capturas visuales con Playwright. |
+| Comando                   | Descripcion                                                         |
+| ------------------------- | ------------------------------------------------------------------- |
+| `npm install`             | Instala las dependencias del proyecto.                              |
+| `npm run dev`             | Levanta el entorno local de desarrollo.                             |
+| `npm run build`           | Ejecuta `astro check` y genera la version de produccion en `dist/`. |
+| `npm run preview`         | Sirve localmente la compilacion de produccion.                      |
+| `npm run lint`            | Ejecuta ESLint y Stylelint.                                         |
+| `npm run format`          | Formatea el codigo con Prettier.                                    |
+| `npm run format:check`    | Verifica el formateo sin modificar archivos.                        |
+| `npm run test:lighthouse` | Ejecuta Lighthouse CI sobre `dist/`.                                |
+| `npm run test:a11y`       | Ejecuta tests de accesibilidad con Playwright + axe-core.           |
+| `npm run test:visual`     | Ejecuta capturas visuales con Playwright.                           |
 
 ## Estructura del proyecto
 
