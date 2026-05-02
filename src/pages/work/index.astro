@@ -12,11 +12,15 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
   <section class="page-section work-page" data-work-view>
     <div class="portfolio-head">
       <span></span>
-      <div class="view-toggles" aria-label="Cambiar vista">
-        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"><span class="grid-icon" aria-hidden="true"></span></button>
-        <button type="button" data-view-button="list" aria-label="Vista lista" aria-pressed="false"><span class="list-icon" aria-hidden="true"></span></button>
+      <div class="view-toggles" aria-label="Cambiar vista" aria-live="polite">
+        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"
+          ><span class="grid-icon" aria-hidden="true"></span></button
+        >
+        <button type="button" data-view-button="list" aria-label="Vista lista" aria-pressed="false"
+          ><span class="list-icon" aria-hidden="true"></span></button
+        >
       </div>
     </div>
-    <WorkGrid items={works} />
+    <WorkGrid items={works} eagerFirst={true} />
   </section>
 </BaseLayout>

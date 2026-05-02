@@ -52,7 +52,7 @@ const structuredDataItems = [
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-CL">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,8 +63,29 @@ const structuredDataItems = [
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <meta name="robots" content={robots} />
+    <link rel="dns-prefetch" href="https://instagram.com" />
+    <link rel="dns-prefetch" href="https://linkedin.com" />
+    <link rel="preconnect" href="https://instagram.com" crossorigin />
+    <link rel="preconnect" href="https://linkedin.com" crossorigin />
+    <link
+      rel="preload"
+      href="/assets/fonts/satoshi/Satoshi-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter/Inter-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      fetchpriority="high"
+    />
     <link rel="preload" href="/assets/fonts/inter/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="es_CL" />
     <meta property="og:site_name" content="Plinto" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -87,11 +108,21 @@ const structuredDataItems = [
           navItems.map((item) => {
             const href = item.href.replace(/\/$/, "") || "/";
             const isCurrent = pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
-            return <a href={item.href} aria-current={isCurrent ? "page" : undefined}>{item.label}</a>;
+            return (
+              <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
+                {item.label}
+              </a>
+            );
           })
         }
       </nav>
-      <button class="mobile-menu-mark" type="button" aria-label="Abrir menu" aria-controls="site-nav" aria-expanded="false">
+      <button
+        class="mobile-menu-mark"
+        type="button"
+        aria-label="Abrir menu"
+        aria-controls="site-nav"
+        aria-expanded="false"
+      >
         <span aria-hidden="true"></span>
       </button>
     </header>
@@ -120,7 +151,13 @@ const structuredDataItems = [
       <p class="footer-credit">
         <span>Design: Plinto.cl</span>
         <span class="footer-credit__separator" aria-hidden="true">·</span>
-        <span>Dev: <a href="https://agenciachucao.cl/?utm_source=plinto.cl&utm_medium=referral&utm_campaign=credit_footer" target="_blank" rel="noopener noreferrer">agencia chucao</a></span>
+        <span
+          >Dev: <a
+            href="https://agenciachucao.cl/?utm_source=plinto.cl&utm_medium=referral&utm_campaign=credit_footer"
+            target="_blank"
+            rel="noopener noreferrer">agencia chucao</a
+          ></span
+        >
       </p>
     </footer>
     <script is:inline src="/scripts/site.js" defer></script>

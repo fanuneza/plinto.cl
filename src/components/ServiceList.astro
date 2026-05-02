@@ -23,7 +23,7 @@ const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as 
       <li class="service-item">
         <ServiceIcon name={item.icon ?? fallbackIcons[index % fallbackIcons.length]} />
         {item.number && <p class="service-number">{item.number}</p>}
-        <h3>{item.title}</h3>
+        <h2>{item.title}</h2>
         {item.body && <p>{item.body}</p>}
         {item.points && (
           <ul>

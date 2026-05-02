@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import robotsTxt from "astro-robots-txt";
 
 const legacyWorkPaths = new Set([
   "/work/campaña-building-of-the-year-awards/",
@@ -18,5 +19,6 @@ export default defineConfig({
         return !legacyWorkPaths.has(decodeURI(pathname));
       },
     }),
+    robotsTxt(),
   ],
 });

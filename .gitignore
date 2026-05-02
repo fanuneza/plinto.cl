@@ -146,18 +146,23 @@ vite.config.ts.timestamp-*
 .astro/
 
 # Docs
-*.md
 *.md.bak
 docs/
 !README.md
 !THIRD_PARTY_NOTICES.md
+!AGENTS.md
+!CLAUDE.md
 
 # Playwright
 PLAYWRIGHT_VISUAL_CAPTURE.md
-playwright.config.ts
-tests/visual/
 test-results/
 playwright-report/
 
 # Claude
 .claude/
+
+# Lighthouse
+.lighthouseci/
+
+# Reports
+Report.md

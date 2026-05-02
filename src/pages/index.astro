@@ -22,7 +22,11 @@ const services = [
     icon: "image",
     title: "CREACIÓN DE CONTENIDO",
     body: "Creación de packs de contenido audiovisual y editorial para distintos medios y difusión según objetivos del cliente.",
-    points: ["Producción Audiovisual: Fotografía, Video, Visualización 3D, Ilustraciones", "Artículos y Posts - SEO", "Newsletters"],
+    points: [
+      "Producción Audiovisual: Fotografía, Video, Visualización 3D, Ilustraciones",
+      "Artículos y Posts - SEO",
+      "Newsletters",
+    ],
   },
   {
     icon: "cluster",
@@ -35,14 +39,30 @@ const services = [
 
 <BaseLayout title="Estrategia, contenido y comunicación para arquitectura">
   <section class="hero">
-    <img class="stone stone-hero-left" src="/assets/images/decorative/stone-hero-left.png" alt="" loading="lazy" decoding="async" />
-    <img class="stone stone-hero-right" src="/assets/images/decorative/stone-hero-right.png" alt="" loading="lazy" decoding="async" />
+    <img
+      class="stone stone-hero-left"
+      src="/assets/images/decorative/stone-hero-left.png"
+      alt=""
+      width="678"
+      height="629"
+      decoding="async"
+    />
+    <img
+      class="stone stone-hero-right"
+      src="/assets/images/decorative/stone-hero-right.png"
+      alt=""
+      width="402"
+      height="390"
+      decoding="async"
+    />
     <div class="hero-content">
       <h1>plinto</h1>
       <p class="tagline">brand & content marketing</p>
       <div class="scroll-cue">
         <span>SCROLL DOWN</span>
-        <a href="#somos" aria-label="Ir a la sección sobre Plinto"><span class="scroll-arrow" aria-hidden="true"></span></a>
+        <a href="#somos" aria-label="Ir a la sección sobre Plinto"
+          ><span class="scroll-arrow" aria-hidden="true"></span></a
+        >
       </div>
     </div>
   </section>
@@ -50,7 +70,7 @@ const services = [
   <section class="brand-intro page-section">
     <div class="brand-intro-inner">
       <h2>Elevamos la identidad de tu marca desde la narrativa, la estética visual y el contenido creativo</h2>
-      <img class="asterisk" src="/assets/icons/asterisk.svg" alt="" aria-hidden="true" />
+      <img class="asterisk" src="/assets/icons/asterisk.svg" alt="" width="640" height="640" aria-hidden="true" />
       <div class="intro-services">
         <p><strong>Branding.</strong><br />Construimos identidad de marca y rescatamos el valor intrínseco</p>
         <p><strong>Storytelling.</strong><br />Traducimos la esencia de una marca en una narrativa potente</p>
@@ -69,10 +89,28 @@ const services = [
           <li>estructura fundamental sobre la que se desarrolla y sostiene una identidad clara y coherente</li>
         </ol>
       </div>
-      <img class="stacked-stone" src="/assets/images/decorative/stone-stack.png" alt="" loading="lazy" decoding="async" />
+      <img
+        class="stacked-stone"
+        src="/assets/images/decorative/stone-stack.png"
+        alt=""
+        width="1920"
+        height="1920"
+        loading="lazy"
+        decoding="async"
+      />
       <div class="somos-copy">
-        <p>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo. Y desde ahí, proponemos otra forma de habitar el marketing y la comunicación: elevar la conversación, darle forma a la identidad de quienes construyen ciudad y recordar que detrás de cada proyecto hay una historia que merece ser bien contada.</p>
-        <p>En un mundo saturado de imágenes sin relato, la narrativa clara y visual es un acto de posicionamiento y observamos este panorama como agentes culturales. Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la arquitectura y la construcción a través de una narrativa coherente y distintiva.</p>
+        <p>
+          No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo. Y desde
+          ahí, proponemos otra forma de habitar el marketing y la comunicación: elevar la conversación, darle forma a la
+          identidad de quienes construyen ciudad y recordar que detrás de cada proyecto hay una historia que merece ser
+          bien contada.
+        </p>
+        <p>
+          En un mundo saturado de imágenes sin relato, la narrativa clara y visual es un acto de posicionamiento y
+          observamos este panorama como agentes culturales. Plinto es un estudio de estrategia, contenido y comunicación
+          que construye marcas relevantes en el mundo de la arquitectura y la construcción a través de una narrativa
+          coherente y distintiva.
+        </p>
       </div>
     </div>
   </section>
@@ -81,18 +119,29 @@ const services = [
     <div class="portfolio-head source-head">
       <div>
         <h2 class="kicker">PORTAFOLIO</h2>
-        <p class="intro-copy">Colección de proyectos y campañas realizadas entre 2012 y 2025 para ArchDaily y clientes privados.</p>
-        <p class="intro-copy small-copy">Contamos con más de 13 años de experiencia en creación de contenido para marcas relacionadas a la arquitectura y construcción otorgando una mirada editorial aplicada a un objetivo comercial.</p>
+        <p class="intro-copy">
+          Colección de proyectos y campañas realizadas entre 2012 y 2025 para ArchDaily y clientes privados.
+        </p>
+        <p class="intro-copy small-copy">
+          Contamos con más de 13 años de experiencia en creación de contenido para marcas relacionadas a la arquitectura
+          y construcción otorgando una mirada editorial aplicada a un objetivo comercial.
+        </p>
       </div>
-      <a class="round-link" href="/work"><span>VIEW ALL</span><span class="round-link__arrow" aria-hidden="true"></span></a>
+      <a class="round-link" href="/work"
+        ><span>VIEW ALL</span><span class="round-link__arrow" aria-hidden="true"></span></a
+      >
     </div>
-    <WorkGrid items={works} limit={4} />
+    <WorkGrid items={works} limit={4} eagerFirst={true} />
   </section>
 
   <section class="services-section page-section">
     <div class="center-head">
       <h2>QUÉ CREAMOS</h2>
-      <p>Especialistas en traducir el conocimiento técnico en una comunicación clara y asequible que combina la creatividad y la estética con un sentido mayor y coherente. Trabajamos con una mirada editorial aplicada a un objetivo comercial.</p>
+      <p>
+        Especialistas en traducir el conocimiento técnico en una comunicación clara y asequible que combina la
+        creatividad y la estética con un sentido mayor y coherente. Trabajamos con una mirada editorial aplicada a un
+        objetivo comercial.
+      </p>
     </div>
     <ServiceList items={services} />
   </section>
@@ -106,17 +155,29 @@ const services = [
       <article>
         <span aria-hidden="true"></span>
         <h3>Arquitectos Independientes o Estudios de Arquitectura:</h3>
-        <p><strong>Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra.</strong> Creamos una narrativa coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales para posicionar tu estudio y tus proyectos.</p>
+        <p>
+          <strong>Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra.</strong> Creamos una narrativa coherente
+          que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales para posicionar
+          tu estudio y tus proyectos.
+        </p>
       </article>
       <article>
         <span aria-hidden="true"></span>
         <h3>Empresas y Marcas de Materiales de Construcción:</h3>
-        <p>Traducimos el valor técnico de tus productos en un <strong>relato claro y atractivo.</strong> Te ayudamos a conectar con arquitectos, constructoras y especificadores mediante una estrategia de marca, contenido visual y digital que pone en valor tu propuesta.</p>
+        <p>
+          Traducimos el valor técnico de tus productos en un <strong>relato claro y atractivo.</strong> Te ayudamos a conectar
+          con arquitectos, constructoras y especificadores mediante una estrategia de marca, contenido visual y digital que
+          pone en valor tu propuesta.
+        </p>
       </article>
       <article>
         <span aria-hidden="true"></span>
         <h3>Inmobiliarias y Corredoras de Propiedades:</h3>
-        <p>Promovemos proyectos desde una mirada <strong>arquitectónica y estratégica.</strong> Creamos contenido atractivo, profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto y mejora la conversión de tu comunicación digital.</p>
+        <p>
+          Promovemos proyectos desde una mirada <strong>arquitectónica y estratégica.</strong> Creamos contenido atractivo,
+          profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto y mejora la conversión
+          de tu comunicación digital.
+        </p>
       </article>
     </div>
   </section>

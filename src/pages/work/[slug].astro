@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import WorkGrid from "../../components/WorkGrid.astro";
-import { getRasterImageSrcSet, getResponsiveImageSources } from "../../utils/responsive-images";
 
 export async function getStaticPaths() {
   const works = await getCollection("work");
@@ -25,8 +25,6 @@ const related = (await getCollection("work"))
   .filter((item) => item.id !== work.id)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 2);
-const heroImageSources = getResponsiveImageSources(work.data.coverImage, work.data.coverWidth);
-const heroRasterSrcSet = getRasterImageSrcSet(work.data.coverImage, work.data.coverWidth);
 const heroSizes = "(max-width: 809px) calc(100vw - 40px), 1000px";
 const structuredData = [
   {
@@ -34,7 +32,7 @@ const structuredData = [
     "@type": "CreativeWork",
     name: work.data.title,
     description: work.data.seoDescription,
-    image: new URL(work.data.coverImage, Astro.site).toString(),
+    image: new URL(work.data.coverImage.src, Astro.site).toString(),
     creator: {
       "@type": "Organization",
       name: "Plinto",
@@ -71,7 +69,7 @@ const structuredData = [
 <BaseLayout
   title={work.data.seoTitle}
   description={work.data.seoDescription}
-  image={work.data.coverImage}
+  image={work.data.coverImage.src}
   imageAlt={work.data.coverAlt}
   canonicalPath={canonicalPath}
   robots={isLegacySlug ? "noindex,follow,max-image-preview:large" : "index,follow,max-image-preview:large"}
@@ -81,21 +79,15 @@ const structuredData = [
   <article class="work-detail">
     <div class="work-hero">
       <h1>{work.data.title}</h1>
-      <picture>
-        <source srcset={heroImageSources.avif} sizes={heroSizes} type="image/avif" />
-        <source srcset={heroImageSources.webp} sizes={heroSizes} type="image/webp" />
-        <img
-          src={work.data.coverImage}
-          alt={work.data.coverAlt}
-          width={work.data.coverWidth}
-          height={work.data.coverHeight}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          srcset={heroRasterSrcSet}
-          sizes={heroSizes}
-        />
-      </picture>
+      <Image
+        src={work.data.coverImage}
+        alt={work.data.coverAlt}
+        widths={[480, 800, 1200]}
+        sizes={heroSizes}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
     </div>
     <dl class="meta-grid">
       <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
@@ -127,42 +119,27 @@ const structuredData = [
             const gallerySizes = isFeatured
               ? "(max-width: 809px) calc(100vw - 40px), 1000px"
               : "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) calc(50vw - 32px), 491px";
-            const modernSources = image.src === work.data.coverImage
-              ? getResponsiveImageSources(image.src, image.width)
-              : null;
-            const rasterSrcSet = getRasterImageSrcSet(image.src, image.width);
 
             return (
-              <li
-                class:list={[
-                  "gallery-item",
-                  { "gallery-item--featured": isFeatured },
-                ]}
-              >
+              <li class:list={["gallery-item", { "gallery-item--featured": isFeatured }]}>
                 <button
                   class="gallery-button"
                   type="button"
                   data-lightbox-trigger
-                  data-src={image.src}
+                  data-src={image.src.src}
                   data-alt={image.alt}
                   data-caption={image.caption ?? image.alt}
                   aria-label={`Abrir imagen: ${image.caption ?? image.alt}`}
                 >
-                  <picture>
-                    {modernSources && <source srcset={modernSources.avif} sizes={gallerySizes} type="image/avif" />}
-                    {modernSources && <source srcset={modernSources.webp} sizes={gallerySizes} type="image/webp" />}
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
-                      loading="lazy"
-                      decoding="async"
-                      fetchpriority="low"
-                      srcset={rasterSrcSet}
-                      sizes={gallerySizes}
-                    />
-                  </picture>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    widths={[480, 800, 1200]}
+                    sizes={gallerySizes}
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
+                  />
                 </button>
               </li>
             );
@@ -180,9 +157,7 @@ const structuredData = [
     </section>
   </article>
   <dialog class="lightbox" data-lightbox-dialog aria-label="Vista ampliada de imagen">
-    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Cerrar vista ampliada">
-      ×
-    </button>
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Cerrar vista ampliada"> × </button>
     <figure class="lightbox__figure">
       <img class="lightbox__image" data-lightbox-image alt="" />
       <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
