@@ -1,0 +1,387 @@
+/* ─── Work detail ────────────────────────────────────────────────────────── */
+
+.work-detail {
+  display: grid;
+  gap: 64px;
+  padding: 74px clamp(20px, 7vw, 100px) clamp(64px, 7.4vw, 112px);
+}
+
+.work-hero {
+  display: grid;
+  justify-items: center;
+  gap: 44px;
+}
+
+.work-hero picture {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.work-hero h1 {
+  max-width: 1040px;
+  margin: 0;
+  text-align: center;
+  color: var(--text);
+  font-size: 60px;
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.work-hero img {
+  width: 100%;
+  max-width: 1000px;
+  max-height: 552px;
+  object-fit: cover;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: min(600px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+}
+
+.meta-grid div,
+.meta-grid dt,
+.meta-grid dd {
+  margin: 0;
+}
+
+.meta-grid dt {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.detail-sections {
+  display: grid;
+  gap: 0;
+  max-width: 600px;
+  width: 100%;
+  margin: -12px auto 0;
+}
+
+.detail-sections h2 {
+  margin: 0;
+  padding: 22px 0;
+  color: var(--label);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.detail-sections section {
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-sections p,
+.detail-sections ul {
+  margin: 0;
+}
+
+.detail-sections p,
+.detail-sections li {
+  color: var(--muted);
+}
+
+.detail-sections ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+.work-detail p,
+.work-detail li {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.work-detail > section > .kicker {
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.work-detail > section:last-child > .kicker {
+  text-align: left;
+}
+
+.detail-summary {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.detail-summary h2 {
+  margin: 0 0 34px;
+  color: var(--label);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.detail-summary p {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* ─── Gallery + lightbox ─────────────────────────────────────────────────── */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.gallery-item--featured {
+  grid-column: 1 / -1;
+  aspect-ratio: 2.05;
+}
+
+.gallery-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.gallery-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox {
+  width: min(96vw, 1200px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.lightbox::backdrop {
+  background: rgb(0 0 0 / 0.82);
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lightbox__close:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.lightbox__figure {
+  margin: 0;
+}
+
+.lightbox__image {
+  display: block;
+  width: 100%;
+  max-height: 86vh;
+  object-fit: contain;
+}
+
+.lightbox__caption {
+  padding-block: 0.75rem;
+  color: white;
+  text-align: center;
+}
+
+/* ─── About page ─────────────────────────────────────────────────────────── */
+
+.about-context {
+  display: grid;
+  grid-template-columns: minmax(240px, 350px) minmax(0, 520px);
+  gap: clamp(48px, 8vw, 120px);
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-logo {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+}
+
+.about-context-copy {
+  display: grid;
+  gap: 22px;
+}
+
+.about-eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.about-context-copy h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 36px;
+  line-height: 1.16;
+  font-weight: 700;
+}
+
+.about-context-copy p:not(.about-eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.team-section {
+  border-bottom: 1px solid var(--line);
+}
+
+.people-grid {
+  display: grid;
+  gap: clamp(84px, 10vw, 150px);
+}
+
+.person {
+  display: grid;
+  grid-template-columns: 350px minmax(0, 520px);
+  justify-content: center;
+  gap: clamp(48px, 7vw, 96px);
+}
+
+.person > img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.person-copy {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.person h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.person p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.collaborators-section h2 {
+  margin: 0 0 70px;
+  color: var(--text);
+  font-size: 60px;
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+.collaborators-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 350px));
+  gap: clamp(48px, 12vw, 180px);
+}
+
+.collaborators-grid p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.collaborators-grid h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.collaborators-grid span {
+  display: block;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* ─── Contact page ───────────────────────────────────────────────────────── */
+
+.contact-section {
+  padding-top: 0;
+}
+
+.contact-links {
+  display: grid;
+  gap: 26px;
+  max-width: 1120px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-links li {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.contact-links span {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.contact-links a {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
