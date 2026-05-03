@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
@@ -29,12 +32,15 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Lighthouse CI
         run: |
           npm install -g @lhci/cli
           lhci autorun
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
   test:
@@ -57,6 +63,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
