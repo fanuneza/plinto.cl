@@ -102,11 +102,11 @@ Astro 6.x requires Node.js ≥ 22.12.0. Pin it with `.nvmrc`:
 
 ### Where to place images
 
-| Location | Use case | Optimization |
-|----------|----------|--------------|
-| `src/assets/` | Photos, illustrations, hero images | Full Astro optimization |
-| `src/content/blog/` | Inline blog images | Full Astro optimization |
-| `public/` | Favicons, downloadable files, external logos | None — served as-is |
+| Location            | Use case                                     | Optimization            |
+| ------------------- | -------------------------------------------- | ----------------------- |
+| `src/assets/`       | Photos, illustrations, hero images           | Full Astro optimization |
+| `src/content/blog/` | Inline blog images                           | Full Astro optimization |
+| `public/`           | Favicons, downloadable files, external logos | None — served as-is     |
 
 ### The `<Image />` component
 
@@ -184,12 +184,12 @@ const { title, description, href } = Astro.props;
 
 ### Islands architecture
 
-| Directive | Hydrates when | Use case |
-|-----------|---------------|----------|
-| `client:load` | Immediately | Critical interactive elements (mobile nav toggle) |
-| `client:idle` | Browser idle | Non-critical interactivity (carousel, accordion) |
-| `client:visible` | Enters viewport | Below-fold widgets (maps, comments) |
-| `client:media` | Media query matches | Responsive components (desktop-only search) |
+| Directive        | Hydrates when       | Use case                                          |
+| ---------------- | ------------------- | ------------------------------------------------- |
+| `client:load`    | Immediately         | Critical interactive elements (mobile nav toggle) |
+| `client:idle`    | Browser idle        | Non-critical interactivity (carousel, accordion)  |
+| `client:visible` | Enters viewport     | Below-fold widgets (maps, comments)               |
+| `client:media`   | Media query matches | Responsive components (desktop-only search)       |
 
 ```astro
 <InteractiveMap client:visible />
@@ -245,7 +245,14 @@ const { title, description, image, canonical, noindex, schema } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <SEO title={title} description={description} image={image} canonical={canonical} noindex={noindex} schema={schema} />
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      canonical={canonical}
+      noindex={noindex}
+      schema={schema}
+    />
     <meta name="theme-color" content="#1c2e1a" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
@@ -550,12 +557,12 @@ export default defineConfig({
 
 ### Alt text guidelines
 
-| Image type | Alt text |
-|-----------|----------|
-| Informative photo | Describe what's happening |
-| Decorative divider | `alt=""` |
-| Logo linking home | `alt="Home — Company Name"` |
-| Chart/graph | Describe the data trend |
+| Image type          | Alt text                                |
+| ------------------- | --------------------------------------- |
+| Informative photo   | Describe what's happening               |
+| Decorative divider  | `alt=""`                                |
+| Logo linking home   | `alt="Home — Company Name"`             |
+| Chart/graph         | Describe the data trend                 |
 | Complex infographic | Short summary + long description nearby |
 
 ---
@@ -624,7 +631,9 @@ declare const gtag: (...args: unknown[]) => void;
 }
 
 /* 3. Reset / normalize */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -652,7 +661,9 @@ body {
 
 /* 5. Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -670,13 +681,12 @@ body {
 
 ```astro
 <!-- In BaseLayout.astro <head> -->
-<script
-  type="text/partytown"
-  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-></script>
+<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script type="text/partytown">
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag("js", new Date());
   gtag("config", "G-XXXXXXXXXX");
 </script>
@@ -687,6 +697,7 @@ body {
 ### Cookie consent (GDPR)
 
 Implement a cookie banner that:
+
 1. Blocks GA until consent is given
 2. Stores consent in `localStorage`
 3. Respects `data-cookieconsent` attributes on scripts
@@ -703,9 +714,7 @@ Implement a cookie banner that:
 - **`rel="noopener noreferrer"`** on all external links.
 
 ```astro
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">
-  External link
-</a>
+<a href="https://example.com" target="_blank" rel="noopener noreferrer"> External link </a>
 ```
 
 ---

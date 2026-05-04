@@ -26,6 +26,7 @@ npm install -D \
 ```
 
 > **Why these packages:**
+>
 > - `@astrojs/check` + `typescript`: Type-check Astro files at build time
 > - `eslint` + `eslint-plugin-astro`: Lint `.astro`, `.ts`, `.js` files
 > - `prettier` + `prettier-plugin-astro`: Consistent formatting across all file types
@@ -269,6 +270,7 @@ jobs:
 ```
 
 > **AGENT INSTRUCTION:** This workflow has two jobs:
+>
 > 1. `lint-and-build`: Runs on every push/PR. Validates code quality, builds the site, and runs Lighthouse CI against the static build.
 > 2. `test`: Depends on `lint-and-build` passing. Installs Playwright, rebuilds, and runs browser-based tests.
 >
@@ -285,12 +287,7 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: "./dist",
-      url: [
-        "/",
-        "/about/",
-        "/contact/",
-        "/404",
-      ],
+      url: ["/", "/about/", "/contact/", "/404"],
       numberOfRuns: 1,
     },
     assert: {
@@ -403,9 +400,9 @@ const pages = [
 // Rules disabled due to pre-existing design/content choices.
 // These are MONITORED — if new violations appear, the test will fail.
 const DISABLED_RULES = [
-  "color-contrast",              // Design system uses brand colors that don't always meet 4.5:1
+  "color-contrast", // Design system uses brand colors that don't always meet 4.5:1
   "label-content-name-mismatch", // Icon-only buttons with aria-label
-  "heading-order",               // Design uses visual hierarchy different from DOM order
+  "heading-order", // Design uses visual hierarchy different from DOM order
 ];
 
 for (const pageInfo of pages) {
@@ -480,8 +477,8 @@ Configure these in your GitHub repository settings:
 
 ### Secrets (Settings → Secrets and variables → Actions)
 
-| Secret | Value | Required |
-|--------|-------|----------|
+| Secret                  | Value                                                                  | Required                                              |
+| ----------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- |
 | `LHCI_GITHUB_APP_TOKEN` | From [Lighthouse CI GitHub App](https://github.com/apps/lighthouse-ci) | Optional — enables PR comments with Lighthouse scores |
 
 ---
@@ -523,6 +520,7 @@ npx playwright show-report
 ### "Lighthouse CI failed on color-contrast"
 
 This means your design has text/background combinations below WCAG AA. Either:
+
 1. Fix the colors in CSS, OR
 2. Add `"color-contrast": "warn"` to `.lighthouserc.cjs` if the design is intentionally using brand colors
 

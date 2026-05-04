@@ -13,11 +13,11 @@
 3. Select your GitHub repository
 4. Configure build settings:
 
-| Setting | Value |
-|---------|-------|
-| **Build command** | `npm run build` |
-| **Build output directory** | `dist` |
-| **Root directory** | `/` |
+| Setting                    | Value           |
+| -------------------------- | --------------- |
+| **Build command**          | `npm run build` |
+| **Build output directory** | `dist`          |
+| **Root directory**         | `/`             |
 
 5. Click **Save and Deploy**
 
@@ -40,16 +40,17 @@
 
 In Pages project settings → **Environment variables**:
 
-| Variable | Value | When needed |
-|----------|-------|-------------|
-| `NODE_VERSION` | `22` | Only if `.nvmrc` is missing |
-| `ASTRO_TELEMETRY_DISABLED` | `1` | Always — disables Astro analytics |
+| Variable                   | Value | When needed                       |
+| -------------------------- | ----- | --------------------------------- |
+| `NODE_VERSION`             | `22`  | Only if `.nvmrc` is missing       |
+| `ASTRO_TELEMETRY_DISABLED` | `1`   | Always — disables Astro analytics |
 
 > **AGENT INSTRUCTION:** Set `ASTRO_TELEMETRY_DISABLED=1` on all projects. This is a privacy best practice and has no impact on functionality.
 
 ### Build output
 
 Astro's `output: "static"` generates a `dist/` folder with:
+
 - HTML files for every route
 - `_astro/` folder with hashed CSS/JS assets (cache-friendly)
 - Any files from `public/` copied verbatim
@@ -92,16 +93,16 @@ Create `public/_headers`. This is the single most important file for security.
 
 ### Header reference
 
-| Header | Purpose | Value |
-|--------|---------|-------|
-| `Strict-Transport-Security` | Forces HTTPS (HSTS) | `max-age=63072000; includeSubDomains; preload` |
-| `Content-Security-Policy` | Prevents XSS, injection | See CSP section below |
-| `X-Frame-Options` | Clickjacking protection | `DENY` or `SAMEORIGIN` |
-| `X-Content-Type-Options` | MIME sniffing protection | `nosniff` |
-| `Referrer-Policy` | Controls referrer leakage | `strict-origin-when-cross-origin` |
-| `Permissions-Policy` | Disables browser APIs | Deny all unnecessary APIs |
-| `Cross-Origin-Opener-Policy` | Window isolation | `same-origin` |
-| `Cross-Origin-Resource-Policy` | Resource isolation | `same-origin` |
+| Header                         | Purpose                   | Value                                          |
+| ------------------------------ | ------------------------- | ---------------------------------------------- |
+| `Strict-Transport-Security`    | Forces HTTPS (HSTS)       | `max-age=63072000; includeSubDomains; preload` |
+| `Content-Security-Policy`      | Prevents XSS, injection   | See CSP section below                          |
+| `X-Frame-Options`              | Clickjacking protection   | `DENY` or `SAMEORIGIN`                         |
+| `X-Content-Type-Options`       | MIME sniffing protection  | `nosniff`                                      |
+| `Referrer-Policy`              | Controls referrer leakage | `strict-origin-when-cross-origin`              |
+| `Permissions-Policy`           | Disables browser APIs     | Deny all unnecessary APIs                      |
+| `Cross-Origin-Opener-Policy`   | Window isolation          | `same-origin`                                  |
+| `Cross-Origin-Resource-Policy` | Resource isolation        | `same-origin`                                  |
 
 ### Content-Security-Policy (CSP)
 
@@ -135,13 +136,13 @@ default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';
 
 ### Cache-Control headers
 
-| Path pattern | Directive | Why |
-|--------------|-----------|-----|
-| `/_astro/*` | `public, max-age=31536000, immutable` | Hashed filenames — safe to cache forever |
-| `/assets/*` | `public, max-age=31536000, immutable` | Your own hashed/static assets |
-| `/*.html` | `public, max-age=0, must-revalidate` | HTML should always be fresh |
-| `/` | `public, max-age=0, must-revalidate` | Homepage must be fresh |
-| Any page | `public, max-age=0, must-revalidate` | Cloudflare CDN handles edge caching |
+| Path pattern | Directive                             | Why                                      |
+| ------------ | ------------------------------------- | ---------------------------------------- |
+| `/_astro/*`  | `public, max-age=31536000, immutable` | Hashed filenames — safe to cache forever |
+| `/assets/*`  | `public, max-age=31536000, immutable` | Your own hashed/static assets            |
+| `/*.html`    | `public, max-age=0, must-revalidate`  | HTML should always be fresh              |
+| `/`          | `public, max-age=0, must-revalidate`  | Homepage must be fresh                   |
+| Any page     | `public, max-age=0, must-revalidate`  | Cloudflare CDN handles edge caching      |
 
 > **AGENT INSTRUCTION:** Cloudflare Pages automatically applies `Cache-Control: public, max-age=0, must-revalidate` to HTML. You can override per-path. The `_astro/` directory contains files with content hashes in their names (e.g., `index.DNs6zLT3.css`) — these are safe to cache forever because the hash changes when content changes.
 
@@ -204,17 +205,17 @@ Policy: https://yourdomain.com/security-policy
 
 ### Security settings to enable
 
-| Setting | Location | Recommendation |
-|---------|----------|----------------|
-| **SSL/TLS** | SSL/TLS → Overview | Full (strict) |
-| **Always Use HTTPS** | SSL/TLS → Edge Certificates | On |
-| **Automatic HTTPS Rewrites** | SSL/TLS → Edge Certificates | On |
-| **HSTS** | SSL/TLS → Edge Certificates | Enable (matches `_headers`) |
-| **Security Level** | Security → Settings | High |
-| **Browser Integrity Check** | Security → Settings | On |
-| **Brotli** | Speed → Optimization | On |
-| **Early Hints** | Speed → Optimization | On |
-| **Auto Minify** | Speed → Optimization | HTML, CSS, JS — On |
+| Setting                      | Location                    | Recommendation              |
+| ---------------------------- | --------------------------- | --------------------------- |
+| **SSL/TLS**                  | SSL/TLS → Overview          | Full (strict)               |
+| **Always Use HTTPS**         | SSL/TLS → Edge Certificates | On                          |
+| **Automatic HTTPS Rewrites** | SSL/TLS → Edge Certificates | On                          |
+| **HSTS**                     | SSL/TLS → Edge Certificates | Enable (matches `_headers`) |
+| **Security Level**           | Security → Settings         | High                        |
+| **Browser Integrity Check**  | Security → Settings         | On                          |
+| **Brotli**                   | Speed → Optimization        | On                          |
+| **Early Hints**              | Speed → Optimization        | On                          |
+| **Auto Minify**              | Speed → Optimization        | HTML, CSS, JS — On          |
 
 > **AGENT INSTRUCTION:** The `_headers` file HSTS setting and Cloudflare's dashboard HSTS are redundant — that's fine. The browser uses whichever is stricter. "Full (strict)" SSL mode ensures encrypted end-to-end communication.
 
@@ -233,13 +234,12 @@ Policy: https://yourdomain.com/security-policy
 Add to `BaseLayout.astro`:
 
 ```astro
-<script
-  type="text/partytown"
-  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-></script>
+<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script type="text/partytown">
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag("js", new Date());
   gtag("config", "G-XXXXXXXXXX");
 </script>
@@ -297,16 +297,16 @@ Ensure `font-src` in CSP includes your font CDN (e.g., `https://fonts.gstatic.co
 
 Run [securityheaders.com](https://securityheaders.com/) against your site. Target:
 
-| Check | Target | How |
-|-------|--------|-----|
-| Strict-Transport-Security | A+ | `max-age=63072000; includeSubDomains; preload` |
-| Content-Security-Policy | A+ | Strict but functional CSP |
-| X-Frame-Options | A+ | `DENY` |
-| X-Content-Type-Options | A+ | `nosniff` |
-| Referrer-Policy | A+ | `strict-origin-when-cross-origin` |
-| Permissions-Policy | A+ | Deny unnecessary APIs |
-| Cross-Origin-Opener-Policy | A+ | `same-origin` |
-| Cross-Origin-Resource-Policy | A+ | `same-origin` |
+| Check                        | Target | How                                            |
+| ---------------------------- | ------ | ---------------------------------------------- |
+| Strict-Transport-Security    | A+     | `max-age=63072000; includeSubDomains; preload` |
+| Content-Security-Policy      | A+     | Strict but functional CSP                      |
+| X-Frame-Options              | A+     | `DENY`                                         |
+| X-Content-Type-Options       | A+     | `nosniff`                                      |
+| Referrer-Policy              | A+     | `strict-origin-when-cross-origin`              |
+| Permissions-Policy           | A+     | Deny unnecessary APIs                          |
+| Cross-Origin-Opener-Policy   | A+     | `same-origin`                                  |
+| Cross-Origin-Resource-Policy | A+     | `same-origin`                                  |
 
 > **AGENT INSTRUCTION:** A+ on securityheaders.com should be your minimum target. The template `_headers` above achieves this out of the box. You only lose points if you weaken CSP for third-party services — document any relaxations.
 
