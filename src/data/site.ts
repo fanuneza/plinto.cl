@@ -10,10 +10,10 @@ export const site = {
 };
 
 export const navItems = [
-  { href: "/work", label: "WORK" },
-  { href: "/service", label: "SERVICE" },
-  { href: "/about", label: "ABOUT" },
-  { href: "/contact", label: "CONTACT" },
+  { href: "/work/", label: "WORK" },
+  { href: "/service/", label: "SERVICE" },
+  { href: "/about/", label: "ABOUT" },
+  { href: "/contact/", label: "CONTACT" },
 ];
 
 export const asset = (name: string) => `/assets/images/${name}`;

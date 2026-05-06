@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import { site, navItems, asset } from "../data/site";
 import "../styles/global.css";
 
@@ -98,6 +99,7 @@ const structuredDataItems = [
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content={imageAlt} />
     {structuredDataItems.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
+    <ClientRouter fallback="animate" />
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#content">Saltar al contenido</a>
@@ -126,7 +128,7 @@ const structuredDataItems = [
         <span aria-hidden="true"></span>
       </button>
     </header>
-    <main id="content">
+    <main id="content" transition:animate="fade">
       <slot />
     </main>
     <footer class="site-footer">

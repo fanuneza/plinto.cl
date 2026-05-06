@@ -7,16 +7,16 @@
 /
   Cache-Control: public, max-age=0, must-revalidate
 
-/about
+/about/
   Cache-Control: public, max-age=0, must-revalidate
 
-/contact
+/contact/
   Cache-Control: public, max-age=0, must-revalidate
 
-/service
+/service/
   Cache-Control: public, max-age=0, must-revalidate
 
-/work
+/work/
   Cache-Control: public, max-age=0, must-revalidate
 
 /work/*
@@ -42,7 +42,7 @@
 
 /*
   Strict-Transport-Security: max-age=63072000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; frame-src 'none'
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; frame-src 'none'
   X-Frame-Options: DENY
   Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
   Referrer-Policy: strict-origin-when-cross-origin

@@ -20,7 +20,7 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
       const isEager = eagerFirst && isFirst;
       return (
         <li>
-          <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}`}>
+          <a class="work-card" href={`/work/${item.id.replace(/\.mdx$/, "")}/`} transition:name={`work-${item.id}`}>
             <span class="work-media">
               <Image
                 src={item.data.coverImage}

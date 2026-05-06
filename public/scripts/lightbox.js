@@ -1,4 +1,4 @@
-(() => {
+document.addEventListener("astro:page-load", () => {
   /** @type {HTMLDialogElement | null} */
   const dialog = document.querySelector("[data-lightbox-dialog]");
   const image = document.querySelector("[data-lightbox-image]");
@@ -42,4 +42,4 @@
     image.alt = "";
     caption.textContent = "";
   });
-})();
+});
