@@ -150,8 +150,6 @@ vite.config.ts.timestamp-*
 docs/
 !README.md
 !THIRD_PARTY_NOTICES.md
-!AGENTS.md
-!CLAUDE.md
 
 # Playwright
 PLAYWRIGHT_VISUAL_CAPTURE.md
@@ -166,3 +164,17 @@ playwright-report/
 
 # Reports
 Report.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment overrides
+.env*.local
+
+# Internal project documentation
+AGENTS.md
+Astro.md
+CI.md
+Cloudflare.md
+CLAUDE.md
