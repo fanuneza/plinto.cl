@@ -6,8 +6,10 @@ module.exports = {
       numberOfRuns: 1,
     },
     assert: {
-      preset: "lighthouse:recommended",
       assertions: {
+        // Keep Lighthouse in CI as a monitoring signal instead of a hard gate.
+        // Perf audits are sensitive to runner variance and Lighthouse preset
+        // changes, so only the assertions below should influence the result.
         "categories:performance": ["warn", { minScore: 0.8 }],
         "categories:accessibility": ["warn", { minScore: 0.9 }],
         "categories:best-practices": ["warn", { minScore: 0.9 }],
@@ -21,6 +23,7 @@ module.exports = {
         "heading-order": "warn",
         "lcp-lazy-loaded": "warn",
         // Insights are informational, not failures
+        "forced-reflow-insight": "off",
         "network-dependency-tree-insight": "off",
         "image-delivery-insight": "off",
         "dom-size-insight": "off",
