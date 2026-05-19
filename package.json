@@ -14,16 +14,16 @@
     "test:lighthouse": "lhci autorun"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.12.0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/mdx": "^5.0.6",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
-    "astro": "^6.2.0",
+    "astro": "^6.3.5",
     "astro-robots-txt": "^1.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "yaml": "^2.8.3"
@@ -31,14 +31,14 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.59.1",
-    "@typescript-eslint/eslint-plugin": "^8.59.1",
-    "@typescript-eslint/parser": "^8.59.1",
-    "eslint": "^10.3.0",
+    "@playwright/test": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.4",
+    "@typescript-eslint/parser": "^8.59.4",
+    "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
-    "stylelint": "^17.9.1",
+    "stylelint": "^17.11.1",
     "stylelint-config-standard": "^40.0.0"
   }
 }
