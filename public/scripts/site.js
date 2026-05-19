@@ -25,6 +25,15 @@ document.addEventListener("astro:page-load", () => {
     if (event.key === "Escape") closeMenu();
   });
 
+  const desktopMq = window.matchMedia("(min-width: 810px)");
+  const handleMqChange = (event) => {
+    if (event.matches && document.body.classList.contains("is-menu-open")) {
+      document.body.classList.remove("is-menu-open");
+      menuButton?.setAttribute("aria-expanded", "false");
+    }
+  };
+  desktopMq.addEventListener?.("change", handleMqChange);
+
   // Focus trap for mobile menu
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Tab" || !document.body.classList.contains("is-menu-open")) {

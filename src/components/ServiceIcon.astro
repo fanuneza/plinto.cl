@@ -18,4 +18,17 @@ const icons = {
 } as const;
 ---
 
-{icons[name] && <img class="service-icon" src={icons[name]} alt="" aria-hidden="true" />}
+{
+  icons[name] && (
+    <img
+      class="service-icon"
+      src={icons[name]}
+      alt=""
+      width="28"
+      height="28"
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}

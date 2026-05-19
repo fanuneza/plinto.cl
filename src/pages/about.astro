@@ -87,7 +87,7 @@ const collaborators = [
               height={350}
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
-              fetchpriority={index === 0 ? "high" : "low"}
+              fetchpriority={index === 0 ? "auto" : "low"}
             />
             <div class="person-copy">
               <p class="about-eyebrow">{person.role}</p>

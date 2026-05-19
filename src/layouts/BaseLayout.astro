@@ -39,6 +39,7 @@ const structuredDataItems = [
     name: "Plinto",
     url: site.url,
     email: site.email,
+    logo: new URL(asset("brand/plinto-og-image.webp"), site.url).toString(),
     sameAs: [site.instagram, site.linkedin],
   },
   {
@@ -66,8 +67,6 @@ const structuredDataItems = [
     <meta name="robots" content={robots} />
     <link rel="dns-prefetch" href="https://instagram.com" />
     <link rel="dns-prefetch" href="https://linkedin.com" />
-    <link rel="preconnect" href="https://instagram.com" crossorigin />
-    <link rel="preconnect" href="https://linkedin.com" crossorigin />
     <link
       rel="preload"
       href="/assets/fonts/satoshi/Satoshi-Regular.woff2"
@@ -128,7 +127,7 @@ const structuredDataItems = [
         <span aria-hidden="true"></span>
       </button>
     </header>
-    <main id="content" transition:animate="fade">
+    <main id="content" tabindex="-1" transition:animate="fade">
       <slot />
     </main>
     <footer class="site-footer">

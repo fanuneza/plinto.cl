@@ -12,7 +12,7 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
   <section class="page-section work-page" data-work-view>
     <div class="portfolio-head">
       <span></span>
-      <div class="view-toggles" aria-label="Cambiar vista" aria-live="polite">
+      <div class="view-toggles" role="group" aria-label="Cambiar vista">
         <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"
           ><span class="grid-icon" aria-hidden="true"></span></button
         >

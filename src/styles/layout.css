@@ -10,8 +10,15 @@
   color: var(--bg);
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   top: 16px;
+}
+
+/* Skip-link target: focusable for keyboard nav, no visible ring */
+main:focus,
+main:focus-visible {
+  outline: none;
 }
 
 /* ─── Header ─────────────────────────────────────────────────────────────── */
