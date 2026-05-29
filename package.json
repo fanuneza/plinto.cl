@@ -11,6 +11,7 @@
     "lint:fix": "eslint . --fix && stylelint \"src/**/*.css\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test": "playwright test",
     "test:lighthouse": "lhci autorun"
   },
   "engines": {

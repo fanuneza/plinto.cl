@@ -1,0 +1,18 @@
+{
+  "name": "Plinto",
+  "short_name": "Plinto",
+  "description": "Estudio de estrategia, contenido y comunicacion para arquitectura y construccion.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#fffbf7",
+  "theme_color": "#fffbf7",
+  "lang": "es-CL",
+  "icons": [
+    {
+      "src": "/assets/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
