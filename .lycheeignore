@@ -1,0 +1,8 @@
+# Excluir URL del servidor de desarrollo local
+http://localhost:4321/.*
+
+# Excluir Instagram (arroja error 429 Too Many Requests en entornos de CI)
+https://(www\.)?instagram\.(com|cl)/.*
+
+# Excluir URLs con variables de plantilla de JS sin evaluar en bloques de código
+https://www\.googletagmanager\.com/ns\.html\?id=\$\{gtmContainerId\}

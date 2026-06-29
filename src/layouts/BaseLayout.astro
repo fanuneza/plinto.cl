@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
 import { site, navItems, asset } from "../data/site";
 import "../styles/global.css";
 
@@ -13,6 +14,7 @@ interface Props {
   ogType?: "website" | "article";
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
+  schema?: Record<string, any>;
 }
 
 const {
@@ -25,32 +27,48 @@ const {
   ogType = "website",
   structuredData = [],
   bodyClass = "",
+  schema,
 } = Astro.props;
+
 const canonical = new URL(canonicalPath, site.url).toString();
-const pageTitle = title === site.name ? title : `${title} | Plinto.cl`;
-const currentYear = new Date().getFullYear();
-const imageUrl = new URL(image, site.url).toString();
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const themeColor = "#fffbf7";
-const structuredDataItems = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Plinto",
-    url: site.url,
-    email: site.email,
-    logo: new URL(asset("brand/plinto-og-image.webp"), site.url).toString(),
-    sameAs: [site.instagram, site.linkedin],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Plinto",
-    url: site.url,
-    inLanguage: "es-CL",
-  },
-  ...(Array.isArray(structuredData) ? structuredData : [structuredData]),
-];
+const imageUrl = new URL(image, site.url).toString();
+const currentYear = new Date().getFullYear();
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const noindex = robots.includes("noindex");
+const nofollow = robots.includes("nofollow");
+
+// Generate standard unified schema graph if not explicitly passed
+const schemaGraph = schema || {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: "Plinto",
+      url: site.url,
+      email: site.email,
+      logo: {
+        "@type": "ImageObject",
+        url: new URL(asset("brand/plinto-og-image.webp"), site.url).toString(),
+      },
+      sameAs: [site.instagram, site.linkedin],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: "Plinto",
+      url: site.url,
+      inLanguage: "es-CL",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+    ...(Array.isArray(structuredData) ? structuredData : [structuredData]).filter(Boolean).map((item: any) => {
+      const { "@context": _, ...rest } = item;
+      return rest;
+    }),
+  ],
+};
 ---
 
 <!doctype html>
@@ -60,16 +78,30 @@ const structuredDataItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content={themeColor} />
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="robots" content={robots} />
-    <meta name="application-name" content="Plinto" />
-    <meta name="apple-mobile-web-app-title" content="Plinto" />
-    <link rel="dns-prefetch" href="https://instagram.com" />
-    <link rel="dns-prefetch" href="https://linkedin.com" />
+
+    <Seo
+      title={title}
+      titleTemplate={title === "plinto" || title === "Plinto" || title === "Plinto.cl" ? undefined : "%s | Plinto.cl"}
+      description={description}
+      canonical={canonical}
+      noindex={noindex}
+      nofollow={nofollow}
+      ogType={ogType}
+      ogImage={imageUrl}
+      ogImageAlt={imageAlt}
+      ogImageWidth={1200}
+      ogImageHeight={630}
+      siteName="Plinto"
+      locale="es_CL"
+      graph={schemaGraph}
+      extraLinks={[
+        { rel: "icon", href: "/assets/favicon.ico", type: "image/x-icon" },
+        { rel: "manifest", href: "/site.webmanifest" },
+        { rel: "dns-prefetch", href: "https://instagram.com" },
+        { rel: "dns-prefetch", href: "https://linkedin.com" },
+      ]}
+    />
+
     <link
       rel="preload"
       href="/assets/fonts/satoshi/Satoshi-Regular.woff2"
@@ -87,22 +119,6 @@ const structuredDataItems = [
       fetchpriority="high"
     />
     <link rel="preload" href="/assets/fonts/inter/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="es_CL" />
-    <meta property="og:site_name" content="Plinto" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:alt" content={imageAlt} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content={imageAlt} />
-    {structuredDataItems.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
     <ClientRouter fallback="animate" />
   </head>
   <body class={bodyClass}>

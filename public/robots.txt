@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://plinto.cl/sitemap-index.xml
+Schemamap: https://plinto.cl/schemamap.xml
