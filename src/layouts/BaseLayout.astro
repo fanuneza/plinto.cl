@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
+import { buildSchemaGraph } from "../utils/schema";
 import { site, navItems, asset } from "../data/site";
 import "../styles/global.css";
 
@@ -14,11 +15,11 @@ interface Props {
   ogType?: "website" | "article";
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
-  schema?: Record<string, any>;
+  schema?: Record<string, unknown>;
 }
 
 const {
-  title = "Plinto.cl",
+  title = "Plinto",
   description = site.description,
   image = asset("brand/plinto-og-image.webp"),
   imageAlt = "Plinto",
@@ -39,36 +40,35 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const noindex = robots.includes("noindex");
 const nofollow = robots.includes("nofollow");
 
-// Generate standard unified schema graph if not explicitly passed
-const schemaGraph = schema || {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${site.url}/#organization`,
-      name: "Plinto",
-      url: site.url,
-      email: site.email,
-      logo: {
-        "@type": "ImageObject",
-        url: new URL(asset("brand/plinto-og-image.webp"), site.url).toString(),
-      },
-      sameAs: [site.instagram, site.linkedin],
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${site.url}/#website`,
-      name: "Plinto",
-      url: site.url,
-      inLanguage: "es-CL",
-      publisher: { "@id": `${site.url}/#organization` },
-    },
-    ...(Array.isArray(structuredData) ? structuredData : [structuredData]).filter(Boolean).map((item: any) => {
-      const { "@context": _, ...rest } = item;
-      return rest;
-    }),
-  ],
-};
+// Auto-generate a base WebSite (home) or WebPage (all others) graph on every page.
+// This ensures every page always emits a script[type="application/ld+json"].
+const isHome = pathname === "/";
+const baseGraph = buildSchemaGraph({
+  pageType: isHome ? "website" : "webpage",
+  url: canonical,
+  title,
+  description,
+});
+
+// Merge any page-specific schema nodes on top of the base graph.
+// Pages can pass either a full @graph envelope or a single loose node.
+if (schema) {
+  if ("@graph" in schema && Array.isArray(schema["@graph"])) {
+    // Page passes a full graph: merge its nodes
+    (baseGraph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
+  } else {
+    // Page passes a loose node: strip redundant @context and add it
+    const { "@context": _ctx, ...node } = schema;
+    (baseGraph["@graph"] as Record<string, unknown>[]).push(node);
+  }
+}
+
+// Also absorb legacy structuredData items (existing page-level schemas)
+const extraItems = (Array.isArray(structuredData) ? structuredData : [structuredData]).filter(Boolean);
+for (const item of extraItems) {
+  const { "@context": _ctx, ...node } = item as Record<string, unknown>;
+  (baseGraph["@graph"] as Record<string, unknown>[]).push(node);
+}
 ---
 
 <!doctype html>
@@ -81,7 +81,7 @@ const schemaGraph = schema || {
 
     <Seo
       title={title}
-      titleTemplate={title === "plinto" || title === "Plinto" || title === "Plinto.cl" ? undefined : "%s | Plinto.cl"}
+      titleTemplate="%s | Plinto.cl"
       description={description}
       canonical={canonical}
       noindex={noindex}
@@ -93,7 +93,8 @@ const schemaGraph = schema || {
       ogImageHeight={630}
       siteName="Plinto"
       locale="es_CL"
-      graph={schemaGraph}
+      graph={baseGraph}
+      twitter={{ card: "summary_large_image" }}
       extraLinks={[
         { rel: "icon", href: "/assets/favicon.ico", type: "image/x-icon" },
         { rel: "manifest", href: "/site.webmanifest" },
