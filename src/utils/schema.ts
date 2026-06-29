@@ -4,10 +4,12 @@ import {
   buildWebPage,
   buildArticle,
   buildPiece,
+  buildBreadcrumbList,
   type WebPageInput,
   type ArticleInput,
   type GraphEntity,
   type WebSiteInput,
+  type BreadcrumbItem,
 } from "@jdevalk/seo-graph-core";
 
 const SITE_URL = "https://plinto.cl";
@@ -80,8 +82,51 @@ export function buildSchemaGraph(options: {
     name: options.title,
     description: options.description,
     isPartOf: { "@id": ids.website },
-    breadcrumb: { "@id": ids.breadcrumb(options.url) },
   };
+
+  // Build breadcrumbs dynamically if not homepage
+  const pathname = new URL(options.url).pathname.replace(/\/$/, "");
+  if (pathname && pathname !== "") {
+    const segments = pathname.split("/").filter(Boolean);
+    const items: BreadcrumbItem[] = [];
+
+    // Always start with Home
+    items.push({
+      name: "Home",
+      url: SITE_URL + "/",
+    });
+
+    let currentPath = SITE_URL;
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+      currentPath += `/${segment}/`;
+
+      let name = segment.toUpperCase();
+      if (i === segments.length - 1) {
+        name = options.title;
+      } else if (segment === "work") {
+        name = "Work";
+      }
+
+      items.push({
+        name,
+        url: currentPath,
+      });
+    }
+
+    pieces.push(
+      buildBreadcrumbList(
+        {
+          url: options.url,
+          items,
+        },
+        ids
+      ) as GraphEntity
+    );
+
+    webPageInput.breadcrumb = { "@id": ids.breadcrumb(options.url) };
+  }
+
   if (options.publishDate) {
     webPageInput.datePublished = options.publishDate;
   }

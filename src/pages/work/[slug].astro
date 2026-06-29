@@ -43,30 +43,6 @@ const structuredData = [
     },
     datePublished: String(work.data.year),
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: new URL("/", Astro.site).toString(),
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Work",
-        item: new URL("/work/", Astro.site).toString(),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: work.data.title,
-        item: new URL(canonicalPath, Astro.site).toString(),
-      },
-    ],
-  },
 ];
 ---
 
