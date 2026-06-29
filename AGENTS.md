@@ -104,14 +104,14 @@ All styles live in `src/styles/` and are imported through `global.css`. **Never 
 
 ```css
 :root {
-  --bg:    #fffbf7;   /* warm off-white page background */
-  --text:  #0d0d0d;   /* near-black body text */
-  --muted: #687076;   /* secondary text, labels, captions */
-  --line:  #e5e2de;   /* borders, dividers */
-  --panel: #f7f3ef;   /* card/panel backgrounds */
-  --label: #1f3545;   /* metadata labels in work detail */
-  --font-body: Satoshi, Inter, ui-sans-serif, …;
-  --font-ui:   Inter, Satoshi, ui-sans-serif, …;
+  --bg: #fffbf7; /* warm off-white page background */
+  --text: #0d0d0d; /* near-black body text */
+  --muted: #687076; /* secondary text, labels, captions */
+  --line: #e5e2de; /* borders, dividers */
+  --panel: #f7f3ef; /* card/panel backgrounds */
+  --label: #1f3545; /* metadata labels in work detail */
+  --font-body: Satoshi, ui-sans-serif, system-ui, …;
+  --font-ui: Satoshi, ui-sans-serif, system-ui, …;
 }
 ```
 
@@ -142,25 +142,25 @@ The `ServiceList.astro` component accepts a `headingLevel` prop (`"h2"` default,
 
 Each portfolio entry is an MDX file in `src/content/work/` with the following frontmatter schema (defined in `src/content.config.ts`):
 
-| Field           | Type                      | Required | Notes |
-|-----------------|---------------------------|----------|-------|
-| `title`         | string                    | ✅        | Display title |
-| `client`        | string                    | ✅        | Client name |
-| `service`       | string                    | ✅        | Service label shown in grid |
-| `year`          | number                    | ✅        | Year of execution |
-| `coverImage`    | `image()`                 | ✅        | Astro image reference → `src/assets/images/projects/` |
-| `coverAlt`      | string                    | ✅        | Alt text for cover |
-| `gallery`       | `{ src, alt, caption? }[]`| ✅        | Array of gallery images |
-| `summary`       | string                    | ✅        | Short summary for RSS and lists |
-| `seoTitle`      | string                    | ✅        | `<title>` tag on detail page |
-| `seoDescription`| string                    | ✅        | Meta description on detail page |
-| `featured`      | boolean (default: false)  | —        | Reserved for future featured filter |
-| `order`         | number                    | ✅        | Sort order across all grids (ascending) |
-| `liveUrl`       | url (optional)            | —        | External project URL |
-| `legacySlugs`   | string[] (default: [])    | —        | Old slugs that redirect to canonical |
-| `brief`         | string (optional)         | —        | Client brief text for detail page |
-| `solution`      | string (optional)         | —        | Approach/solution text for detail page |
-| `deliverables`  | string[] (default: [])    | —        | List of deliverables |
+| Field            | Type                       | Required | Notes                                                 |
+| ---------------- | -------------------------- | -------- | ----------------------------------------------------- |
+| `title`          | string                     | ✅       | Display title                                         |
+| `client`         | string                     | ✅       | Client name                                           |
+| `service`        | string                     | ✅       | Service label shown in grid                           |
+| `year`           | number                     | ✅       | Year of execution                                     |
+| `coverImage`     | `image()`                  | ✅       | Astro image reference → `src/assets/images/projects/` |
+| `coverAlt`       | string                     | ✅       | Alt text for cover                                    |
+| `gallery`        | `{ src, alt, caption? }[]` | ✅       | Array of gallery images                               |
+| `summary`        | string                     | ✅       | Short summary for RSS and lists                       |
+| `seoTitle`       | string                     | ✅       | `<title>` tag on detail page                          |
+| `seoDescription` | string                     | ✅       | Meta description on detail page                       |
+| `featured`       | boolean (default: false)   | —        | Reserved for future featured filter                   |
+| `order`          | number                     | ✅       | Sort order across all grids (ascending)               |
+| `liveUrl`        | url (optional)             | —        | External project URL                                  |
+| `legacySlugs`    | string[] (default: [])     | —        | Old slugs that redirect to canonical                  |
+| `brief`          | string (optional)          | —        | Client brief text for detail page                     |
+| `solution`       | string (optional)          | —        | Approach/solution text for detail page                |
+| `deliverables`   | string[] (default: [])     | —        | List of deliverables                                  |
 
 **Adding a new project:**
 
@@ -178,6 +178,7 @@ Base metadata and JSON-LD are emitted by `src/layouts/BaseLayout.astro` on every
 ### How it works
 
 `buildSchemaGraph()` in `src/utils/schema.ts` always emits:
+
 - `WebSite` node (with `SearchAction`)
 - `Organization` node for Plinto
 - `Person` node for Fernanda Castro (default author)
@@ -187,16 +188,14 @@ Pages pass a `schema` prop to `<BaseLayout>` to merge additional nodes (e.g. `Cr
 
 ### SEO artifact surfaces — keep these aligned
 
-| File | Purpose |
-|------|---------|
-| `src/utils/schema.ts` | Typed graph builder |
-| `src/pages/schema/work.json.ts` | JSON-LD corpus for work collection |
-| `src/pages/schemamap.xml.ts` | Semantic discovery map |
-| `src/pages/.well-known/` | RFC 9727 API catalog |
-| `src/pages/work/[...slug].md.ts` | Markdown alternates for work entries |
-| `src/pages/rss.xml.ts` | RSS feed |
-| `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` | IndexNow key |
-| `public/_headers` | `No-Vary-Search` must retain UTM params + campaign params |
+- `src/utils/schema.ts` — Typed graph builder
+- `src/pages/schema/work.json.ts` — JSON-LD corpus for work collection
+- `src/pages/schemamap.xml.ts` — Semantic discovery map
+- `src/pages/.well-known/` — RFC 9727 API catalog
+- `src/pages/work/[...slug].md.ts` — Markdown alternates for work entries
+- `src/pages/rss.xml.ts` — RSS feed
+- `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` — IndexNow key
+- `public/_headers` — `No-Vary-Search` must retain UTM params + campaign params
 
 ### Image SEO rules
 
@@ -214,7 +213,7 @@ The site targets a 100/100 PSI score on all categories. Every change must preser
 - **LCP**: Hero images (`stone-hero-left`, `stone-hero-right`) on the homepage use `loading="eager"` + `fetchpriority="high"`. Do not regress these.
 - **Render-blocking scripts**: `site.js` and `lightbox.js` must never be synchronous. `site.js` uses `type="module"` (deferred by spec). `lightbox.js` uses `is:inline defer` on the work detail page.
 - **CSS delivery**: `inlineStylesheets: "auto"` in `astro.config.mjs` lets Astro decide whether to inline or link CSS based on size. Do not change this to `"always"` — it causes unused-CSS penalties.
-- **Font preloads**: Only `Satoshi-Regular.woff2` uses `fetchpriority="high"`. The two Inter preloads use default priority to avoid competing with LCP.
+- **Font preloads**: Only `Satoshi-Regular.woff2` uses `fetchpriority="high"`. Other fonts are not preloaded to avoid competing with LCP.
 - **No Adapter**: See §2. Never install `@astrojs/cloudflare` or any SSR adapter.
 
 ---
@@ -240,6 +239,7 @@ Both files listen for `astro:page-load` to re-initialize after View Transitions 
 - **`No-Vary-Search`**: must retain `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid` to avoid cache fragmentation from tracking parameters.
 
 Cache rules:
+
 - `/_astro/*` — `max-age=31536000, immutable` (content-hashed by Astro)
 - `/assets/fonts/*` — 30-day cache, `stale-while-revalidate`
 - HTML pages — `max-age=0, must-revalidate` (always fresh from CDN)

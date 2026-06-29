@@ -25,9 +25,7 @@ export default defineConfig({
         return !legacyWorkPaths.has(decodeURI(pathname));
       },
     }),
-    robotsTxt({
-      transform: (content) => content + "\nSchemamap: https://plinto.cl/schemamap.xml\n",
-    }),
+    robotsTxt(),
     seoGraph({
       validateH1: true,
       validateUniqueMetadata: true,

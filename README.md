@@ -30,15 +30,15 @@ El sitio queda disponible en `http://localhost:4321`.
 
 ## Comandos
 
-| Comando | Descripción |
-|---|---|
-| `npm run dev` | Servidor de desarrollo local |
-| `npm run build` | Valida TypeScript y genera la versión de producción en `dist/` |
-| `npm run preview` | Sirve la compilación de producción localmente |
-| `npm run format` | Formatea el código con Prettier |
-| `npm run lint` | Ejecuta ESLint y Stylelint |
-| `npm run test` | Tests de accesibilidad con Playwright |
-| `npm run test:lighthouse` | Auditoría de rendimiento con Lighthouse CI |
+| Comando                   | Descripción                                                    |
+| ------------------------- | -------------------------------------------------------------- |
+| `npm run dev`             | Servidor de desarrollo local                                   |
+| `npm run build`           | Valida TypeScript y genera la versión de producción en `dist/` |
+| `npm run preview`         | Sirve la compilación de producción localmente                  |
+| `npm run format`          | Formatea el código con Prettier                                |
+| `npm run lint`            | Ejecuta ESLint y Stylelint                                     |
+| `npm run test`            | Tests de accesibilidad con Playwright                          |
+| `npm run test:lighthouse` | Auditoría de rendimiento con Lighthouse CI                     |
 
 ## Estructura del proyecto
 

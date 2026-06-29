@@ -24,38 +24,6 @@
   font-weight: 700;
 }
 
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter/Inter-Regular.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter/Inter-Medium.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter/Inter-SemiBold.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter/Inter-Bold.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 700;
-}
-
 /* ─── Tokens ─────────────────────────────────────────────────────────────── */
 
 :root {
@@ -67,8 +35,8 @@
   --panel: #f7f3ef;
   --label: #1f3545;
   --font-body:
-    Satoshi, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  --font-ui: Inter, Satoshi, ui-sans-serif, system-ui, sans-serif;
+    Satoshi, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-ui: Satoshi, ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
