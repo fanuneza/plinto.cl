@@ -29,7 +29,7 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
                 sizes={cardSizes}
                 loading={isEager ? "eager" : "lazy"}
                 decoding="async"
-                fetchpriority={isEager ? "auto" : "low"}
+                fetchpriority={isEager ? "high" : "low"}
               />
             </span>
             <span class="work-meta">

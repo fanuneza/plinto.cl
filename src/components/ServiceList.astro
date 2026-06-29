@@ -11,10 +11,12 @@ interface Item {
 
 interface Props {
   items: readonly Item[];
+  headingLevel?: "h2" | "h3";
 }
 
-const { items } = Astro.props;
+const { items, headingLevel = "h2" } = Astro.props;
 const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as const;
+const Heading = headingLevel;
 ---
 
 <ul class="service-list">
@@ -23,7 +25,7 @@ const fallbackIcons = ["house", "building", "tree", "lightbulb", "asterisk"] as 
       <li class="service-item">
         <ServiceIcon name={item.icon ?? fallbackIcons[index % fallbackIcons.length]} />
         {item.number && <p class="service-number">{item.number}</p>}
-        <h2>{item.title}</h2>
+        <Heading>{item.title}</Heading>
         {item.body && <p>{item.body}</p>}
         {item.points && (
           <ul>

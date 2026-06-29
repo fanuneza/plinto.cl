@@ -49,7 +49,9 @@ const services = [
       alt="Piedras apiladas en composicion editorial"
       width={678}
       height={629}
+      loading="eager"
       decoding="async"
+      fetchpriority="high"
     />
     <Image
       class="stone stone-hero-right"
@@ -57,7 +59,9 @@ const services = [
       alt="Formacion de piedras en equilibrio"
       width={402}
       height={390}
+      loading="eager"
       decoding="async"
+      fetchpriority="high"
     />
     <div class="hero-content">
       <h1>plinto</h1>
@@ -156,7 +160,7 @@ const services = [
         objetivo comercial.
       </p>
     </div>
-    <ServiceList items={services} />
+    <ServiceList items={services} headingLevel="h3" />
   </section>
 
   <section class="audience-section page-section">

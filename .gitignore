@@ -173,7 +173,6 @@ Thumbs.db
 .env*.local
 
 # Internal project documentation
-AGENTS.md
 Astro.md
 CI.md
 Cloudflare.md

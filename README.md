@@ -1,127 +1,75 @@
 # Plinto.cl
 
-Sitio estatico desarrollado con Astro para Plinto, estudio enfocado en estrategia, contenidos y comunicacion para marcas de arquitectura y construccion.
+Sitio web del estudio de estrategia, contenido y comunicación [Plinto](https://plinto.cl), especializado en marcas del mundo de la arquitectura y la construcción en Chile. Desarrollado con Astro y desplegado en Cloudflare Pages.
 
-## Stack
+---
 
-- `Astro 6` con output estatico
-- `TypeScript`
-- `@astrojs/mdx` para fichas de proyectos
-- `@astrojs/sitemap` para generacion de sitemap
-- `@astrojs/rss` para feed RSS
-- `astro-robots-txt` para robots.txt
-- `astro:assets` con `sharp` para optimizacion de imagenes
-- `Playwright` + `@axe-core/playwright` para testing de accesibilidad
-- `@lhci/cli` para Lighthouse CI
-- `ESLint` + `eslint-plugin-astro` para linting
-- `Prettier` para formateo
-- `Stylelint` para linting de CSS
+## Qué es este repositorio
 
-## Requisitos
+Este repo contiene el sitio completo de Plinto: la presentación del estudio, el portafolio de proyectos, la página de servicios, el equipo y el contacto. El sitio es completamente estático — no hay servidor, no hay base de datos. Todo se genera en tiempo de compilación.
 
-- `Node.js` compatible con las dependencias definidas en `package-lock.json`
-- `npm`
+## Tecnologías principales
+
+- [Astro 7](https://astro.build) con salida estática
+- TypeScript
+- Vanilla CSS (sin frameworks de estilos)
+- Cloudflare Pages para despliegue
+- Playwright para testing de accesibilidad
+- Lighthouse CI para auditorías de rendimiento
+
+## Desarrollo local
+
+Requiere Node.js ≥ 22 y npm.
+
+```bash
+npm install
+npm run dev
+```
+
+El sitio queda disponible en `http://localhost:4321`.
 
 ## Comandos
 
-| Comando                   | Descripcion                                                         |
-| ------------------------- | ------------------------------------------------------------------- |
-| `npm install`             | Instala las dependencias del proyecto.                              |
-| `npm run dev`             | Levanta el entorno local de desarrollo.                             |
-| `npm run build`           | Ejecuta `astro check` y genera la version de produccion en `dist/`. |
-| `npm run preview`         | Sirve localmente la compilacion de produccion.                      |
-| `npm run lint`            | Ejecuta ESLint y Stylelint.                                         |
-| `npm run format`          | Formatea el codigo con Prettier.                                    |
-| `npm run format:check`    | Verifica el formateo sin modificar archivos.                        |
-| `npm run test:lighthouse` | Ejecuta Lighthouse CI sobre `dist/`.                                |
-| `npm run test:a11y`       | Ejecuta tests de accesibilidad con Playwright + axe-core.           |
-| `npm run test:visual`     | Ejecuta capturas visuales con Playwright.                           |
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Servidor de desarrollo local |
+| `npm run build` | Valida TypeScript y genera la versión de producción en `dist/` |
+| `npm run preview` | Sirve la compilación de producción localmente |
+| `npm run format` | Formatea el código con Prettier |
+| `npm run lint` | Ejecuta ESLint y Stylelint |
+| `npm run test` | Tests de accesibilidad con Playwright |
+| `npm run test:lighthouse` | Auditoría de rendimiento con Lighthouse CI |
 
 ## Estructura del proyecto
 
 ```
 src/
-  pages/              # Rutas del sitio
-  pages/work/[slug].astro   # Pagina dinamica de detalle para proyectos
-  pages/rss.xml.ts    # Endpoint de feed RSS
-  layouts/            # Layouts compartidos
-  components/         # Componentes reutilizables de interfaz
-  content/work/*.mdx  # Entradas del portafolio
-  content.config.ts   # Esquema de la coleccion de contenido
-  data/               # Datos compartidos del sitio
-  styles/
-    global.css        # Punto de entrada de estilos
-    base.css          # Tokens, reset y estilos base
-    layout.css        # Estructuras de layout
-    components.css    # Componentes UI
-    pages.css         # Estilos especificos de paginas
-    responsive.css    # Media queries y breakpoints
-    utilities.css     # Clases utilitarias
-  assets/images/      # Imagenes procesadas por Astro (build-time optimization)
-public/               # Archivos estaticos publicados sin procesamiento
-  assets/             # Assets estaticos (fuentes, scripts, media legacy)
-  scripts/site.js     # JavaScript del sitio (menu, focus trap, etc.)
-docs/site-capture/    # Material historico de referencia del sitio anterior
+  content/work/     # Fichas de proyectos en MDX
+  pages/            # Rutas del sitio y endpoints estáticos
+  layouts/          # Layout base compartido
+  components/       # Componentes reutilizables
+  styles/           # CSS organizado por responsabilidad
+  utils/schema.ts   # Generador de Schema.org
+public/
+  _headers          # Headers HTTP de Cloudflare Pages
+  assets/           # Fuentes, íconos y scripts
 ```
 
-## Modelo de contenido
+## Portafolio de proyectos
 
-Cada proyecto en `src/content/work/` se define como un archivo MDX con frontmatter. Desde ahi se generan los listados, las paginas de detalle, el feed RSS y el contenido SEO.
+Los proyectos del portafolio se definen como archivos MDX en `src/content/work/`. Cada entrada incluye título, cliente, servicio, año, imágenes, resumen y metadatos SEO. Para agregar un nuevo proyecto, basta con crear un nuevo archivo MDX siguiendo la estructura de los existentes y ejecutar `npm run build`.
 
-Campos del esquema:
+## Despliegue
 
-- `title` — Nombre del proyecto
-- `client` — Cliente
-- `service` — Servicio prestado
-- `year` — Ano de realizacion (numero)
-- `coverImage` — Imagen de portada (`image()` de Astro)
-- `coverAlt` — Texto alternativo de la portada
-- `gallery` — Array de imagenes con `src`, `alt` y `caption`
-- `summary` — Resumen para listados y RSS
-- `seoTitle` — Titulo para meta tags
-- `seoDescription` — Descripcion para meta tags
-- `featured` — Destacado en home (boolean)
-- `order` — Orden de aparicion (numero)
-- `liveUrl` — URL del proyecto en vivo (opcional)
-- `legacySlugs` — Slugs historicos para redirecciones (array)
-- `brief` — Descripcion del brief (opcional)
-- `solution` — Descripcion de la solucion (opcional)
-- `deliverables` — Lista de entregables (array)
+El sitio se despliega automáticamente en Cloudflare Pages al hacer push a `main`. La configuración de build es:
 
-## Convenciones de assets
+- **Comando de build**: `npm run build`
+- **Directorio de salida**: `dist`
 
-### Imagenes procesadas (recomendado)
-
-- Usa `src/assets/images/` para imagenes que beneficien optimizacion automatica.
-- Astro genera variantes responsivas y formatos modernos (WebP/AVIF) en build.
-- Referencia las imagenes con el componente `<Image>` de `astro:assets`.
-
-### Assets estaticos
-
-- Usa `public/assets/` para archivos que no requieran procesamiento (fuentes, scripts, media legacy).
-- Prefiere subdirectorios descriptivos bajo `public/assets/`.
-- Agrega texto alternativo significativo cuando el recurso aporte contenido.
-- Las imagenes puramente decorativas pueden usar `alt=""`.
-
-## CI/CD
-
-El proyecto incluye un workflow de GitHub Actions en `.github/workflows/ci.yml` que ejecuta en cada push y pull request:
-
-1. **Lint y build** — Valida codigo y genera el sitio.
-2. **Lighthouse** — Corre auditorias de performance, accesibilidad, best practices y SEO.
-3. **A11y** — Ejecuta tests de accesibilidad automatizados con Playwright.
-
-## Flujo de trabajo recomendado
-
-1. Instala dependencias con `npm install`.
-2. Trabaja localmente con `npm run dev`.
-3. Si cambias rutas, contenido o estilos, valida el resultado en navegador.
-4. Antes de cerrar tu cambio, ejecuta `npm run lint` y `npm run build`.
-5. Para cambios visibles, considera correr `npm run test:a11y` y `npm run test:lighthouse`.
+No se usa ningún adaptador de Astro — el proyecto es puramente estático.
 
 ## Notas
 
-- `dist/`, caches, logs, resultados de pruebas y otros archivos generados no forman parte de la fuente de verdad del proyecto.
-- `docs/site-capture/` debe tratarse solo como referencia historica, no como documentacion vigente de implementacion.
-- No subas secretos ni archivos `.env` reales al repositorio.
-- El sitio esta configurado en espanol de Chile (`lang="es-CL"`, `og:locale="es_CL"`).
+- El sitio está configurado en español de Chile (`lang="es-CL"`).
+- `dist/` y otros archivos generados no forman parte del repositorio.
+- No subas archivos `.env` ni secretos al repositorio.
