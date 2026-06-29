@@ -21,6 +21,10 @@ const currentSlug = Astro.params.slug;
 const isLegacySlug = currentSlug !== canonicalSlug;
 const hasFeaturedGalleryTile = canonicalSlug !== "casa-kddk";
 const canonicalPath = `/work/${canonicalSlug}/`;
+const pageTitle = isLegacySlug ? `${work.data.seoTitle} (ruta anterior)` : work.data.seoTitle;
+const pageDescription = isLegacySlug
+  ? `Ruta anterior de ${work.data.title}. Esta version se mantiene solo para compatibilidad y apunta al caso canonico de Plinto.`
+  : work.data.seoDescription;
 const related = (await getCollection("work"))
   .filter((item) => item.id !== work.id)
   .sort((a, b) => a.data.order - b.data.order)
@@ -67,8 +71,8 @@ const structuredData = [
 ---
 
 <BaseLayout
-  title={work.data.seoTitle}
-  description={work.data.seoDescription}
+  title={pageTitle}
+  description={pageDescription}
   image={work.data.coverImage.src}
   imageAlt={work.data.coverAlt}
   canonicalPath={canonicalPath}

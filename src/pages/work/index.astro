@@ -7,7 +7,10 @@ import WorkGrid from "../../components/WorkGrid.astro";
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Work" description="Portafolio de proyectos, campañas y registros desarrollados por Plinto.">
+<BaseLayout
+  title="Portafolio de proyectos Plinto"
+  description="Revisa el portafolio de Plinto con proyectos editoriales, campanas, fotografia y contenido para arquitectura y construccion."
+>
   <SectionTitle title="WORK" />
   <section class="page-section work-page" data-work-view>
     <div class="portfolio-head">
