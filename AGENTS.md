@@ -196,6 +196,7 @@ Pages pass a `schema` prop to `<BaseLayout>` to merge additional nodes (e.g. `Cr
 - `src/pages/rss.xml.ts` — RSS feed
 - `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` — IndexNow key
 - `public/_headers` — `No-Vary-Search` must retain UTM params + campaign params
+- `public/llms.txt` and `public/llms-full.txt` — AI agent discovery indexes. Since these are static files, they do **not** update automatically; they must be manually updated whenever new content or projects are published.
 
 ### Image SEO rules
 

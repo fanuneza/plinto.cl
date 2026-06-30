@@ -1,0 +1,20 @@
+# Plinto
+
+> Plinto es un estudio chileno de estrategia, contenido y comunicación para el sector de la arquitectura, diseño y construcción.
+
+## Secciones Principales
+
+- [Inicio](https://plinto.cl/): Presentación de la marca, manifiesto editorial y clientes del estudio.
+- [Proyectos (Work)](https://plinto.cl/work/): Listado completo de proyectos, campañas y registros audiovisuales.
+- [Servicios y Clientes](https://plinto.cl/service/): Detalle de servicios dirigidos a arquitectos, inmobiliarias, marcas de construcción y asesorías.
+- [Sobre Plinto y el Equipo](https://plinto.cl/about/): Socios fundadores, colaboradores externos y perfil del estudio.
+- [Información de Contacto](https://plinto.cl/contact/): Formas de comunicación directa con los directores ejecutivos y creativos.
+
+## Portafolio de Casos de Estudio
+
+- [Casa KDDK](https://plinto.cl/work/casa-kddk/): Registro de obra formal y video narrativo para Karina Duque Arquitecta.
+- [Campaña MINI "Open More Doors"](https://plinto.cl/work/mini-open-more-doors/): Relato visual y estrategia de contenidos sobre movilidad y arquitectura para MINI Clubman.
+- [Campaña We Love Architecture](https://plinto.cl/work/we-love/): Guion, estrategia de marca y dirección creativa audiovisual para ArchDaily.
+- [Registro Fotográfico USACH](https://plinto.cl/work/registro-fotografico-usach/): Registro documental de la restauración arquitectónica del campus.
+- [WA Magazine Chile](https://plinto.cl/work/wa-magazine-chile/): Estrategia de contenidos y dirección editorial para revista impresa.
+- [Campaña Building of the Year Awards](https://plinto.cl/work/campana-building-of-the-year-awards/): Coordinación de prensa y difusión global para los premios anuales de ArchDaily.

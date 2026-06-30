@@ -1,0 +1,89 @@
+# Plinto — Documentación Completa para Modelos de Lenguaje
+
+> Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la arquitectura y la construcción en Chile a través de una narrativa coherente y distintiva.
+
+---
+
+## Secciones del Sitio
+
+### 1. Página de Inicio
+- **URL:** https://plinto.cl/
+- **Descripción:** Presenta el enfoque editorial y de marketing de Plinto, su definición filosófica (el plinto como la estructura fundamental sobre la que se sostiene una identidad clara), su portafolio destacado, y las áreas en las que ayuda al rubro.
+
+### 2. Portafolio (Work)
+- **URL:** https://plinto.cl/work/
+- **Descripción:** Índice completo que muestra las campañas, dirección editorial, guiones, registros audiovisuales y producciones realizadas por el estudio desde 2012. Permite filtrado en modo grilla o lista.
+
+### 3. Servicios y Clientes
+- **URL:** https://plinto.cl/service/
+- **Descripción:** Detalle de cómo Plinto ayuda a distintos agentes del rubro:
+  - **Arquitectos:** Difusión de obra, posicionamiento de marca (branding), registros fotográficos y kits de prensa.
+  - **Inmobiliarias y Corredoras:** Promoción de proyectos desde una mirada arquitectónica y de valor de diseño.
+  - **Marcas de Construcción:** Traducción del valor técnico de los materiales en relatos comerciales atractivos.
+  - **Asesorías:** Creación de material gráfico y editorial para concursos, postulaciones y campañas especiales.
+
+### 4. Equipo y Perfil (About)
+- **URL:** https://plinto.cl/about/
+- **Descripción:** Detalle de la historia y fundadores de Plinto:
+  - **Fernanda Castro (Directora Ejecutiva):** Arquitecta UC con más de una década liderando la estrategia de contenidos de ArchDaily (el sitio de arquitectura más visitado del mundo).
+  - **Diego Hernández (Director Creativo):** Ex-director de los premios Building of the Year de ArchDaily, especialista en campañas internacionales (MINI, Velux, Epic Games).
+  - **Cristian Pino Anguita (Director Audiovisual):** Guionista y montajista de documentales culturales y series de arquitectura.
+
+### 5. Contacto
+- **URL:** https://plinto.cl/contact/
+- **Descripción:** Canal de contacto directo con el estudio:
+  - Dirección de correo principal: `fernanda@plinto.cl`
+  - Dirección de correo creativa: `diego@plinto.cl`
+  - Enlaces de redes sociales oficiales.
+
+---
+
+## Casos de Estudio y Proyectos Detallados
+
+### Casa KDDK
+- **URL:** https://plinto.cl/work/casa-kddk/
+- **Cliente:** Karina Duque Arquitecta
+- **Servicio:** Producción y Registro Audiovisual (2024)
+- **Brief:** Registro formal de la obra residencial para su posterior publicación en medios de arquitectura.
+- **Solución:** Sesión de fotografía y video editorial relatando el recorrido espacial a través de un personaje, emulando la estructura de las publicaciones en ArchDaily.
+- **Entregables:** Video editorial de CPA Director, Set de fotografías.
+
+### Campaña MINI "Open More Doors"
+- **URL:** https://plinto.cl/work/mini-open-more-doors/
+- **Cliente:** MINI Clubman
+- **Servicio:** Campaña, Estrategia y Producción (2024)
+- **Brief:** Crear una campaña visual que conectara movilidad urbana, arquitectura moderna y estilo de vida.
+- **Solución:** Estrategia creativa y producción de piezas audiovisuales y editoriales para difusión digital.
+- **Entregables:** Campaña, Estrategia de difusión, Producción de piezas.
+
+### Campaña We Love Architecture
+- **URL:** https://plinto.cl/work/we-love/
+- **Cliente:** ArchDaily
+- **Servicio:** Guion, Estrategia de Marca, Producción & Edición (2024)
+- **Brief:** Construir un relato audiovisual potente capaz de ampliar la conversación sobre la arquitectura y su impacto comunitario.
+- **Solución:** Desarrollo de guion, dirección creativa y edición fina para una pieza de alto alcance editorial y cultural.
+- **Entregables:** Guion, Estrategia de marca, Producción y edición.
+
+### Registro Fotográfico USACH
+- **URL:** https://plinto.cl/work/registro-fotografico-usach/
+- **Cliente:** ArchDaily / Universidad de Santiago
+- **Servicio:** Registro Documental y Editorial (2023)
+- **Brief:** Registro fotográfico y documental del nuevo pabellón académico de la USACH para su publicación digital.
+- **Solución:** Reportaje fotográfico de la obra centrado en el uso de la estructura metálica y el diálogo con el campus histórico.
+- **Entregables:** Set fotográfico de arquitectura y detalles estructurales.
+
+### WA Magazine Chile
+- **URL:** https://plinto.cl/work/wa-magazine-chile/
+- **Cliente:** ArchDaily / WA Magazine
+- **Servicio:** Estrategia Editorial y Dirección de Arte (2023)
+- **Brief:** Lanzamiento y estrategia de contenidos para la edición impresa de la revista de arquitectura en Chile.
+- **Solución:** Curaduría de obras y dirección de arte aplicada a la diagramación de la revista física.
+- **Entregables:** Dirección de arte editorial, Planificación del contenido.
+
+### Campaña Building of the Year Awards
+- **URL:** https://plinto.cl/work/campana-building-of-the-year-awards/
+- **Cliente:** ArchDaily
+- **Servicio:** Coordinación Creativa y Difusión Global (2024)
+- **Brief:** Producción, relaciones con prensa y difusión digital global para los premios anuales del sitio.
+- **Solución:** Coordinación y estrategia de relaciones públicas globales en múltiples idiomas, maximizando la participación de oficinas de arquitectura del mundo.
+- **Entregables:** Campaña de prensa, Coordinación creativa, Reporte de impacto.
