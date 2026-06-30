@@ -31,8 +31,9 @@ export function buildSchemaGraph(options: {
   pieces.push(
     buildWebSite(
       {
-        url: SITE_URL,
+        url: SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`,
         name: "Plinto",
+        alternateName: ["Plinto", "plinto.cl"],
         description:
           "Estudio de estrategia, contenido y comunicación para marcas del mundo de la arquitectura y la construcción.",
         publisher: { "@id": ids.organization("plinto") },
