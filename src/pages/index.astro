@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import ServiceList from "../components/ServiceList.astro";
+import { site } from "../data/site";
 import stoneHeroLeft from "../assets/images/decorative/stone-hero-left.png";
 import stoneHeroRight from "../assets/images/decorative/stone-hero-right.png";
 import stoneStack from "../assets/images/decorative/stone-stack.png";
@@ -41,7 +42,17 @@ const services = [
 ] as const;
 ---
 
-<BaseLayout title="Contenido y comunicacion para arquitectura">
+<BaseLayout
+  title="Plinto | Contenido y comunicación para arquitectura"
+  titleTemplate="%s"
+  schema={{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Plinto",
+    alternateName: "plinto.cl",
+    url: site.url,
+  }}
+>
   <section class="hero">
     <Image
       class="stone stone-hero-left"

@@ -16,6 +16,7 @@ interface Props {
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
   schema?: Record<string, unknown>;
+  titleTemplate?: string;
 }
 
 const {
@@ -29,6 +30,7 @@ const {
   structuredData = [],
   bodyClass = "",
   schema,
+  titleTemplate = "%s | Plinto",
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, site.url).toString();
@@ -81,7 +83,7 @@ for (const item of extraItems) {
 
     <Seo
       title={title}
-      titleTemplate="%s | Plinto"
+      titleTemplate={titleTemplate}
       description={description}
       canonical={canonical}
       noindex={noindex}
