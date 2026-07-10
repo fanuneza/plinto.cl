@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
+import { FadeIn } from "../components/motion";
 ---
 
 <BaseLayout
@@ -9,14 +10,16 @@ import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
   canonicalPath="/404"
   robots="noindex,follow"
 >
-  <section class="error-page page-section">
-    <h1>Página no encontrada</h1>
-    <p>Error 404 — La página que buscas no existe.</p>
+  <FadeIn client:visible>
+    <section class="error-page page-section">
+      <h1>Página no encontrada</h1>
+      <p>Error 404 — La página que buscas no existe.</p>
 
-    <div style="margin: 1.5rem 0; font-weight: 500;">
-      <FuzzyRedirect />
-    </div>
+      <div style="margin: 1.5rem 0; font-weight: 500;">
+        <FuzzyRedirect />
+      </div>
 
-    <a class="link-row" href="/">Volver al inicio</a>
-  </section>
+      <a class="link-row" href="/">Volver al inicio</a>
+    </section>
+  </FadeIn>
 </BaseLayout>

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+import { FadeHover, FadeIn } from "../components/motion";
 import fernandaImg from "../assets/images/people/fernanda-castro-portrait.jpg";
 import diegoImg from "../assets/images/people/diego-hernandez-portrait.png";
 import cristianImg from "../assets/images/people/cristian-pino-anguita-portrait-bw.png";
@@ -49,73 +50,81 @@ const collaborators = [
   title="Sobre Plinto y su equipo"
   description="Conoce al equipo, la mirada editorial y la experiencia en estrategia de contenidos que sostienen el trabajo de Plinto."
 >
-  <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
-  <section class="about-context page-section">
-    <Image
-      class="about-logo"
-      src={logoStacked}
-      alt="Logo de Plinto"
-      width={350}
-      height={350}
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
-    />
-    <div class="about-context-copy">
-      <p class="about-eyebrow">contexto</p>
-      <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</h2>
-      <p>
-        Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la
-        arquitectura y la construcción a través de una narrativa coherente y distintiva.
-      </p>
-      <p>
-        Contamos con más de 10 años de experiencia en creación de contenido y marcas de arquitectura. Trabajamos con una
-        mirada editorial aplicada a un objetivo comercial.
-      </p>
-      <p>
-        Especialistas en convertir conocimiento técnico en comunicación clara combinando la creatividad con estructura:
-        estética con sentido.
-      </p>
-    </div>
-  </section>
+  <FadeIn client:visible>
+    <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
+  </FadeIn>
+  <FadeIn client:visible>
+    <section class="about-context page-section">
+      <Image
+        class="about-logo"
+        src={logoStacked}
+        alt="Logo de Plinto"
+        width={350}
+        height={350}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="about-context-copy">
+        <p class="about-eyebrow">contexto</p>
+        <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</h2>
+        <p>
+          Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la
+          arquitectura y la construcción a través de una narrativa coherente y distintiva.
+        </p>
+        <p>
+          Contamos con más de 10 años de experiencia en creación de contenido y marcas de arquitectura. Trabajamos con
+          una mirada editorial aplicada a un objetivo comercial.
+        </p>
+        <p>
+          Especialistas en convertir conocimiento técnico en comunicación clara combinando la creatividad con
+          estructura: estética con sentido.
+        </p>
+      </div>
+    </section>
+  </FadeIn>
   <section class="team-section page-section">
     <div class="people-grid">
       {
         people.map((person, index) => (
-          <article class="person">
-            <Image
-              src={person.image}
-              alt={`Retrato de ${person.name}`}
-              width={350}
-              height={350}
-              loading={index === 0 ? "eager" : "lazy"}
-              decoding="async"
-              fetchpriority={index === 0 ? "auto" : "low"}
-            />
-            <div class="person-copy">
-              <p class="about-eyebrow">{person.role}</p>
-              <h2>{person.name}</h2>
-              {person.bio.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-            </div>
-          </article>
+          <FadeHover client:visible delay={index * 0.1} hoverScale={1.01} hoverY={-3}>
+            <article class="person">
+              <Image
+                src={person.image}
+                alt={`Retrato de ${person.name}`}
+                width={350}
+                height={350}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                fetchpriority={index === 0 ? "auto" : "low"}
+              />
+              <div class="person-copy">
+                <p class="about-eyebrow">{person.role}</p>
+                <h2>{person.name}</h2>
+                {person.bio.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+            </article>
+          </FadeHover>
         ))
       }
     </div>
   </section>
-  <section class="collaborators-section page-section">
-    <h2>Socios Colaboradores</h2>
-    <div class="collaborators-grid">
-      {
-        collaborators.map((person) => (
-          <article>
-            <p>{person.role}</p>
-            <h3>{person.name}</h3>
-            {person.note && <span>{person.note}</span>}
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <FadeIn client:visible>
+    <section class="collaborators-section page-section">
+      <h2>Socios Colaboradores</h2>
+      <div class="collaborators-grid">
+        {
+          collaborators.map((person) => (
+            <article>
+              <p>{person.role}</p>
+              <h3>{person.name}</h3>
+              {person.note && <span>{person.note}</span>}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </FadeIn>
 </BaseLayout>

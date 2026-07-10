@@ -122,7 +122,7 @@
     margin-top: 98px;
   }
 
-  .stone {
+  .hero-stone {
     display: none;
   }
 
@@ -242,17 +242,17 @@
     grid-row: 1 / span 2;
   }
 
-  .work-page.is-list .work-meta {
+  .work-page--list .work-meta {
     grid-template-columns: minmax(0, 1fr) minmax(120px, 0.9fr) auto auto;
     gap: 16px;
   }
 
-  .work-page.is-list .work-title {
+  .work-page--list .work-title {
     font-size: 22px;
   }
 
-  .work-page.is-list .work-service,
-  .work-page.is-list .work-year {
+  .work-page--list .work-service,
+  .work-page--list .work-year {
     font-size: 16px;
   }
 

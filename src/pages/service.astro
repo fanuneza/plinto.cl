@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import ServiceList from "../components/ServiceList.astro";
+import { FadeIn } from "../components/motion";
 
 const items = [
   {
@@ -57,7 +58,9 @@ const items = [
   description="Áreas, clientes y servicios de Plinto para arquitectura, inmobiliarias, marcas y concursos."
   bodyClass="service-page"
 >
-  <SectionTitle title="SERVICIOS & CLIENTES" />
+  <FadeIn client:visible>
+    <SectionTitle title="SERVICIOS & CLIENTES" />
+  </FadeIn>
   <section class="page-section">
     <ServiceList items={items} />
   </section>

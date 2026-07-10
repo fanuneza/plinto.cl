@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import WorkGrid from "../../components/WorkGrid.astro";
+import { FadeIn, FadeHover } from "../../components/motion";
 
 export async function getStaticPaths() {
   const works = await getCollection("work");
@@ -57,42 +58,50 @@ const structuredData = [
   structuredData={structuredData}
 >
   <article class="work-detail">
-    <div class="work-hero">
-      <h1>{work.data.title}</h1>
-      <Image
-        src={work.data.coverImage}
-        alt={work.data.coverAlt}
-        widths={[480, 800, 1200]}
-        sizes={heroSizes}
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        transition:name={`work-${work.id}`}
-      />
-    </div>
-    <dl class="meta-grid">
-      <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
-      <div><dt>SERVICE</dt><dd>{work.data.service}</dd></div>
-      <div><dt>YEAR</dt><dd>{work.data.year}</dd></div>
-    </dl>
-    <div class="detail-sections">
-      <section>
-        <h2>01 - BRIEF</h2>
-        <p>{work.data.brief ?? work.data.summary}</p>
-      </section>
-      <section>
-        <h2>02 - SOLUTION</h2>
-        <p>{work.data.solution ?? work.data.summary}</p>
-      </section>
-      <section>
-        <h2>03 - DELIVERABLES</h2>
-        <ul>
-          {work.data.deliverables.map((item) => <li>{item}</li>)}
-        </ul>
-      </section>
-    </div>
+    <FadeIn client:visible>
+      <div class="work-hero">
+        <h1>{work.data.title}</h1>
+        <Image
+          src={work.data.coverImage}
+          alt={work.data.coverAlt}
+          widths={[480, 800, 1200]}
+          sizes={heroSizes}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          transition:name={`work-${work.id}`}
+        />
+      </div>
+    </FadeIn>
+    <FadeIn client:visible>
+      <dl class="meta-grid">
+        <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
+        <div><dt>SERVICE</dt><dd>{work.data.service}</dd></div>
+        <div><dt>YEAR</dt><dd>{work.data.year}</dd></div>
+      </dl>
+    </FadeIn>
+    <FadeIn client:visible>
+      <div class="detail-sections">
+        <section>
+          <h2>01 - BRIEF</h2>
+          <p>{work.data.brief ?? work.data.summary}</p>
+        </section>
+        <section>
+          <h2>02 - SOLUTION</h2>
+          <p>{work.data.solution ?? work.data.summary}</p>
+        </section>
+        <section>
+          <h2>03 - DELIVERABLES</h2>
+          <ul>
+            {work.data.deliverables.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      </div>
+    </FadeIn>
     <section>
-      <h2 class="kicker">IMAGE GALLERY</h2>
+      <FadeIn client:visible>
+        <h2 class="kicker">IMAGE GALLERY</h2>
+      </FadeIn>
       <ul class="gallery" data-lightbox-gallery>
         {
           work.data.gallery.map((image, index) => {
@@ -103,37 +112,43 @@ const structuredData = [
 
             return (
               <li class:list={["gallery-item", { "gallery-item--featured": isFeatured }]}>
-                <button
-                  class="gallery-button"
-                  type="button"
-                  data-lightbox-trigger
-                  data-src={image.src.src}
-                  data-alt={image.alt}
-                  data-caption={image.caption ?? image.alt}
-                  aria-label={`Abrir imagen: ${image.caption ?? image.alt}`}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    widths={[480, 800, 1200]}
-                    sizes={gallerySizes}
-                    loading="lazy"
-                    decoding="async"
-                    fetchpriority="low"
-                  />
-                </button>
+                <FadeHover client:visible delay={index * 0.06} hoverScale={1.02} hoverY={-3}>
+                  <button
+                    class="gallery-button"
+                    type="button"
+                    data-lightbox-trigger
+                    data-src={image.src.src}
+                    data-alt={image.alt}
+                    data-caption={image.caption ?? image.alt}
+                    aria-label={`Abrir imagen: ${image.caption ?? image.alt}`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      widths={[480, 800, 1200]}
+                      sizes={gallerySizes}
+                      loading="lazy"
+                      decoding="async"
+                      fetchpriority="low"
+                    />
+                  </button>
+                </FadeHover>
               </li>
             );
           })
         }
       </ul>
     </section>
-    <section class="copy-stack detail-summary">
-      <h2>SUMMARY</h2>
-      <p>{work.data.summary}</p>
-    </section>
+    <FadeIn client:visible>
+      <section class="copy-stack detail-summary">
+        <h2>SUMMARY</h2>
+        <p>{work.data.summary}</p>
+      </section>
+    </FadeIn>
     <section>
-      <h2 class="kicker">READ MORE</h2>
+      <FadeIn client:visible>
+        <h2 class="kicker">READ MORE</h2>
+      </FadeIn>
       <WorkGrid items={related} />
     </section>
   </article>

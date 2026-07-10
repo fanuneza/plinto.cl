@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import ServiceList from "../components/ServiceList.astro";
-import { site } from "../data/site";
+import { FadeIn, HoverScale } from "../components/motion";
 import stoneHeroLeft from "../assets/images/decorative/stone-hero-left.png";
 import stoneHeroRight from "../assets/images/decorative/stone-hero-right.png";
 import stoneStack from "../assets/images/decorative/stone-stack.png";
@@ -42,20 +42,10 @@ const services = [
 ] as const;
 ---
 
-<BaseLayout
-  title="Plinto | Contenido y comunicación para arquitectura"
-  titleTemplate="%s"
-  schema={{
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Plinto",
-    alternateName: "plinto.cl",
-    url: site.url,
-  }}
->
+<BaseLayout title="Plinto | Contenido y comunicación para arquitectura" titleTemplate="%s">
   <section class="hero">
     <Image
-      class="stone stone-hero-left"
+      class="hero-stone hero-stone--left"
       src={stoneHeroLeft}
       alt="Piedras apiladas en composicion editorial"
       width={360}
@@ -65,7 +55,7 @@ const services = [
       fetchpriority="high"
     />
     <Image
-      class="stone stone-hero-right"
+      class="hero-stone hero-stone--right"
       src={stoneHeroRight}
       alt="Formacion de piedras en equilibrio"
       width={310}
@@ -75,9 +65,9 @@ const services = [
       fetchpriority="high"
     />
     <div class="hero-content">
-      <h1>plinto</h1>
-      <p class="tagline">brand & content marketing</p>
-      <div class="scroll-cue">
+      <h1 class="hero-fade-in" style="--hero-delay: 0s">plinto</h1>
+      <p class="tagline hero-fade-in" style="--hero-delay: 0.15s">brand & content marketing</p>
+      <div class="scroll-cue hero-fade-in" style="--hero-delay: 0.3s">
         <span>SCROLL DOWN</span>
         <a href="#somos" aria-label="Ir a la sección sobre Plinto"
           ><span class="scroll-arrow" aria-hidden="true"></span></a
@@ -86,127 +76,143 @@ const services = [
     </div>
   </section>
 
-  <section class="brand-intro page-section">
-    <div class="brand-intro-inner">
-      <h2>Elevamos la identidad de tu marca desde la narrativa, la estética visual y el contenido creativo</h2>
-      <img
-        class="asterisk"
-        src="/assets/icons/asterisk.svg"
-        alt=""
-        width="24"
-        height="24"
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="intro-services">
-        <p><strong>Branding.</strong><br />Construimos identidad de marca y rescatamos el valor intrínseco</p>
-        <p><strong>Storytelling.</strong><br />Traducimos la esencia de una marca en una narrativa potente</p>
-        <p><strong>Content Marketing.</strong><br />Creamos contenido que posiciona y comunica.</p>
+  <FadeIn client:visible>
+    <section class="brand-intro page-section">
+      <div class="brand-intro-inner">
+        <h2>Elevamos la identidad de tu marca desde la narrativa, la estética visual y el contenido creativo</h2>
+        <img
+          class="asterisk"
+          src="/assets/icons/asterisk.svg"
+          alt=""
+          width="24"
+          height="24"
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="intro-services">
+          <p><strong>Branding.</strong><br />Construimos identidad de marca y rescatamos el valor intrínseco</p>
+          <p><strong>Storytelling.</strong><br />Traducimos la esencia de una marca en una narrativa potente</p>
+          <p><strong>Content Marketing.</strong><br />Creamos contenido que posiciona y comunica.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </FadeIn>
 
-  <section id="somos" class="somos-section page-section">
-    <div class="somos-inner">
-      <h2>somos plinto</h2>
-      <div class="definition">
-        <p>Del lat. <em>plinthus</em>, y este del gr. πλίνθος <em>plínthos</em>;</p>
-        <ol>
-          <li>base que sostiene y eleva un pilar o estructura</li>
-          <li>estructura fundamental sobre la que se desarrolla y sostiene una identidad clara y coherente</li>
-        </ol>
+  <FadeIn client:visible>
+    <section id="somos" class="somos-section page-section">
+      <div class="somos-inner">
+        <h2>somos plinto</h2>
+        <div class="definition">
+          <p>Del lat. <em>plinthus</em>, y este del gr. πλίνθος <em>plínthos</em>;</p>
+          <ol>
+            <li>base que sostiene y eleva un pilar o estructura</li>
+            <li>estructura fundamental sobre la que se desarrolla y sostiene una identidad clara y coherente</li>
+          </ol>
+        </div>
+        <Image
+          class="stacked-stone"
+          src={stoneStack}
+          alt="Torre de piedras apiladas sobre fondo neutro"
+          width={460}
+          height={460}
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="somos-copy">
+          <p>
+            No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo. Y
+            desde ahí, proponemos otra forma de habitar el marketing y la comunicación: elevar la conversación, darle
+            forma a la identidad de quienes construyen ciudad y recordar que detrás de cada proyecto hay una historia
+            que merece ser bien contada.
+          </p>
+          <p>
+            En un mundo saturado de imágenes sin relato, la narrativa clara y visual es un acto de posicionamiento y
+            observamos este panorama como agentes culturales. Plinto es un estudio de estrategia, contenido y
+            comunicación que construye marcas relevantes en el mundo de la arquitectura y la construcción a través de
+            una narrativa coherente y distintiva.
+          </p>
+        </div>
       </div>
-      <Image
-        class="stacked-stone"
-        src={stoneStack}
-        alt="Torre de piedras apiladas sobre fondo neutro"
-        width={460}
-        height={460}
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="somos-copy">
+    </section>
+  </FadeIn>
+
+  <FadeIn client:visible>
+    <section class="portfolio-section page-section">
+      <div class="portfolio-head source-head">
+        <div>
+          <h2 class="kicker">PORTAFOLIO</h2>
+          <p class="intro-copy">
+            Colección de proyectos y campañas realizadas entre 2012 y 2025 para ArchDaily y clientes privados.
+          </p>
+          <p class="intro-copy small-copy">
+            Contamos con más de 13 años de experiencia en creación de contenido para marcas relacionadas a la
+            arquitectura y construcción otorgando una mirada editorial aplicada a un objetivo comercial.
+          </p>
+        </div>
+        <a class="round-link" href="/work/"
+          ><span>VIEW ALL</span><span class="round-link__arrow" aria-hidden="true"></span></a
+        >
+      </div>
+      <WorkGrid items={works} limit={4} eagerFirst={true} />
+    </section>
+  </FadeIn>
+
+  <FadeIn client:visible>
+    <section class="services-section page-section">
+      <div class="center-head">
+        <h2>QUÉ CREAMOS</h2>
         <p>
-          No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo. Y desde
-          ahí, proponemos otra forma de habitar el marketing y la comunicación: elevar la conversación, darle forma a la
-          identidad de quienes construyen ciudad y recordar que detrás de cada proyecto hay una historia que merece ser
-          bien contada.
-        </p>
-        <p>
-          En un mundo saturado de imágenes sin relato, la narrativa clara y visual es un acto de posicionamiento y
-          observamos este panorama como agentes culturales. Plinto es un estudio de estrategia, contenido y comunicación
-          que construye marcas relevantes en el mundo de la arquitectura y la construcción a través de una narrativa
-          coherente y distintiva.
+          Especialistas en traducir el conocimiento técnico en una comunicación clara y asequible que combina la
+          creatividad y la estética con un sentido mayor y coherente. Trabajamos con una mirada editorial aplicada a un
+          objetivo comercial.
         </p>
       </div>
-    </div>
-  </section>
+      <ServiceList items={services} headingLevel="h3" />
+    </section>
+  </FadeIn>
 
-  <section class="portfolio-section page-section">
-    <div class="portfolio-head source-head">
-      <div>
-        <h2 class="kicker">PORTAFOLIO</h2>
-        <p class="intro-copy">
-          Colección de proyectos y campañas realizadas entre 2012 y 2025 para ArchDaily y clientes privados.
-        </p>
-        <p class="intro-copy small-copy">
-          Contamos con más de 13 años de experiencia en creación de contenido para marcas relacionadas a la arquitectura
-          y construcción otorgando una mirada editorial aplicada a un objetivo comercial.
-        </p>
+  <FadeIn client:visible>
+    <section class="audience-section page-section">
+      <div class="center-head">
+        <h2>ÁREAS Y CLIENTES</h2>
+        <p>Cómo ayudamos a distintos agentes del rubro.</p>
       </div>
-      <a class="round-link" href="/work/"
-        ><span>VIEW ALL</span><span class="round-link__arrow" aria-hidden="true"></span></a
-      >
-    </div>
-    <WorkGrid items={works} limit={4} eagerFirst={true} />
-  </section>
-
-  <section class="services-section page-section">
-    <div class="center-head">
-      <h2>QUÉ CREAMOS</h2>
-      <p>
-        Especialistas en traducir el conocimiento técnico en una comunicación clara y asequible que combina la
-        creatividad y la estética con un sentido mayor y coherente. Trabajamos con una mirada editorial aplicada a un
-        objetivo comercial.
-      </p>
-    </div>
-    <ServiceList items={services} headingLevel="h3" />
-  </section>
-
-  <section class="audience-section page-section">
-    <div class="center-head">
-      <h2>ÁREAS Y CLIENTES</h2>
-      <p>Cómo ayudamos a distintos agentes del rubro.</p>
-    </div>
-    <div class="audience-grid">
-      <article>
-        <span aria-hidden="true"></span>
-        <h3>Arquitectos Independientes o Estudios de Arquitectura:</h3>
-        <p>
-          <strong>Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra.</strong> Creamos una narrativa coherente
-          que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales para posicionar
-          tu estudio y tus proyectos.
-        </p>
-      </article>
-      <article>
-        <span aria-hidden="true"></span>
-        <h3>Empresas y Marcas de Materiales de Construcción:</h3>
-        <p>
-          Traducimos el valor técnico de tus productos en un <strong>relato claro y atractivo.</strong> Te ayudamos a conectar
-          con arquitectos, constructoras y especificadores mediante una estrategia de marca, contenido visual y digital que
-          pone en valor tu propuesta.
-        </p>
-      </article>
-      <article>
-        <span aria-hidden="true"></span>
-        <h3>Inmobiliarias y Corredoras de Propiedades:</h3>
-        <p>
-          Promovemos proyectos desde una mirada <strong>arquitectónica y estratégica.</strong> Creamos contenido atractivo,
-          profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto y mejora la conversión
-          de tu comunicación digital.
-        </p>
-      </article>
-    </div>
-  </section>
+      <div class="audience-grid">
+        <HoverScale client:visible>
+          <article>
+            <span aria-hidden="true"></span>
+            <h3>Arquitectos Independientes o Estudios de Arquitectura:</h3>
+            <p>
+              <strong>Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra.</strong> Creamos una narrativa
+              coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales
+              para posicionar tu estudio y tus proyectos.
+            </p>
+          </article>
+        </HoverScale>
+        <HoverScale client:visible>
+          <article>
+            <span aria-hidden="true"></span>
+            <h3>Empresas y Marcas de Materiales de Construcción:</h3>
+            <p>
+              Traducimos el valor técnico de tus productos en un <strong>relato claro y atractivo.</strong> Te ayudamos a
+              conectar con arquitectos, constructoras y especificadores mediante una estrategia de marca, contenido visual
+              y digital que pone en valor tu propuesta.
+            </p>
+          </article>
+        </HoverScale>
+        <HoverScale client:visible>
+          <article>
+            <span aria-hidden="true"></span>
+            <h3>Inmobiliarias y Corredoras de Propiedades:</h3>
+            <p>
+              Promovemos proyectos desde una mirada <strong>arquitectónica y estratégica.</strong> Creamos contenido atractivo,
+              profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto y mejora la
+              conversión de tu comunicación digital.
+            </p>
+          </article>
+        </HoverScale>
+      </div>
+    </section>
+  </FadeIn>
 </BaseLayout>

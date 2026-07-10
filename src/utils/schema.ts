@@ -14,6 +14,24 @@ import {
 
 const SITE_URL = "https://plinto.cl";
 
+function buildBreadcrumbItems(pathname: string, title: string): BreadcrumbItem[] {
+  const segments = pathname.split("/").filter(Boolean);
+  const items: BreadcrumbItem[] = [{ name: "Home", url: `${SITE_URL}/` }];
+
+  let currentPath = SITE_URL;
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    currentPath += `/${segment}/`;
+
+    const isLast = i === segments.length - 1;
+    const name = isLast ? title : segment === "work" ? "Work" : segment.toUpperCase();
+
+    items.push({ name, url: currentPath });
+  }
+
+  return items;
+}
+
 export function buildSchemaGraph(options: {
   pageType: "website" | "blogPost" | "webpage";
   url: string;
@@ -88,32 +106,7 @@ export function buildSchemaGraph(options: {
   // Build breadcrumbs dynamically if not homepage
   const pathname = new URL(options.url).pathname.replace(/\/$/, "");
   if (pathname && pathname !== "") {
-    const segments = pathname.split("/").filter(Boolean);
-    const items: BreadcrumbItem[] = [];
-
-    // Always start with Home
-    items.push({
-      name: "Home",
-      url: SITE_URL + "/",
-    });
-
-    let currentPath = SITE_URL;
-    for (let i = 0; i < segments.length; i++) {
-      const segment = segments[i];
-      currentPath += `/${segment}/`;
-
-      let name = segment.toUpperCase();
-      if (i === segments.length - 1) {
-        name = options.title;
-      } else if (segment === "work") {
-        name = "Work";
-      }
-
-      items.push({
-        name,
-        url: currentPath,
-      });
-    }
+    const items = buildBreadcrumbItems(pathname, options.title);
 
     pieces.push(
       buildBreadcrumbList(

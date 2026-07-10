@@ -1,5 +1,6 @@
 import { defineConfig, svgoOptimizer } from "astro/config";
 import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 import seoGraph from "@jdevalk/astro-seo-graph/integration";
@@ -19,6 +20,7 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
+    react(),
     sitemap({
       filter: (page) => {
         const pathname = new URL(page).pathname;

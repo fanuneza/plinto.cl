@@ -68,22 +68,43 @@
   transform: translateY(-2px) rotate(45deg);
 }
 
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in {
+  animation: hero-fade-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--hero-delay, 0s) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-in {
+    animation: none;
+  }
+}
+
 /* Decorative stones (desktop only, hidden on mobile) */
-.stone {
+.hero-stone {
   position: absolute;
   z-index: 1;
   pointer-events: none;
   user-select: none;
 }
 
-.stone-hero-left {
+.hero-stone--left {
   width: clamp(230px, 26vw, 360px);
   left: -108px;
   top: 134px;
   transform: rotate(-16deg);
 }
 
-.stone-hero-right {
+.hero-stone--right {
   width: clamp(218px, 23vw, 310px);
   right: -92px;
   top: 150px;
@@ -541,35 +562,35 @@
 }
 
 /* List view mode */
-.work-page.is-list .work-grid {
+.work-page--list .work-grid {
   grid-template-columns: 1fr;
   gap: 0;
 }
 
-.work-page.is-list .work-card {
+.work-page--list .work-card {
   display: block;
   padding: 34px 0;
   border-bottom: 1px solid var(--line);
 }
 
-.work-page.is-list .work-media {
+.work-page--list .work-media {
   display: none;
 }
 
-.work-page.is-list .work-meta {
+.work-page--list .work-meta {
   grid-template-columns: minmax(220px, 0.32fr) minmax(260px, 1fr) auto auto;
   gap: 32px;
   align-items: center;
   min-height: auto;
 }
 
-.work-page.is-list .work-title {
+.work-page--list .work-title {
   font-size: 28px;
   line-height: 1.05;
 }
 
-.work-page.is-list .work-service,
-.work-page.is-list .work-year {
+.work-page--list .work-service,
+.work-page--list .work-year {
   display: block;
   font-size: 18px;
   font-weight: 600;

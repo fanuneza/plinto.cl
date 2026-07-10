@@ -60,7 +60,7 @@ document.addEventListener("astro:page-load", () => {
 
     const setViewMode = (activeButton) => {
       const mode = activeButton.getAttribute("data-view-button");
-      view.classList.toggle("is-list", mode === "list");
+      view.classList.toggle("work-page--list", mode === "list");
       buttons.forEach((button) => {
         const isActive = button === activeButton;
         button.classList.toggle("is-active", isActive);

@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
 import WorkGrid from "../../components/WorkGrid.astro";
+import { FadeIn } from "../../components/motion";
 
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -11,19 +12,23 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
   title="Portafolio de proyectos Plinto"
   description="Revisa el portafolio de Plinto con proyectos editoriales, campanas, fotografia y contenido para arquitectura y construccion."
 >
-  <SectionTitle title="WORK" />
+  <FadeIn client:visible>
+    <SectionTitle title="WORK" />
+  </FadeIn>
   <section class="page-section work-page" data-work-view>
-    <div class="portfolio-head">
-      <span></span>
-      <div class="view-toggles" role="group" aria-label="Cambiar vista">
-        <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"
-          ><span class="grid-icon" aria-hidden="true"></span></button
-        >
-        <button type="button" data-view-button="list" aria-label="Vista lista" aria-pressed="false"
-          ><span class="list-icon" aria-hidden="true"></span></button
-        >
+    <FadeIn client:visible>
+      <div class="portfolio-head">
+        <span></span>
+        <div class="view-toggles" role="group" aria-label="Cambiar vista">
+          <button class="is-active" type="button" data-view-button="grid" aria-label="Vista grilla" aria-pressed="true"
+            ><span class="grid-icon" aria-hidden="true"></span></button
+          >
+          <button type="button" data-view-button="list" aria-label="Vista lista" aria-pressed="false"
+            ><span class="list-icon" aria-hidden="true"></span></button
+          >
+        </div>
       </div>
-    </div>
+    </FadeIn>
     <WorkGrid items={works} eagerFirst={true} />
   </section>
 </BaseLayout>
