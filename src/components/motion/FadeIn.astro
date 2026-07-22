@@ -1,0 +1,18 @@
+---
+interface Props {
+  delay?: number;
+  className?: string;
+  /** Skip scroll-triggered JS reveal and animate in immediately on load (use for above-the-fold content). */
+  onLoad?: boolean;
+}
+
+const { delay = 0, className, onLoad = false } = Astro.props;
+---
+
+<div
+  class:list={["reveal", onLoad && "load-fade-in", className]}
+  data-reveal={onLoad ? undefined : ""}
+  style={delay ? `--reveal-delay: ${delay}s` : undefined}
+>
+  <slot />
+</div>

@@ -89,6 +89,73 @@
   }
 }
 
+/* ─── Reveal / hover motion (CSS-only, replaces framer-motion) ───────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0s),
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.load-fade-in {
+  opacity: 0;
+  animation: hero-fade-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0s) both;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
+.hover-scale,
+.reveal-hover {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-scale:hover,
+.reveal-hover:hover {
+  transform: scale(var(--hover-scale, 1.02)) translateY(var(--hover-y, -4px));
+}
+
+.hover-scale:active,
+.reveal-hover:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-scale,
+  .reveal-hover {
+    transition: none;
+  }
+
+  .hover-scale:hover,
+  .hover-scale:active,
+  .reveal-hover:hover,
+  .reveal-hover:active {
+    transform: none;
+  }
+}
+
+@media (hover: none) {
+  .hover-scale:hover,
+  .reveal-hover:hover {
+    transform: none;
+  }
+}
+
 /* Decorative stones (desktop only, hidden on mobile) */
 .hero-stone {
   position: absolute;

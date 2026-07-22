@@ -1,0 +1,14 @@
+---
+interface Props {
+  className?: string;
+  scale?: number;
+  y?: number;
+}
+
+const { className, scale = 1.02, y = -4 } = Astro.props;
+const style = `--hover-scale: ${scale}; --hover-y: ${y}px;`;
+---
+
+<div class:list={["hover-scale", className]} style={style}>
+  <slot />
+</div>

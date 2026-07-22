@@ -12,11 +12,11 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
   title="Portafolio de proyectos Plinto"
   description="Revisa el portafolio de Plinto con proyectos editoriales, campanas, fotografia y contenido para arquitectura y construccion."
 >
-  <FadeIn client:visible>
+  <FadeIn>
     <SectionTitle title="WORK" />
   </FadeIn>
   <section class="page-section work-page" data-work-view>
-    <FadeIn client:visible>
+    <FadeIn>
       <div class="portfolio-head">
         <span></span>
         <div class="view-toggles" role="group" aria-label="Cambiar vista">

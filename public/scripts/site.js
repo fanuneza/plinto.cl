@@ -1,4 +1,25 @@
+let revealObserver;
+
 document.addEventListener("astro:page-load", () => {
+  revealObserver?.disconnect();
+  const revealEls = document.querySelectorAll("[data-reveal]");
+  if (revealEls.length && "IntersectionObserver" in window) {
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.2 }
+    );
+    revealEls.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
+  }
+
   const menuButton = document.querySelector(".mobile-menu-mark");
   const siteNav = document.querySelector("#site-nav");
 

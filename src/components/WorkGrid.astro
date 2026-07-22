@@ -22,7 +22,7 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
       const slug = item.id.replace(/\.mdx$/, "");
       return (
         <li>
-          <FadeHover client:visible delay={index * 0.08}>
+          <FadeHover delay={index * 0.08}>
             <a class="work-card" href={`/work/${slug}/`} transition:name={`work-${item.id}`}>
               <span class="work-media">
                 <Image

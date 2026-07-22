@@ -1,0 +1,15 @@
+---
+interface Props {
+  delay?: number;
+  className?: string;
+  hoverScale?: number;
+  hoverY?: number;
+}
+
+const { delay = 0, className, hoverScale = 1.02, hoverY = -4 } = Astro.props;
+const style = `--hover-scale: ${hoverScale}; --hover-y: ${hoverY}px;${delay ? ` --reveal-delay: ${delay}s;` : ""}`;
+---
+
+<div class:list={["reveal", "reveal-hover", className]} data-reveal style={style}>
+  <slot />
+</div>

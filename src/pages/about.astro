@@ -50,10 +50,10 @@ const collaborators = [
   title="Sobre Plinto y su equipo"
   description="Conoce al equipo, la mirada editorial y la experiencia en estrategia de contenidos que sostienen el trabajo de Plinto."
 >
-  <FadeIn client:visible>
+  <FadeIn>
     <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
   </FadeIn>
-  <FadeIn client:visible>
+  <FadeIn>
     <section class="about-context page-section">
       <Image
         class="about-logo"
@@ -87,7 +87,7 @@ const collaborators = [
     <div class="people-grid">
       {
         people.map((person, index) => (
-          <FadeHover client:visible delay={index * 0.1} hoverScale={1.01} hoverY={-3}>
+          <FadeHover delay={index * 0.1} hoverScale={1.01} hoverY={-3}>
             <article class="person">
               <Image
                 src={person.image}
@@ -111,7 +111,7 @@ const collaborators = [
       }
     </div>
   </section>
-  <FadeIn client:visible>
+  <FadeIn>
     <section class="collaborators-section page-section">
       <h2>Socios Colaboradores</h2>
       <div class="collaborators-grid">

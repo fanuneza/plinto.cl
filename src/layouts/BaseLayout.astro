@@ -114,6 +114,14 @@ for (const item of extraItems) {
       fetchpriority="high"
     />
     <ClientRouter fallback="animate" />
+    <noscript
+      ><style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style></noscript
+    >
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#content">Saltar al contenido</a>
@@ -177,5 +185,6 @@ for (const item of extraItems) {
       </p>
     </footer>
     <script is:inline type="module" src="/scripts/site.js"></script>
+
   </body>
 </html>

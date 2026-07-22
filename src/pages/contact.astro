@@ -9,29 +9,29 @@ import { site } from "../data/site";
   title="Información de contacto del estudio"
   description="Escribe a Plinto para proyectos de estrategia, contenido y comunicacion para arquitectura, construccion y marcas afines."
 >
-  <FadeIn client:visible>
+  <FadeIn>
     <SectionTitle title="CONTACTO" />
   </FadeIn>
   <section class="page-section contact-section">
     <address>
       <ul class="contact-links">
         <li>
-          <FadeHover client:visible hoverScale={1.01} hoverY={-2}>
+          <FadeHover hoverScale={1.01} hoverY={-2}>
             <span>Email</span><a href={`mailto:${site.email}`}>{site.email}</a>
           </FadeHover>
         </li>
         <li>
-          <FadeHover client:visible hoverScale={1.01} hoverY={-2}>
+          <FadeHover hoverScale={1.01} hoverY={-2}>
             <span>Email</span><a href={`mailto:${site.secondaryEmail}`}>{site.secondaryEmail}</a>
           </FadeHover>
         </li>
         <li>
-          <FadeHover client:visible hoverScale={1.01} hoverY={-2}>
+          <FadeHover hoverScale={1.01} hoverY={-2}>
             <span>Instagram</span><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           </FadeHover>
         </li>
         <li>
-          <FadeHover client:visible hoverScale={1.01} hoverY={-2}>
+          <FadeHover hoverScale={1.01} hoverY={-2}>
             <span>LinkedIn</span><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </FadeHover>
         </li>

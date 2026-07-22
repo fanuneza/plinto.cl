@@ -58,7 +58,7 @@ const structuredData = [
   structuredData={structuredData}
 >
   <article class="work-detail">
-    <FadeIn client:visible>
+    <FadeIn>
       <div class="work-hero">
         <h1>{work.data.title}</h1>
         <Image
@@ -73,14 +73,14 @@ const structuredData = [
         />
       </div>
     </FadeIn>
-    <FadeIn client:visible>
+    <FadeIn>
       <dl class="meta-grid">
         <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
         <div><dt>SERVICE</dt><dd>{work.data.service}</dd></div>
         <div><dt>YEAR</dt><dd>{work.data.year}</dd></div>
       </dl>
     </FadeIn>
-    <FadeIn client:visible>
+    <FadeIn>
       <div class="detail-sections">
         <section>
           <h2>01 - BRIEF</h2>
@@ -99,7 +99,7 @@ const structuredData = [
       </div>
     </FadeIn>
     <section>
-      <FadeIn client:visible>
+      <FadeIn>
         <h2 class="kicker">IMAGE GALLERY</h2>
       </FadeIn>
       <ul class="gallery" data-lightbox-gallery>
@@ -112,7 +112,7 @@ const structuredData = [
 
             return (
               <li class:list={["gallery-item", { "gallery-item--featured": isFeatured }]}>
-                <FadeHover client:visible delay={index * 0.06} hoverScale={1.02} hoverY={-3}>
+                <FadeHover delay={index * 0.06} hoverScale={1.02} hoverY={-3}>
                   <button
                     class="gallery-button"
                     type="button"
@@ -139,14 +139,14 @@ const structuredData = [
         }
       </ul>
     </section>
-    <FadeIn client:visible>
+    <FadeIn>
       <section class="copy-stack detail-summary">
         <h2>SUMMARY</h2>
         <p>{work.data.summary}</p>
       </section>
     </FadeIn>
     <section>
-      <FadeIn client:visible>
+      <FadeIn>
         <h2 class="kicker">READ MORE</h2>
       </FadeIn>
       <WorkGrid items={related} />

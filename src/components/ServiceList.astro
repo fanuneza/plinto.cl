@@ -24,7 +24,7 @@ const Heading = headingLevel;
   {
     items.map((item, index) => (
       <li class="service-item">
-        <FadeHover client:visible delay={index * 0.08} hoverScale={1.015} hoverY={-3}>
+        <FadeHover delay={index * 0.08} hoverScale={1.015} hoverY={-3}>
           <ServiceIcon name={item.icon ?? fallbackIcons[index % fallbackIcons.length]} />
           {item.number && <p class="service-number">{item.number}</p>}
           <Heading>{item.title}</Heading>
