@@ -1,9 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import WorkGrid from "../../components/WorkGrid.astro";
-import { FadeIn, FadeHover } from "../../components/motion";
+import { Image, getImage } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WorkGrid from "@/components/WorkGrid.astro";
+import Icon from "@/components/Icon.astro";
+import { FadeIn, FadeHover } from "@/components/motion";
 
 export async function getStaticPaths() {
   const works = await getCollection("work");
@@ -24,13 +25,25 @@ const hasFeaturedGalleryTile = canonicalSlug !== "casa-kddk";
 const canonicalPath = `/work/${canonicalSlug}/`;
 const pageTitle = isLegacySlug ? `${work.data.seoTitle} (ruta anterior)` : work.data.seoTitle;
 const pageDescription = isLegacySlug
-  ? `Ruta anterior de ${work.data.title}. Esta version se mantiene solo para compatibilidad y apunta al caso canonico de Plinto.`
+  ? `Ruta anterior de ${work.data.title}. Esta versión se mantiene solo para compatibilidad y apunta al caso canónico de Plinto.`
   : work.data.seoDescription;
-const related = (await getCollection("work"))
-  .filter((item) => item.id !== work.id)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 2);
-const heroSizes = "(max-width: 809px) calc(100vw - 40px), 1000px";
+
+const orderedWorks = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+const currentIndex = orderedWorks.findIndex((item) => item.id === work.id);
+const related = [
+  orderedWorks[(currentIndex + 1) % orderedWorks.length],
+  orderedWorks[(currentIndex + 2) % orderedWorks.length],
+];
+
+// Lightbox zoom uses the largest processed step instead of the raw original.
+const gallery = await Promise.all(
+  work.data.gallery.map(async (image) => ({
+    ...image,
+    zoomSrc: (await getImage({ src: image.src, width: Math.min(1200, image.src.width), quality: 72 })).src,
+  }))
+);
+
+const heroSizes = "(max-width: 436px) calc(100vw - 48px), (max-width: 1438px) 89vw, 1280px";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -60,12 +73,16 @@ const structuredData = [
   <article class="work-detail">
     <FadeIn>
       <div class="work-hero">
+        <a class="detail-crumb" href="/work/">Volver al portafolio</a>
         <h1>{work.data.title}</h1>
         <Image
           src={work.data.coverImage}
           alt={work.data.coverAlt}
+          width={work.data.coverImage.width}
+          height={work.data.coverImage.height}
           widths={[480, 800, 1200]}
           sizes={heroSizes}
+          quality={72}
           loading="eager"
           fetchpriority="high"
           decoding="async"
@@ -75,23 +92,23 @@ const structuredData = [
     </FadeIn>
     <FadeIn>
       <dl class="meta-grid">
-        <div><dt>CLIENT</dt><dd>{work.data.client}</dd></div>
-        <div><dt>SERVICE</dt><dd>{work.data.service}</dd></div>
-        <div><dt>YEAR</dt><dd>{work.data.year}</dd></div>
+        <div><dt>Cliente</dt><dd>{work.data.client}</dd></div>
+        <div><dt>Servicio</dt><dd>{work.data.service}</dd></div>
+        <div><dt>Año</dt><dd>{work.data.year}</dd></div>
       </dl>
     </FadeIn>
     <FadeIn>
       <div class="detail-sections">
         <section>
-          <h2>01 - BRIEF</h2>
+          <h2>El encargo</h2>
           <p>{work.data.brief ?? work.data.summary}</p>
         </section>
         <section>
-          <h2>02 - SOLUTION</h2>
+          <h2>La solución</h2>
           <p>{work.data.solution ?? work.data.summary}</p>
         </section>
         <section>
-          <h2>03 - DELIVERABLES</h2>
+          <h2>Entregables</h2>
           <ul>
             {work.data.deliverables.map((item) => <li>{item}</li>)}
           </ul>
@@ -100,24 +117,24 @@ const structuredData = [
     </FadeIn>
     <section>
       <FadeIn>
-        <h2 class="kicker">IMAGE GALLERY</h2>
+        <h2 class="kicker">El proyecto en imágenes</h2>
       </FadeIn>
-      <ul class="gallery" data-lightbox-gallery>
+      <ul class="gallery">
         {
-          work.data.gallery.map((image, index) => {
+          gallery.map((image, index) => {
             const isFeatured = hasFeaturedGalleryTile && (index + 1) % 3 === 0;
             const gallerySizes = isFeatured
-              ? "(max-width: 809px) calc(100vw - 40px), 1000px"
-              : "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) calc(50vw - 32px), 491px";
+              ? heroSizes
+              : "(max-width: 436px) calc(100vw - 48px), (max-width: 809px) 89vw, (max-width: 1438px) calc(44.5vw - 12px), 628px";
 
             return (
               <li class:list={["gallery-item", { "gallery-item--featured": isFeatured }]}>
-                <FadeHover delay={index * 0.06} hoverScale={1.02} hoverY={-3}>
+                <FadeHover delay={index * 0.06} hoverScale={1.02} hoverY={-3} className="gallery-fill">
                   <button
                     class="gallery-button"
                     type="button"
                     data-lightbox-trigger
-                    data-src={image.src.src}
+                    data-src={image.zoomSrc}
                     data-alt={image.alt}
                     data-caption={image.caption ?? image.alt}
                     aria-label={`Abrir imagen: ${image.caption ?? image.alt}`}
@@ -125,8 +142,11 @@ const structuredData = [
                     <Image
                       src={image.src}
                       alt={image.alt}
+                      width={image.src.width}
+                      height={image.src.height}
                       widths={[480, 800, 1200]}
                       sizes={gallerySizes}
+                      quality={72}
                       loading="lazy"
                       decoding="async"
                       fetchpriority="low"
@@ -141,22 +161,33 @@ const structuredData = [
     </section>
     <FadeIn>
       <section class="copy-stack detail-summary">
-        <h2>SUMMARY</h2>
+        <h2>Resumen</h2>
         <p>{work.data.summary}</p>
       </section>
     </FadeIn>
     <section>
       <FadeIn>
-        <h2 class="kicker">READ MORE</h2>
+        <h2 class="kicker">Más proyectos</h2>
       </FadeIn>
       <WorkGrid items={related} />
     </section>
   </article>
   <dialog class="lightbox" data-lightbox-dialog aria-label="Vista ampliada de imagen">
-    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Cerrar vista ampliada"> × </button>
+    <button class="lightbox__close" type="button" data-lightbox-close aria-label="Cerrar vista ampliada">
+      <Icon name="close" size={20} />
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Imagen anterior">
+      <Icon name="chevron-left" size={24} />
+    </button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Imagen siguiente">
+      <Icon name="chevron-right" size={24} />
+    </button>
     <figure class="lightbox__figure">
       <img class="lightbox__image" data-lightbox-image alt="" />
-      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+      <figcaption class="lightbox__caption">
+        <span class="lightbox__counter" data-lightbox-counter></span>
+        <span data-lightbox-caption></span>
+      </figcaption>
     </figure>
   </dialog>
   <script is:inline src="/scripts/lightbox.js" defer></script>

@@ -1,9 +1,11 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
-import { buildSchemaGraph } from "../utils/schema";
-import { site, navItems, asset } from "../data/site";
-import "../styles/global.css";
+import { buildSchemaGraph } from "@/utils/schema";
+import { site, navItems, asset } from "@/data/site";
+import IconSprite from "@/components/IconSprite.astro";
+import Icon from "@/components/Icon.astro";
+import "@/styles/global.css";
 
 interface Props {
   title?: string;
@@ -105,28 +107,14 @@ for (const item of extraItems) {
       ]}
     />
 
-    <link
-      rel="preload"
-      href="/assets/fonts/satoshi/Satoshi-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-      fetchpriority="high"
-    />
+    <link rel="preload" href="/assets/fonts/satoshi/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <ClientRouter fallback="animate" />
-    <noscript
-      ><style>
-        .reveal {
-          opacity: 1 !important;
-          transform: none !important;
-        }
-      </style></noscript
-    >
   </head>
   <body class={bodyClass}>
+    <IconSprite />
     <a class="skip-link" href="#content">Saltar al contenido</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Plinto home">plinto</a>
+      <a class="brand" href="/" aria-label="Plinto, inicio">plinto</a>
       <nav id="site-nav" aria-label="Principal">
         {
           navItems.map((item) => {
@@ -140,10 +128,11 @@ for (const item of extraItems) {
           })
         }
       </nav>
+      <a class="header-cta" href="/contact/">Hablemos<Icon name="arrow-right" size={18} /></a>
       <button
         class="mobile-menu-mark"
         type="button"
-        aria-label="Abrir menu"
+        aria-label="Abrir menú"
         aria-controls="site-nav"
         aria-expanded="false"
       >
@@ -154,29 +143,28 @@ for (const item of extraItems) {
       <slot />
     </main>
     <footer class="site-footer">
-      <h2>CONTACTO</h2>
+      <h2><a class="footer-contact" href="/contact/">Conversemos<Icon name="arrow-right" size={64} /></a></h2>
       <div class="footer-column footer-identity">
         <address>
-          <p>Plinto.cl</p>
+          <p>plinto</p>
           <p>Santiago, Chile</p>
           <p>{currentYear}</p>
         </address>
       </div>
-      <div class="footer-column">
-        <h3>Páginas</h3>
-        <a href="/">HOME</a>
+      <nav class="footer-column" aria-label="Navegación al pie">
+        <p class="footer-label">Explora</p>
         {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-      </div>
-      <div class="footer-column">
-        <h3>Socials</h3>
-        <a href={site.instagram} target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+      </nav>
+      <nav class="footer-column" aria-label="Redes sociales">
+        <p class="footer-label">Conectemos</p>
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </div>
+      </nav>
       <p class="footer-credit">
-        <span>Design: Plinto.cl</span>
+        <span>Diseño: Plinto.cl</span>
         <span class="footer-credit__separator" aria-hidden="true">·</span>
         <span
-          >Dev: <a
+          >Desarrollo: <a
             href="https://fnunez.cl/?utm_source=plinto.cl&utm_medium=referral&utm_campaign=credit_footer"
             target="_blank"
             rel="noopener noreferrer">Fabián Nuñez</a
@@ -185,7 +173,5 @@ for (const item of extraItems) {
       </p>
     </footer>
     <script is:inline type="module" src="/scripts/site.js"></script>
-
-
   </body>
 </html>

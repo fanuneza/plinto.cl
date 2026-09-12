@@ -21,8 +21,11 @@ This repository vendors local webfont files under `public/assets/fonts/` to avoi
 - Embedded files:
   - `public/assets/fonts/satoshi/Satoshi-Regular.woff2`
   - `public/assets/fonts/satoshi/Satoshi-Medium.woff2`
+  - `public/assets/fonts/satoshi/Satoshi-SemiBold.woff2`
   - `public/assets/fonts/satoshi/Satoshi-Bold.woff2`
 - Upstream distributor: https://www.fontshare.com/fonts/satoshi
 - Canonical API distribution used for these files: https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap
+- `Satoshi-SemiBold.woff2` was instantiated at `wght=600` from the official `Satoshi-Variable.ttf`
+  (Fontshare complete package) with fontTools, because Fontshare ships no static SemiBold cut.
 - Licensing note from Indian Type Foundry / Fontshare: Fontshare fonts are distributed for free personal and commercial use under the Fontshare model.
 - Source statement: https://www.indiantypefoundry.com/news/introducing-fontshare

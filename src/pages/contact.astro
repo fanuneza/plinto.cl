@@ -1,39 +1,50 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionTitle from "../components/SectionTitle.astro";
-import { FadeIn, FadeHover } from "../components/motion";
-import { site } from "../data/site";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Icon from "@/components/Icon.astro";
+import { FadeIn } from "@/components/motion";
+import { site } from "@/data/site";
 ---
 
 <BaseLayout
   title="Información de contacto del estudio"
-  description="Escribe a Plinto para proyectos de estrategia, contenido y comunicacion para arquitectura, construccion y marcas afines."
+  description="Escribe a Plinto para proyectos de estrategia, contenido y comunicación para arquitectura, construcción y marcas afines."
+  bodyClass="contact-page"
 >
   <FadeIn>
-    <SectionTitle title="CONTACTO" />
+    <SectionTitle title="Hablemos" />
   </FadeIn>
   <section class="page-section contact-section">
+    <p class="contact-intro">Cuéntanos sobre tu marca o proyecto. Conversemos sobre lo que podemos crear juntos.</p>
     <address>
       <ul class="contact-links">
         <li>
-          <FadeHover hoverScale={1.01} hoverY={-2}>
-            <span>Email</span><a href={`mailto:${site.email}`}>{site.email}</a>
-          </FadeHover>
+          <FadeIn className="contact-row">
+            <span>Escríbele a Fernanda</span><a href={`mailto:${site.email}`}
+              >{site.email}<Icon name="arrow-right" size={24} /></a
+            >
+          </FadeIn>
         </li>
         <li>
-          <FadeHover hoverScale={1.01} hoverY={-2}>
-            <span>Email</span><a href={`mailto:${site.secondaryEmail}`}>{site.secondaryEmail}</a>
-          </FadeHover>
+          <FadeIn className="contact-row">
+            <span>Escríbele a Diego</span><a href={`mailto:${site.secondaryEmail}`}
+              >{site.secondaryEmail}<Icon name="arrow-right" size={24} /></a
+            >
+          </FadeIn>
         </li>
         <li>
-          <FadeHover hoverScale={1.01} hoverY={-2}>
-            <span>Instagram</span><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-          </FadeHover>
+          <FadeIn className="contact-row">
+            <span>Sigue nuestro trabajo</span><a href={site.instagram} target="_blank" rel="noopener noreferrer"
+              >Instagram<Icon name="arrow-right" size={20} /></a
+            >
+          </FadeIn>
         </li>
         <li>
-          <FadeHover hoverScale={1.01} hoverY={-2}>
-            <span>LinkedIn</span><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </FadeHover>
+          <FadeIn className="contact-row">
+            <span>Conectemos</span><a href={site.linkedin} target="_blank" rel="noopener noreferrer"
+              >LinkedIn<Icon name="arrow-right" size={20} /></a
+            >
+          </FadeIn>
         </li>
       </ul>
     </address>

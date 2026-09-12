@@ -11,7 +11,7 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
   prefetch: {
-    prefetchAll: true,
+    prefetchAll: false,
     defaultStrategy: "hover",
   },
   build: {

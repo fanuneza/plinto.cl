@@ -35,6 +35,9 @@ for (const pageInfo of pages) {
         path: path.join(outputDir, `local-${pageInfo.name}-${viewport.name}.png`),
         fullPage: true,
       });
+
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow, `${pageInfo.name} @${viewport.name}`).toBeLessThanOrEqual(0);
     });
   }
 }

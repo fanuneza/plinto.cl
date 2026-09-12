@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionTitle from "../components/SectionTitle.astro";
-import ServiceList from "../components/ServiceList.astro";
-import { FadeIn } from "../components/motion";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import ServiceList from "@/components/ServiceList.astro";
+import { FadeIn } from "@/components/motion";
 
 const items = [
   {
     icon: "house",
-    title: "ARQUITECTOS",
+    title: "Arquitectos",
     body: "Impulsamos la difusión de tu trabajo, rescatando la esencia de tu obra. Creamos una narrativa coherente que comunica tu visión, fortalece tu identidad de marca y gestiona estratégicamente los canales digitales para posicionar tu estudio y tus proyectos.",
     points: [
       "Posicionamiento de Marca (Branding)",
@@ -17,7 +17,7 @@ const items = [
   },
   {
     icon: "building",
-    title: "INMOBILIARIAS & CORREDORAS",
+    title: "Inmobiliarias y corredoras",
     body: "Promovemos los proyectos desde una mirada arquitectónica y estratégica. Creamos contenido atractivo, profesional y coherente que comunica el valor del diseño, potencia la identidad de cada proyecto.",
     points: [
       "Identidad de Marca (Branding)",
@@ -27,7 +27,7 @@ const items = [
   },
   {
     icon: "tree",
-    title: "MARCAS & MATERIALES DE CONSTRUCCIÓN",
+    title: "Marcas y materiales de construcción",
     body: "Desarrollo de una identidad de marca fuerte con un lenguaje visual cohesivo que resuene con su público, logrando mayor engagement y conversión.",
     points: [
       "Identidad de Marca (Branding)",
@@ -37,7 +37,7 @@ const items = [
   },
   {
     icon: "lightbulb",
-    title: "ASESORÍAS EN PROYECTOS & CONCURSOS",
+    title: "Asesorías en proyectos y concursos",
     body: "Te ayudamos con la creación de material gráfico y editorial para distintas instancias (especiales y puntuales) como lanzamientos de productos, proyectos y postulaciones.",
     points: [
       "Lanzamientos y Campañas Especiales",
@@ -48,7 +48,7 @@ const items = [
   {
     icon: "asterisk",
     title: "Nota al pie",
-    body: "Plinto se dedica principalmente a la creación de estrategia e identidad de marca/proyectos/productos.\n\nNo somos una agencia de mantención de redes sociales, sin embargo, estamos abiertos a conversar y definir el plan de acción específico para tu caso.\n\nSi tienes dudas, escríbenos!",
+    body: "Plinto se dedica principalmente a la creación de estrategia e identidad de marca/proyectos/productos.\n\nNo somos una agencia de mantención de redes sociales, sin embargo, estamos abiertos a conversar y definir el plan de acción específico para tu caso.\n\nSi tienes dudas, ¡escríbenos!",
   },
 ] as const;
 ---
@@ -59,7 +59,7 @@ const items = [
   bodyClass="service-page"
 >
   <FadeIn>
-    <SectionTitle title="SERVICIOS & CLIENTES" />
+    <SectionTitle title="Servicios y clientes" />
   </FadeIn>
   <section class="page-section">
     <ServiceList items={items} />

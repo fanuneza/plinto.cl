@@ -43,7 +43,9 @@ src/
     people/               # Team portrait photos
     projects/             # Work portfolio cover and gallery images
   components/
-    ServiceIcon.astro     # Renders an SVG icon by name from public/assets/icons/
+    Icon.astro            # Renders a line icon from the inline SVG sprite (<use href="#icon-…">)
+    IconSprite.astro      # The 24×24 line-icon sprite, inlined once per page after <body>
+    ServiceIcon.astro     # Service card icon via Icon.astro
     ServiceList.astro     # Service card list; accepts headingLevel="h2"|"h3"
     SectionTitle.astro    # Full-width h1 banner for inner pages
     WorkGrid.astro        # Responsive portfolio grid; handles eager/lazy loading
@@ -214,7 +216,7 @@ The site targets a 100/100 PSI score on all categories. Every change must preser
 - **LCP**: Hero images (`stone-hero-left`, `stone-hero-right`) on the homepage use `loading="eager"` + `fetchpriority="high"`. Do not regress these.
 - **Render-blocking scripts**: `site.js` and `lightbox.js` must never be synchronous. `site.js` uses `type="module"` (deferred by spec). `lightbox.js` uses `is:inline defer` on the work detail page.
 - **CSS delivery**: `inlineStylesheets: "auto"` in `astro.config.mjs` lets Astro decide whether to inline or link CSS based on size. Do not change this to `"always"` — it causes unused-CSS penalties.
-- **Font preloads**: Only `Satoshi-Regular.woff2` uses `fetchpriority="high"`. Other fonts are not preloaded to avoid competing with LCP.
+- **Font preloads**: Only `Satoshi-Regular.woff2` is preloaded (without `fetchpriority`). Each page carries exactly one `fetchpriority="high"` resource: its LCP image (hero stone on home, first work card on /work/, cover on work detail, logo on /about/).
 - **No Adapter**: See §2. Never install `@astrojs/cloudflare` or any SSR adapter.
 
 ---

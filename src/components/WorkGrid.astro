@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
-import { FadeHover } from "./motion";
+import { FadeHover } from "@/components/motion";
+import Icon from "@/components/Icon.astro";
 
 interface Props {
   items: CollectionEntry<"work">[];
@@ -11,7 +12,8 @@ interface Props {
 
 const { items, limit, eagerFirst = false } = Astro.props;
 const visible = limit ? items.slice(0, limit) : items;
-const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) calc(50vw - 32px), 520px";
+const cardSizes =
+  "(max-width: 436px) calc(100vw - 48px), (max-width: 809px) 89vw, (max-width: 1438px) calc(44.5vw - 12px), 628px";
 ---
 
 <ul class="work-grid">
@@ -22,24 +24,27 @@ const cardSizes = "(max-width: 809px) calc(100vw - 40px), (max-width: 1199px) ca
       const slug = item.id.replace(/\.mdx$/, "");
       return (
         <li>
-          <FadeHover delay={index * 0.08}>
-            <a class="work-card" href={`/work/${slug}/`} transition:name={`work-${item.id}`}>
+          <FadeHover delay={index * 0.08} onLoad={isEager}>
+            <a class="work-card" href={`/work/${slug}/`}>
               <span class="work-media">
                 <Image
                   src={item.data.coverImage}
                   alt={item.data.coverAlt}
+                  width={item.data.coverImage.width}
+                  height={item.data.coverImage.height}
                   widths={[480, 800, 1200]}
                   sizes={cardSizes}
                   loading={isEager ? "eager" : "lazy"}
                   decoding="async"
                   fetchpriority={isEager ? "high" : "low"}
+                  transition:name={`work-${item.id}`}
                 />
               </span>
               <span class="work-meta">
                 <span class="work-title">{item.data.title}</span>
                 <span class="work-service">{item.data.service}</span>
                 <span class="work-year">{item.data.year}</span>
-                <span class="work-arrow" aria-hidden="true" />
+                <Icon name="arrow-right" size={24} class="work-arrow" />
               </span>
             </a>
           </FadeHover>

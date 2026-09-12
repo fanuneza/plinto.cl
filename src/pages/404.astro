@@ -6,7 +6,7 @@ import { FadeIn } from "../components/motion";
 
 <BaseLayout
   title="Página no encontrada (Error 404)"
-  description="La pagina solicitada no existe o cambio de ruta. Revisa la sugerencia automatica o vuelve al inicio de Plinto."
+  description="La página solicitada no existe o cambió de ruta. Revisa la sugerencia automática o vuelve al inicio de Plinto."
   canonicalPath="/404"
   robots="noindex,follow"
 >
@@ -15,7 +15,7 @@ import { FadeIn } from "../components/motion";
       <h1>Página no encontrada</h1>
       <p>Error 404 — La página que buscas no existe.</p>
 
-      <div style="margin: 1.5rem 0; font-weight: 500;">
+      <div class="error-suggestions">
         <FuzzyRedirect />
       </div>
 

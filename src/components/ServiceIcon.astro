@@ -1,34 +1,11 @@
 ---
+import Icon, { type IconName } from "./Icon.astro";
+
 interface Props {
-  name: "house" | "building" | "tree" | "lightbulb" | "asterisk" | "dna" | "mobile" | "image" | "cluster";
+  name: IconName;
 }
 
 const { name } = Astro.props;
-
-const icons = {
-  house: "/assets/icons/home.svg",
-  building: "/assets/icons/building.svg",
-  tree: "/assets/icons/tree.svg",
-  lightbulb: "/assets/icons/lightbulb.svg",
-  asterisk: "/assets/icons/asterisk.svg",
-  dna: "/assets/icons/dna.svg",
-  mobile: "/assets/icons/mobile.svg",
-  image: "/assets/icons/image.svg",
-  cluster: "/assets/icons/cluster.svg",
-} as const;
 ---
 
-{
-  icons[name] && (
-    <img
-      class="service-icon"
-      src={icons[name]}
-      alt=""
-      width="28"
-      height="28"
-      aria-hidden="true"
-      loading="lazy"
-      decoding="async"
-    />
-  )
-}
+<Icon name={name} size={24} class="service-icon" />

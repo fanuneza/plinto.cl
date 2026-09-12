@@ -28,6 +28,33 @@ test("source keeps analytics opt-in and ships no placeholders", () => {
   }
 });
 
+test("astro sources carry no inline styles except custom properties", () => {
+  const inlineStyle = /style="(?!--)/;
+  for (const file of textFilesIn(join(root, "src")).filter((file) => extname(file) === ".astro")) {
+    const source = readFileSync(file, "utf8");
+    expect(inlineStyle.test(source), relative(root, file)).toBe(false);
+  }
+});
+
+test("llms discovery indexes list every work entry", () => {
+  const llmsFull = readFileSync(join(root, "public", "llms-full.txt"), "utf8");
+  const llms = readFileSync(join(root, "public", "llms.txt"), "utf8");
+  const slugs = filesIn(join(root, "src", "content", "work"))
+    .filter((file) => extname(file) === ".mdx")
+    .map(
+      (file) =>
+        file
+          .split("/")
+          .pop()
+          ?.replace(/\.mdx$/, "") ?? ""
+    );
+
+  for (const slug of slugs) {
+    expect(llmsFull, `llms-full.txt missing ${slug}`).toContain(`/work/${slug}/`);
+    expect(llms, `llms.txt missing ${slug}`).toContain(`/work/${slug}/`);
+  }
+});
+
 test("security headers include the baseline protections", () => {
   const headers = readFileSync(join(root, "public", "_headers"), "utf8");
 

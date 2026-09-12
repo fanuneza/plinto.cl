@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionTitle from "../components/SectionTitle.astro";
-import { FadeHover, FadeIn } from "../components/motion";
-import fernandaImg from "../assets/images/people/fernanda-castro-portrait.jpg";
-import diegoImg from "../assets/images/people/diego-hernandez-portrait.png";
-import cristianImg from "../assets/images/people/cristian-pino-anguita-portrait-bw.png";
-import logoStacked from "../assets/images/brand/plinto-logo-stacked.png";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import { FadeIn } from "@/components/motion";
+import fernandaImg from "@/assets/images/people/fernanda-castro-portrait.jpg";
+import diegoImg from "@/assets/images/people/diego-hernandez-portrait.png";
+import cristianImg from "@/assets/images/people/cristian-pino-anguita-portrait-bw.png";
+import logoStacked from "@/assets/images/brand/plinto-logo-stacked.png";
 
 const people = [
   {
@@ -41,17 +41,18 @@ const people = [
 ];
 
 const collaborators = [
-  { role: "Social Media Expert", name: "Soon" },
-  { role: "Editor de contenidos", name: "Soon", note: "..." },
+  { role: "Especialista en redes sociales", name: "Pronto" },
+  { role: "Editor de contenidos", name: "Pronto" },
 ];
 ---
 
 <BaseLayout
   title="Sobre Plinto y su equipo"
   description="Conoce al equipo, la mirada editorial y la experiencia en estrategia de contenidos que sostienen el trabajo de Plinto."
+  bodyClass="about-page"
 >
   <FadeIn>
-    <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia." />
+    <SectionTitle title="Creamos contenido que posiciona y comunica a través de la estética y la coherencia" />
   </FadeIn>
   <FadeIn>
     <section class="about-context page-section">
@@ -66,8 +67,7 @@ const collaborators = [
         fetchpriority="high"
       />
       <div class="about-context-copy">
-        <p class="about-eyebrow">contexto</p>
-        <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo.</h2>
+        <h2>No venimos del marketing tradicional, sino de la arquitectura, la observación y el contenido creativo</h2>
         <p>
           Plinto es un estudio de estrategia, contenido y comunicación que construye marcas relevantes en el mundo de la
           arquitectura y la construcción a través de una narrativa coherente y distintiva.
@@ -87,7 +87,7 @@ const collaborators = [
     <div class="people-grid">
       {
         people.map((person, index) => (
-          <FadeHover delay={index * 0.1} hoverScale={1.01} hoverY={-3}>
+          <FadeIn delay={index * 0.1}>
             <article class="person">
               <Image
                 src={person.image}
@@ -99,28 +99,27 @@ const collaborators = [
                 fetchpriority={index === 0 ? "auto" : "low"}
               />
               <div class="person-copy">
-                <p class="about-eyebrow">{person.role}</p>
                 <h2>{person.name}</h2>
+                <p class="about-eyebrow">{person.role}</p>
                 {person.bio.map((paragraph) => (
                   <p>{paragraph}</p>
                 ))}
               </div>
             </article>
-          </FadeHover>
+          </FadeIn>
         ))
       }
     </div>
   </section>
   <FadeIn>
     <section class="collaborators-section page-section">
-      <h2>Socios Colaboradores</h2>
+      <h2>Socios colaboradores</h2>
       <div class="collaborators-grid">
         {
           collaborators.map((person) => (
             <article>
               <p>{person.role}</p>
-              <h3>{person.name}</h3>
-              {person.note && <span>{person.note}</span>}
+              <h3 class="is-placeholder">{person.name}</h3>
             </article>
           ))
         }

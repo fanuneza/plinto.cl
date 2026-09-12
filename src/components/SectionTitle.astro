@@ -1,13 +1,11 @@
 ---
 interface Props {
   title: string;
-  intro?: string;
 }
 
-const { title, intro } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <section class="section-title">
   <h1>{title}</h1>
-  {intro && <p>{intro}</p>}
 </section>
